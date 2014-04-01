@@ -31,6 +31,29 @@ class FormsController extends BaseController
 	public function save_form()
 	{
 	
+		$input = Input::all();
+		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
+		
+		
+		$rules_config = array(
+					'form_name'=>'required|alpha_num|size:2',
+					'form_desc'=>'alpha_num|size:2',
+					'form_url'=>'required',
+					
+				     );
+		$validator = Validation::make($input,$rules_config);
+		if($validator->passes())
+		{
+			$form_config = new form_configs();
+			$form_config->form_name = $input['form_name'];
+			if(Input::has('form_desc'))
+			{
+				$form_config->form_desc = $input['form_desc'];
+			}
+			$form_config->form_url = $input['form_url'];
+			$form_config->num_fields = $num_fields; // to be determined
+			$form_config->save();
+		}
 	}
 
 }
