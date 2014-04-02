@@ -37,15 +37,15 @@ class FormsController extends BaseController
 		$form_data = new Form_data();
 		
 		$field_num = 1;
-		 // Loop to insert Single line text fields
-		foreach($type_array as $type)
+		 // Loop to insert standard field names and its values
+		foreach($type_array as $key=>$type)
 		{
 			$i = 1;
 			while(Input::has($type.'_'.$i))
 			{
 				if($form_data::col_exists('field_'.$field_num.'_name') == false)
 				{
-					$form_data::create_col($field_num,1);
+					$form_data::create_col($field_num,$key);
 				}
 				$field = $type.'_'.$i;
 				$col = 'field_'.$field_num.'_name';
