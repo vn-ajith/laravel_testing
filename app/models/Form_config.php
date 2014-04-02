@@ -24,17 +24,16 @@ class Form_config extends Eloquent
 				$table->text('form_desc')->nullable();  // Description of form
 									// Form description can be null
 				$table->text('form_url');  // URL to which form is posted
-				$table->integer('num_fields');  // Number of fields in form
+				$table->integer('field_num');  // Number of fields in form
+				$table->text('desc_order');  // This field gives idea about order of fields and its descriptions
+				/*
+					desc_order = > idea about order fields eg: 3 fields, first single line text, then number then paragraph. It also gives names of fields
+				*/
 			
 			});			
 		}
 		
 	}
 	
-	public function col_exists($col_name)
-	{
-		
-		
-	}
 }
 ?>

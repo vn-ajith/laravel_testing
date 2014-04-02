@@ -8,7 +8,10 @@ class Form_data extends Eloquent
 	protected $table = 'form_datas';
 	public static $key = 'form_id';
 	
-	
+	/*
+		This constructor makes table if not exists
+		Table form_datas initially created with only one field, form_id which references form_id from form_configs table
+	*/
 	public function __construct()
 	{	
 		if(!Schema::hasTable(form_datas))
@@ -24,7 +27,9 @@ class Form_data extends Eloquent
 
 
 	/*
-		Function to check whether a particular column exist in table or not 
+		Function: col_exists()
+			This function checks that given name: col_name is a valid column name in the form_datas table or not
+			If yes, it returns true else false
 	*/
 	
 	public static function col_exists($col_name)
@@ -72,14 +77,20 @@ class Form_data extends Eloquent
 			Schema::table('form_datas', function($table)
 			{
 				
-				$table->string($col_name_db,'100')
+				$table->string($col_name_db,'100');  // new column for field is created
+				/*
+					According to type value field is created
+					single line text=> string (varchar)
+					number => float
+					Paragraph, Checkbox
+				*/
 				if($type == 1)
 				{
 					$table->string($value_name_db,'100')->after($col_name_db);
 				}
 				else if($type == 2)
 				{
-					$table->integer($value_name_db,'100')->after($col_name_db);
+					$table->float($value_name_db,'100')->after($col_name_db);
 				}
 				else
 				{
