@@ -34,6 +34,30 @@ class FormsController extends BaseController
 		$input = Input::all();
 		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
 		
+		$form_data = new Form_data();
+		
+		$field_num = 1;
+		 // Loop to insert Single line text fields
+		foreach($type_array as $type)
+		{
+			$i = 1;
+			while(Input::has($type.'_'.$i))
+			{
+				if($form_data::col_exists('field_'.$field_num.'_name') == false)
+				{
+					$form_data::create_col($field_num,1);
+				}
+				$field = $type.'_'.$i;
+				$col = 'field_'.$field_num.'_name';
+				$col_value = 'field_'.$field_num.'_value';
+				$form_data->$col = $field;
+					
+				$form_data->$col_value = $input[$field];
+				$field_num++;
+				$i++;
+					
+			}
+		}
 		
 		$rules_config = array(
 					'form_name'=>'required|alpha_num|size:2',
@@ -44,7 +68,7 @@ class FormsController extends BaseController
 		$validator = Validation::make($input,$rules_config);
 		if($validator->passes())
 		{
-			$form_config = new form_configs();
+			$form_config = new Form_config();
 			$form_config->form_name = $input['form_name'];
 			if(Input::has('form_desc'))
 			{

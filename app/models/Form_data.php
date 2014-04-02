@@ -27,12 +27,11 @@ class Form_data extends Eloquent
 		Function to check whether a particular column exist in table or not 
 	*/
 	
-	public function col_exists($col_name)
+	public static function col_exists($col_name)
 	{
-		if(Schema::hasColumn('form_datas'))
+		if(Schema::hasColumn('form_datas',$col_name))
 		{
-			$num = stristr($col_name, '_', true);
-			return $num;
+			return true;
 		}
 		else
 		{
@@ -63,12 +62,12 @@ class Form_data extends Eloquent
 			Dropdown : DROPDN_(number) eg: DROPDN_2
 	*/
 	
-	public function create_col($num = 0,$type)
+	public static function create_col($num = 0,$type)
 	{
 			//$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
 						
-			$col_name_db = 'field_'.($num+1).'_name';		// new column to be generated
-			$value_name_db = 'field_'.($num+1).'_value';  // value field of new column 
+			$col_name_db = 'field_'.$num.'_name';		// new column to be generated
+			$value_name_db = 'field_'.$num.'_value';  // value field of new column 
 			
 			Schema::table('form_datas', function($table)
 			{
