@@ -43,7 +43,7 @@ class FormsController extends BaseController
 			$i = 1;
 			while(Input::has($type.'_'.$i))
 			{
-				if(Form_data::col_exists('field_'.$field_num.'_name') == false)
+				if(Form_data::col_exists('field_'.$field_num.'_name') == false) // check field_(number)_name exist or not. If not create a new one
 				{
 					Form_data::create_col($field_num,$key);
 				}
@@ -58,7 +58,9 @@ class FormsController extends BaseController
 					
 			}
 		}
+		$form_data->save();
 		
+		$field_num--;
 		$rules_config = array(
 					'form_name'=>'required|alpha_num|size:2',
 					'form_desc'=>'alpha_num|size:2',
@@ -75,7 +77,7 @@ class FormsController extends BaseController
 				$form_config->form_desc = $input['form_desc'];
 			}
 			$form_config->form_url = $input['form_url'];
-			$form_config->num_fields = $num_fields; // to be determined
+			$form_config->num_fields = $field_num; // to be determined
 			$form_config->save();
 		}
 	}
