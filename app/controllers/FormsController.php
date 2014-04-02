@@ -43,9 +43,9 @@ class FormsController extends BaseController
 			$i = 1;
 			while(Input::has($type.'_'.$i))
 			{
-				if($form_data::col_exists('field_'.$field_num.'_name') == false)
+				if(Form_data::col_exists('field_'.$field_num.'_name') == false)
 				{
-					$form_data::create_col($field_num,$key);
+					Form_data::create_col($field_num,$key);
 				}
 				$field = $type.'_'.$i;
 				$col = 'field_'.$field_num.'_name';
