@@ -25,8 +25,7 @@ class Form_config extends Eloquent
 									// Form description can be null
 				$table->text('form_url');  // URL to which form is posted
 				$table->integer('field_num');  // Number of fields in form
-				$table->text('desc_order');// This field gives idea about order of fields and its descriptions
-				$table->timestamps();
+				$table->text('desc_order');  // This field gives idea about order of fields and its descriptions
 				/*
 					desc_order = > idea about order fields eg: 3 fields, first single line text, then number then paragraph. It also gives names of fields
 				*/

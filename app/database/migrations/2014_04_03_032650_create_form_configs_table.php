@@ -1,24 +1,18 @@
-<?php 
-/*
+<?php
 
-Model for handling configurations of form
-like form name, form id , URL to which form is posted, form description
-redirection URL, number of fields associated
-*/
-class Form_config extends Eloquent
-{
-	protected $table = 'form_configs';
-	public static $key = 'form_id';
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-	/*
-		Table creation is done in constructor.
-		Table is created if not exits
-	*/	
-	public function __construct()
+class CreateFormConfigsTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
 	{
-		if (!Schema::hasTable('form_configs'))
-		{
-    			Schema::create('form_configs',function($table){
+		Schema::create('form_configs',function($table){
 				$table->increments('form_id'); // Form id
 				$table->string('form_name','50'); // Form name
 				$table->text('form_desc')->nullable();  // Description of form
@@ -31,10 +25,17 @@ class Form_config extends Eloquent
 					desc_order = > idea about order fields eg: 3 fields, first single line text, then number then paragraph. It also gives names of fields
 				*/
 			
-			});			
-		}
-		
+			});
 	}
-	
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('form_configs');
+	}
+
 }
-?>

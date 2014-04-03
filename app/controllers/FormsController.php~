@@ -38,33 +38,15 @@ class FormsController extends BaseController
 		Numbers should be conitnuous
 		eg:  if 3 single line fields, then names of fields should be SLT_1, SLT_2, SLT_3 
 		
+		pass data as following: 
 		
-		Inputs to the form creation can be in json format
-		format that should be followed: 
-		{
-			"form_name":(name),
-			"form_desc": (description) ,
-			"form_url" : (url),
-			"field_num" :(number of fields),
-			"desc_order" : {
-					"(field name 1)" : {
-								"label" : (label),
-								"default" : (default value),
-								"css class name" : (class name),
-								"field_size": (small/medium/large)
-								},
-					"(field name 2)" : {
-								"label" : (label),
-								"default" : (default value),
-								"css class name" : (class name),
-								"field_size": (small/medium/large)
-								},
-					................................................................
-			
-					}
-		}
-
-
+		"field_num" => number of fields in form
+		'form_name'=>'Name of form
+		'form_desc'=>'Description of form if any
+		'form_url'=> It should be save_form_data() function 
+		desc-order=> field gives information about order of form and names of fields
+			this value should be output of form.serialize() method in jquery
+		Inputs to the form can be in json format
 			
 	*/
 	public function save_form()
