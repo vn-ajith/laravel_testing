@@ -18,5 +18,9 @@ Route::get('/', function()
 
 });*/
 
-Route::get('/','ProductsController@index');
-Route::post('/store_product','ProductsController@store_product');
+Route::get('/','FormsController@index');
+
+Route::model('form_c','Form_config');
+// routes are added to render a particular form,, a form identifies by model using its form id
+Route::get('/render_form/form_c','FormsController@render_form');
+

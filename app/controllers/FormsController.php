@@ -11,16 +11,25 @@ class FormsController extends BaseController
 	*/
 	
 	
-	public function render_form_creator()
+	public function render_form_creator($id)
 	{
+		
 	
 	}
 	/*
 		Function for rendering created form
 		This function can make use of model form_config and reproduce expected
+		Route is already defined in order to recieve parameters for particular form from database
 	*/
-	public function render_form()
+	public function render_form(Form_config $form)
 	{
+		$json_to_view = array('form_name' => $form->form_name,
+					'form_desc' => $form->form_desc,
+					'form_url'  => $form->form_url,
+					'field_num' => $form->field_num,
+					'desc_order'=>json_decode($form->desc_order,true));
+		// returning details of form into view as json
+		return Response::json($json_to_view);
 	}
 	
 	/*      Function: save_form()
