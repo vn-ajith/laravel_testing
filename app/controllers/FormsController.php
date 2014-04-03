@@ -46,7 +46,7 @@ class FormsController extends BaseController
 			"form_desc": (description) ,
 			"form_url" : (url),
 			"field_num" :(number of fields),
-			"desc_url":{
+			"desc_order":{
 					"(field name 1)": {
 						"label" : (label),
 						"default" : (default value),
