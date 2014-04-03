@@ -41,27 +41,29 @@ class FormsController extends BaseController
 		
 		Inputs to the form creation can be in json format
 		format that should be followed: 
-		{
-			"form_name":(name),
+		
+		{	"form_name":(name),
 			"form_desc": (description) ,
 			"form_url" : (url),
 			"field_num" :(number of fields),
-			"desc_order" : {
-					"(field name 1)" : {
-								"label" : (label),
-								"default" : (default value),
-								"css class name" : (class name),
-								"field_size": (small/medium/large)
-								},
-					"(field name 2)" : {
-								"label" : (label),
-								"default" : (default value),
-								"css class name" : (class name),
-								"field_size": (small/medium/large)
-								},
-					................................................................
-			
+			"desc_url":{
+					"(field name 1)": {
+						"label" : (label),
+						"default" : (default value),
+						"css class name" : (class name),
+						"field_size": (small/medium/large),
+						"required": (0 for no, 1 for yes)
+
+					},
+					"(field name 2)":{
+						"label" : (label),
+						"default" : (default value),
+						"css class name" : (class name),
+						"field_size": (small/medium/large),
+						"required": (0 for no, 1 for yes)
+
 					}
+				}
 		}
 
 
@@ -70,12 +72,12 @@ class FormsController extends BaseController
 	public function save_form()
 	{
 	
-		//$input = Input::all();
-		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
 		
+		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
+		//  input is send as json, in above format
 		$input = json_decode(file_get_contents("php://input"),true);
 		
-		$field_num = $input['field_num'];
+		
 		$rules_config = array(
 					'form_name'=>'required|alpha_num|size:2',
 					'form_desc'=>'alpha_num|size:2',
@@ -90,14 +92,18 @@ class FormsController extends BaseController
 			$form_config = new Form_config();  // model for saving form configuration
 			$form_config->form_name = $input['form_name'];
 			
-			if(Input::has('form_desc'))
+			if(isset($input['form_desc'])
 			{
 				$form_config->form_desc = $input['form_desc'];
 			}
 			
 			$form_config->form_url = $input['form_url'];
-			$form_config->field_num = $field_num; 
-			$form_config->desc_order = $input['desc-order'];
+			$form_config->field_num = $input['field_num']; 
+			// descriptional order is converted back to json in order to store it in db 
+
+			$desc_order = json_encode($input['desc-order']);
+			
+			$form_config->desc_order = $desc_order;
 			$form_config->save();
 		}
 	}
@@ -116,6 +122,8 @@ class FormsController extends BaseController
 		
 		// Loop to insert standard field names and its values
 		// Taking each type of field  and check whether they are present in the form or not
+		
+		
 		
 		foreach($type_array as $key=>$type)
 		{
