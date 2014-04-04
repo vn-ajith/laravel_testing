@@ -5,13 +5,28 @@ Forms controller: Controller to act as backend for form builder
 */
 class FormsController extends BaseController
 {
+	
+
+	/*
+		This function gives control to user,, as to select a particular form from already created ones
+		after selecting form, control goes to render form
+	*/
+	public fucntion select_form()
+	{
+		$forms = Form_config::all();
+		return View::make('select_form',compact($forms));
+	}
+	
+
+
+
 	/*
 		Function for rendering form builder. This functions view is showing form builder	
 	
 	*/
 	
 	
-	public function render_form_creator($id)
+	public function render_form_creator()
 	{
 		
 	
@@ -161,5 +176,103 @@ class FormsController extends BaseController
 		
 	}
 
+
+
+	//backup test function: This function works as if it gets parametrs as json when form is submitted
+	
+	/*
+		Format json to used when form is submitted
+		format that should be followed: 
+		
+		{	"form_id": (id of form)
+			"form_name":(name),
+			"form_desc": (description) ,
+			"form_url" : (url),
+			"field_num" :(number of fields),
+			"form_data":{
+					"(field name 1)": {
+						"label" : (label),
+						"css class name" : (class name),
+						"required": (0 for no, 1 for yes),
+						"value":(value)
+
+					},
+					"(field name 2)":{
+						
+						"label" : (label),
+						"css class name" : (class name),
+						"required": (0 for no, 1 for yes),
+						"value":(value)
+					}
+				}
+		}
+	*/
+		// field verification can be easily done at view
+	public function save_form_data_v2()
+	{
+		$form_data = new Form_data();
+		
+		$field_num = 1;
+		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
+	
+		$input = json_decode(file_get_contents("php://input"),true);	
+
+		$fdata = $input['form_data'];
+// 		$counter = 0;
+// 		// loop to check whether any fields violates 'require' rule
+// 		foreach ($form_data as $field)
+// 		{
+// 			$value = $field["value"];
+// 			foreach ($field as $att=>$att_value)
+// 			{
+// 				if($att=="required" && $att_value==1)
+// 				{
+// 					if($value==NULL)
+// 					{
+// 						$counter++;
+// 						// counter increments when a "required" field contains nothing
+// 						// error !!!
+// 					}
+// 					
+// 				}
+// 			}
+// 		}
+// 			
+// 		if($counter!=0)
+// 		{
+// 			
+// 		}
+
+		// Loop to insert standard field names and its values
+		// Taking each type of field  and check whether they are present in the form or not
+		
+		
+		
+		foreach($type_array as $key=>$type)
+		{
+			$i = 1;
+			//checking whether $type_$i exist in input or not
+			// for eg: SLT_1, NUM_4 etc
+			
+			while(array_key_exists($type.'_'.$i,$fdata)
+			{
+				if(Form_data::col_exists('field_'.$field_num.'_name') == false) // check field_(number)_name exist or not. If not create a new one
+				{
+					Form_data::create_col($field_num,$key);
+				}      // field_num is giving idea about which field is created
+				$field = $type.'_'.$i;
+				$col = 'field_'.$field_num.'_name';
+				$col_value = 'field_'.$field_num.'_value';
+				$form_data->$col = $field;
+					
+				$form_data->$col_value = $fdata[$field]['value'];
+				$field_num++;
+				$i++;
+					
+			}
+		}
+		$form_data->save();
+		
+	}
 }
 ?>
