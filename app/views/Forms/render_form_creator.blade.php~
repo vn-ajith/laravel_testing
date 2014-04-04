@@ -49,39 +49,56 @@
 				});
 	});
 	//
+
 	$('#SLT').click(function(){
-		var str = "<input type='text' name='SLT_"+SLT_num+"'><br>";
+		var str = "<label for='SLT_"+SLT_num+"' name='SLT_"+SLT_num+"_label'>Untitled</label><br>";
+		str = str+ "<input type='text' name='SLT_"+SLT_num+"' id ='SLT_"+SLT_num+"' >";
+		str = str+ "<img src='assets/images/settings.png' id='clicked'><br>"
+		
 		SLT_num++;
 		$( "#form_holder" ).append( str );	
 	});
 	$('#NUM').click(function(){
-		var str = "<input type='text' name='NUM_"+NUM_num+"'><br>";
+		var str = "<label for='NUM_"+NUM_num+"' name='NUM_"+NUM_num+"_label'>Untitled</label><br>";
+		str = str+ "<input type='text' name='NUM_"+NUM_num+"'><br>";
 		NUM_num++;
 		$( "#form_holder" ).append( str );	
 	});
 	$('#PARAGH').click(function(){
-		var str = "<textarea name='PARAGH_"+PARAGH_num+"'><br>";
+		var str = "<label for='PARAGH_"+PARAGH_num+"' name='PARAGH_"+PARAGH_num+"_label'>Untitled</label><br>";
+		str = str+ "<textarea name='PARAGH_"+PARAGH_num+"'></textarea><br>";
 		PARAGH_num++;
 		$( "#form_holder" ).append( str );	
 	});
 	$('#CHECK').click(function(){
-		var str = "<input type='checkbox' name='CHECK_"+CHECK_num+"'><br>";
+		var str = "<label for='CHECK_"+CHECK_num+"' name='CHECK_"+CHECK_num+"_label'>Untitled</label><br>";
+		
+		str = str+ "<input type='checkbox' name='CHECK_"+CHECK_num+"'><br>";
 		CHECK_num++;
 		$( "#form_holder" ).append( str );	
 	});
 	$('#MCHOICE').click(function(){
-		var str = "<select name='MCHOICE_"+MCHOICE_num+"'><br>";
+		var str = "<label for='MCHOICE_"+MCHOICE_num+"' name='MCHOICE_"+MCHOICE_num+"_label'>Untitled</label><br>";
+		str = str+ "<select name='MCHOICE_"+MCHOICE_num+"'></select><br>";
 		MCHOICE_num++;
 		$( "#form_holder" ).append( str );	
 	});
 	$('#DROPDN').click(function(){
-		var str = "<select name='DROPDN_"+DROPDN_num+"'><br>";
+		var str = "<label for='DROPDN_"+DROPDN_num+"' name='DROPDN_"+DROPDN_num+"_label'>Untitled</label><br>";
+		str = str+ "<select name='DROPDN_"+DROPDN_num+"'></select><br>";
 		DROPDN_num++;
 		$( "#form_holder" ).append( str );	
 	});
-
+	$('#clicked').click(function(){
+		//$( "#SLT_1" ).before( $( ".clicked" ) ).value="aj";
+		alert('config');
+	});
+	//$('#clicked').click(function(){alert('hi')}); 
 		
    });
+	$( "#clicked" ).on( "click", function() {
+		alert('hi');
+});
   </script>
 </head>
 <body>
@@ -103,10 +120,10 @@
 	
      </div>
 </div>
- 
+<!--  <img src="{{asset('assets/images/fanssignupsplash.png')}}"> -->
 <div id="form_holder" style="float:left">
 </div> 
  <br>
-<input type="button" id="send_json" value="Send json" >
+<!-- <input type="button" id="send_json" value="Send json" > -->
 </body>
 </html>
