@@ -10,15 +10,13 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-/*
-Route::get('/', function()
-{
-	return View::make('hello');
-	//return View::make('register');
 
-});*/
+// Default application goes to form -builder
+Route::get('/','FormsController@render_form_creator');
 
-Route::get('/','FormsController@index');
+Route::post('/saveForm','FormsController@saveForm');
+
+
 
 Route::model('form_c','Form_config');
 // routes are added to render a particular form,, a form identifies by model using its form id

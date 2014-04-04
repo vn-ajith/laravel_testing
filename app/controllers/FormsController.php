@@ -7,11 +7,14 @@ class FormsController extends BaseController
 {
 	
 
+		
+	
 	/*
 		This function gives control to user,, as to select a particular form from already created ones
 		after selecting form, control goes to render form
 	*/
-	public fucntion select_form()
+	
+	public function select_form()
 	{
 		$forms = Form_config::all();
 		return View::make('select_form',compact($forms));
@@ -28,7 +31,7 @@ class FormsController extends BaseController
 	
 	public function render_form_creator()
 	{
-		
+		return View::make('Forms.render_form_creator');
 	
 	}
 	/*
@@ -93,87 +96,46 @@ class FormsController extends BaseController
 
 			
 	*/
-	public function save_form()
+	public function saveForm()
 	{
 	
-		
+		//return View::make('Forms.saveForm');
+		echo 'hi';
+	
 		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
 		//  input is send as json, in above format
-		$input = json_decode(file_get_contents("php://input"),true);
+		//$input = json_decode(file_get_contents("php://input"),true);
+		$input = Input::all();
 		
-		
-		$rules_config = array(
-					'form_name'=>'required|alpha_num|size:2',
-					'form_desc'=>'alpha_num|size:2',
-					'form_url'=>'required',
-					'desc_order'=>'required'
-					'field_num'=>'required'
-				 );
-		$validator = Validation::make($input,$rules_config); // Validation for necessary fields
-		if($validator->passes()) // If validation is passed then form should be saved
-
-		{
-			$form_config = new Form_config();  // model for saving form configuration
-			$form_config->form_name = $input['form_name'];
-			
-			if(isset($input['form_desc'])
-			{
-				$form_config->form_desc = $input['form_desc'];
-			}
-			
-			$form_config->form_url = $input['form_url'];
-			$form_config->field_num = $input['field_num']; 
-			// descriptional order is converted back to json in order to store it in db 
-
-			$desc_order = json_encode($input['desc-order']);
-			
-			$form_config->desc_order = $desc_order;
-			$form_config->save();
-		}
-	}
-	/*
-		function: save_form_data()
-			This function saves data from form to database
-			Form is reproduced in the order it was created
-			
-	*/
-	public function save_form_data()
-	{
-		$form_data = new Form_data();
-		
-		$field_num = 1; 
-		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
-		
-		// Loop to insert standard field names and its values
-		// Taking each type of field  and check whether they are present in the form or not
-		
-		
-		
-		foreach($type_array as $key=>$type)
-		{
-			$i = 1;
-			//checking whether $type_$i exist in input or not
-			// for eg: SLT_1, NUM_4 etc
-			
-			while(Input::has($type.'_'.$i))
-			{
-				if(Form_data::col_exists('field_'.$field_num.'_name') == false) // check field_(number)_name exist or not. If not create a new one
-				{
-					Form_data::create_col($field_num,$key);
-				}      // field_num is giving idea about which field is created
-				$field = $type.'_'.$i;
-				$col = 'field_'.$field_num.'_name';
-				$col_value = 'field_'.$field_num.'_value';
-				$form_data->$col = $field;
-					
-				$form_data->$col_value = $input[$field];
-				$field_num++;
-				$i++;
-					
-			}
-		}
-		$form_data->save();
-		
+		var_dump($input['form_name']);
+// 		$rules_config = array(
+// 					'form_name'=>'required|alpha_num|size:2',
+// 					'form_desc'=>'alpha_num|size:2',
+// 					'form_url'=>'required',
+// 					'desc_order'=>'required',
+// 					'field_num'=>'required'
+// 				 );
+// 		$validator = Validation::make($input,$rules_config); // Validation for necessary fields
+// 		if($validator->passes()) // If validation is passed then form should be saved
+// 
+// 		{
+// 			$form_config = new Form_config();  // model for saving form configuration
+// 			$form_config->form_name = $input['form_name'];
+// 			
+// 			if(isset($input['form_desc']))
+// 			{
+// 				$form_config->form_desc = $input['form_desc'];
+// 			}
+// 			
+// 			$form_config->form_url = $input['form_url'];
+// 			$form_config->field_num = $input['field_num']; 
+// 			// descriptional order is converted back to json in order to store it in db 
+// 
+// 			$desc_order = json_encode($input['desc-order']);
+// 			
+// 			$form_config->desc_order = $desc_order;
+// 			$form_config->save();
+// 		}
 	}
 
 
@@ -208,7 +170,7 @@ class FormsController extends BaseController
 		}
 	*/
 		// field verification can be easily done at view
-	public function save_form_data_v2()
+	public function save_form_data()
 	{
 		$form_data = new Form_data();
 		
@@ -218,34 +180,6 @@ class FormsController extends BaseController
 		$input = json_decode(file_get_contents("php://input"),true);	
 
 		$fdata = $input['form_data'];
-// 		$counter = 0;
-// 		// loop to check whether any fields violates 'require' rule
-// 		foreach ($form_data as $field)
-// 		{
-// 			$value = $field["value"];
-// 			foreach ($field as $att=>$att_value)
-// 			{
-// 				if($att=="required" && $att_value==1)
-// 				{
-// 					if($value==NULL)
-// 					{
-// 						$counter++;
-// 						// counter increments when a "required" field contains nothing
-// 						// error !!!
-// 					}
-// 					
-// 				}
-// 			}
-// 		}
-// 			
-// 		if($counter!=0)
-// 		{
-// 			
-// 		}
-
-		// Loop to insert standard field names and its values
-		// Taking each type of field  and check whether they are present in the form or not
-		
 		
 		
 		foreach($type_array as $key=>$type)
@@ -254,7 +188,7 @@ class FormsController extends BaseController
 			//checking whether $type_$i exist in input or not
 			// for eg: SLT_1, NUM_4 etc
 			
-			while(array_key_exists($type.'_'.$i,$fdata)
+			while(array_key_exists($type.'_'.$i,$fdata))
 			{
 				if(Form_data::col_exists('field_'.$field_num.'_name') == false) // check field_(number)_name exist or not. If not create a new one
 				{
@@ -274,5 +208,7 @@ class FormsController extends BaseController
 		$form_data->save();
 		
 	}
+	
+
 }
 ?>

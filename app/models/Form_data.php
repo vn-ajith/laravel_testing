@@ -8,22 +8,7 @@ class Form_data extends Eloquent
 	protected $table = 'form_datas';
 	public static $key = 'form_id';
 	
-	/*
-		This constructor makes table if not exists
-		Table form_datas initially created with only one field, form_id which references form_id from form_configs table
-	*/
-	public function __construct()
-	{	
-		if(!Schema::hasTable(form_datas))
-		{
-			Schema::create('form_datas',function($table)
-			{
-				$table->increments('form_id');
-				$table->foreign('form_id')->references('form_id')->on('form_configs');
-			});
-		}
-	}
-
+	
 
 
 	/*
