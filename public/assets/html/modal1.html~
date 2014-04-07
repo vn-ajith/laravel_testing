@@ -1,0 +1,57 @@
+<!-- Modal for settings of single line text field, number , paragraph, checkbox  -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Field settings</h4>
+      </div>
+      <div class="modal-body">
+	<div id="settings">
+  <div class="form-group">
+    <label for="label">Label </label>
+    <input type="text" class="form-control" id="label" placeholder="Enter label">
+  </div>
+
+  <div class="form-group">
+    <label for="default_value">Default value</label>
+    <input type="text" class="form-control" id="default_value" placeholder="Enter default value">
+  </div>
+
+  <div class="form-group">
+    <label for="css_class_name">CSS class name</label>
+    <input type="text" class="form-control" id="css_class_name" placeholder="Enter css class name">
+  </div>
+
+  <div class="form-group">
+    <label for="field_size">Field size</label>
+    <select id="field_size">
+	<option value="small">Small</option>
+	<option value="medium">Medium</option>
+	<option value="large">Large</option>
+	</select>
+  </div>
+	<div class="form-group">
+    <label for="req_field">Required field</label>
+    
+	<select id="req_field">
+	<option value="1">YES</option>
+	<option value="0">NO</option>
+	
+	</select>
+  </div>	
+
+</div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="save_field_settings">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End of settings for modal -->
