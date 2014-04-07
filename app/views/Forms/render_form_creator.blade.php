@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>jQuery UI Droppable - Shopping Cart Demo</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <title>Form builder</title>
   <script src="//code.jquery.com/jquery-1.9.1.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>	
+  
+  
   <style>
   h1 { padding: .2em; margin: 0; }
-  #products { float:left; width: 500px; margin-right: 2em; }
-  #cart { width: 200px; float: left; margin-top: 1em; }
-  /* style the list to maximize the droppable hitarea */
-  #cart ol { margin: 0; padding: 1em 0 1em 3em; }
+	#forms_builder ul { float:left;}
+  
+  
+  
+  
   </style>
   <script>
   $(function() {
+	var json = "";
 	var SLT_num = 1;
 	var NUM_num = 1;
 	var PARAGH_num = 1;
@@ -53,11 +57,16 @@
 	$('#SLT').click(function(){
 		var str = "<label for='SLT_"+SLT_num+"' name='SLT_"+SLT_num+"_label'>Untitled</label><br>";
 		str = str+ "<input type='text' name='SLT_"+SLT_num+"' id ='SLT_"+SLT_num+"' >";
-		str = str+ "<img src='assets/images/settings.png' id='clicked'><br>"
-		
+		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal'>  Settings</button><br>";
 		SLT_num++;
 		$( "#form_holder" ).append( str );	
 	});
+	 $( "body" ).on( "click", "#clicked", function() {
+		
+		//('#myModal').modal('toggle');
+		alert('hi');
+
+		});
 	$('#NUM').click(function(){
 		var str = "<label for='NUM_"+NUM_num+"' name='NUM_"+NUM_num+"_label'>Untitled</label><br>";
 		str = str+ "<input type='text' name='NUM_"+NUM_num+"'><br>";
@@ -95,35 +104,109 @@
 // 	});
 	//$('#clicked').click(function(){alert('hi')}); 
 	
-	$( "#clicked" ).on( "click", function() {
-		alert('hi');
-		
-   });
+	
 });
   </script>
 </head>
 <body>
  
-<div id="products">
-  <h1 class="ui-widget-header">Form builder</h1>
-  <div id="catalog">
-    <h2><a href="#">Fields</a></h2>
-    <div>
+<div id="form_builder" class="panel panel-default">
+  <h1 class="">Form builder</h1>
+  
+    <h2>Fields</h2>
+    <div class="panel-body">
       <ul>
-        <li ><input type="button" id = "SLT" value="Single line text"></li>
-        <li ><input type="button" id = "NUM" value="Number"></li>
-        <li ><input type="button" id = "PARAGH" value="Paragraph text"></li>
-	<li ><input type="button" id = "CHECK" value="Checkboxes"></li>
-	<li ><input type="button" id = "MCHOICE" value="Multiple choice"></li>
-	<li ><input type="button" id = "DROPDN" value="Dropdown"></li>
+        <li ><input type="button" id = "SLT" value="Single line text" class="btn btn-primary"></li>
+        <li ><input type="button" id = "NUM" value="Number" class="btn btn-primary"></li>
+        <li ><input type="button" id = "PARAGH" value="Paragraph text" class="btn btn-primary"></li>
+	<li ><input type="button" id = "CHECK" value="Checkboxes" class="btn btn-primary"></li>
+	<li ><input type="button" id = "MCHOICE" value="Multiple choice" class="btn btn-primary"></li>
+	<li ><input type="button" id = "DROPDN" value="Dropdown" class="btn btn-primary"></li>
       </ul>
     </div>
+
 	
-     </div>
+  
 </div>
-<!--  <img src="{{asset('assets/images/fanssignupsplash.png')}}"> -->
-<div id="form_holder" style="float:left">
+<div id="form_holder">
+	
 </div> 
+
+
+<!-- Modal for setting  -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Field settings</h4>
+      </div>
+      <div class="modal-body">
+        ...
+	
+
+
+	<div id="settings">
+  <div class="form-group">
+    <label for="label">Label </label>
+    <input type="text" class="form-control" id="label" placeholder="Enter label">
+  </div>
+
+  <div class="form-group">
+    <label for="default_value">Password</label>
+    <input type="text" class="form-control" id="default_value" placeholder="Enter default value">
+  </div>
+
+  <div class="form-group">
+    <label for="css_class_name">CSS class name</label>
+    <input type="text" class="form-control" id="css_class_name" placeholder="Enter css class name">
+  </div>
+
+  <div class="form-group">
+    <label for="field_size">Field size</label>
+    <select id="field_size">
+	<option value="small">Small</option>
+	<option value="medium">Medium</option>
+	<option value="large">Large</option>
+	</select>
+  </div>
+	<div class="form-group">
+    <label for="req_field">Required field</label>
+    
+	<select id="req_field">
+	<option value="1">YES</option>
+	<option value="0">NO</option>
+	
+	</select>
+  </div>	
+
+</div>
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End of settings for modal -->
+
+
+
+
+<!--  <img src="{{asset('assets/images/fanssignupsplash.png')}}"> -->
  <br>
 <!-- <input type="button" id="send_json" value="Send json" > -->
 </body>
