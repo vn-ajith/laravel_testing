@@ -49,6 +49,7 @@
 require_once('assets/html/modal1.html');
 require_once('assets/html/modal2.html');
 require_once('assets/html/modal3.html');
+require_once('assets/html/modal4.html');
 ?>
 
 

@@ -1,0 +1,41 @@
+<!-- Modal for setting  -->
+<div class="modal fade" id="myModal_MAIN" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+        <h4 class="modal-title" id="myModalLabel">Form settings</h4>
+      </div>
+      <div class="modal-body">
+	<div id="settings">
+  <div class="form-group">
+    <label for="form_name">Form name</label>
+    <input type="text" class="form-control" id="form_name" placeholder="Enter name of form">
+  </div>
+
+  <div class="form-group">
+    <label for="form_desc">Form description</label>
+    <textarea class="form-control" id="form_desc" placeholder="Enter default value"></textarea>
+  </div>
+  
+  <div class="form-group">
+    <label for="form_url">Form URL</label>
+    <input type="text" class="form-control" id="form_url" placeholder="Enter form redirection URL">
+  </div>
+  
+
+</div>
+
+
+      </div>
+	<input type="hidden" value="<script>document.write('SLT_num'); </script>"
+      <div class="modal-footer">
+<!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary" id="save_form_name">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End of settings for modal -->

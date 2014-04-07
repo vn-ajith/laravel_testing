@@ -10,7 +10,12 @@
 	var option_num_1 = 1;
 	var option_num_2 = 1;
 	//$('#myModal').modal(data-show="true");
-	$('#myModal_3').modal('toggle');
+	$('#myModal_MAIN').modal('toggle');
+	
+	var field_array =   {};
+            
+
+	
 
 	$("#send_json").click(function(){
 		
@@ -48,7 +53,7 @@
 	$('#SLT').click(function(){
 		var str = "<label for='SLT_"+SLT_num+"' name='SLT_"+SLT_num+"_label' id='SLT_"+SLT_num+"_label'>Untitled</label><br>";
 		str = str+ "<input type='text' name='SLT_"+SLT_num+"' id ='SLT_"+SLT_num+"' >";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal'>  Settings</button><br>";
+		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_SLT'>  Settings</button><br>";
 		SLT_num++;
 		$( "#form_holder" ).append( str );	
 	});
@@ -56,14 +61,14 @@
 	$('#NUM').click(function(){
 		var str = "<label for='NUM_"+NUM_num+"' name='NUM_"+NUM_num+"_label' id='NUM_"+NUM_num+"_label'>Untitled</label><br>";
 		str = str+ "<input type='text' name='NUM_"+NUM_num+"' id='NUM_"+NUM_num+"'>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal'>  Settings</button><br>";
+		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_NUM'>  Settings</button><br>";
 		NUM_num++;
 		$( "#form_holder" ).append( str );	
 	});
 	$('#PARAGH').click(function(){
 		var str = "<label for='PARAGH_"+PARAGH_num+"' name='PARAGH_"+PARAGH_num+"_label' id='PARAGH_"+PARAGH_num+"_label'>Untitled</label><br>";
 		str = str+ "<textarea name='PARAGH_"+PARAGH_num+"'></textarea>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal'>  Settings</button><br>";
+		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_PARAGH'>  Settings</button><br>";
 		PARAGH_num++;
 		$( "#form_holder" ).append( str );	
 	});
@@ -71,7 +76,7 @@
 		var str = "<label for='CHECK_"+CHECK_num+"' name='CHECK_"+CHECK_num+"_label' id='CHECK_"+CHECK_num+"_label'>Untitled</label><br>";
 		
 		str = str+ "<input type='checkbox' name='CHECK_"+CHECK_num+"'>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal'>  Settings</button><br>";
+		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_CHECK'>  Settings</button><br>";
 		
 		
 		CHECK_num++;
@@ -80,14 +85,14 @@
 	$('#MCHOICE').click(function(){
 		var str = "<label for='MCHOICE_"+MCHOICE_num+"' name='MCHOICE_"+MCHOICE_num+"_label' id='MCHOICE_"+MCHOICE_num+"_label'>Untitled</label><br>";
 		str = str+ "<select name='MCHOICE_"+MCHOICE_num+"'></select>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_2'>  Settings</button><br>";
+		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_MCHOICE'>  Settings</button><br>";
 		MCHOICE_num++;
 		$( "#form_holder" ).append( str );	
 	});
 	$('#DROPDN').click(function(){
 		var str = "<label for='DROPDN_"+DROPDN_num+"' name='DROPDN_"+DROPDN_num+"_label' id='DROPDN_"+DROPDN_num+"_label'>Untitled</label><br>";
 		str = str+ "<select name='DROPDN_"+DROPDN_num+"'></select>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_4'>  Settings</button><br>";
+		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_DROPDN'>  Settings</button><br>";
 		DROPDN_num++;
 		$( "#form_holder" ).append( str );	
 	});
@@ -108,24 +113,26 @@
 		 
 	});
 	// form settings save
-	$( "body" ).on( "click", "#save_field_setting", function() {
+	$( "body" ).on( "click", "#save_field_settings_SLT", function() {
 		
-		//('#myModal').modal('toggle');
+		
+		field_array['']
 		alert($('#label').val());
 		$('#SLT_1_label').html('it worked');
-
+		$('#myModal_SLT').modal('toggle');
 		});
 	
 	$('#save_form_name').click(function(){
-		alert('hi');
+		
 		
 		var form_name = $('#form_name').val();
 		var form_desc = $('#form_desc').val();
 		var form_url = $('#form_url').val();
 		json = json + '{ "form_name" : "'+form_name+'", "form_desc":"'+form_desc+'", "form_url" : "'+form_url+'" , "desc_order":';
 		alert(json);
-		$('#myModal_3').modal('toggle');
+		$('#myModal_MAIN').modal('toggle');
 	});
+	
 	
 });
   

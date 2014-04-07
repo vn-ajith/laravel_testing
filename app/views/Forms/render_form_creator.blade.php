@@ -46,10 +46,14 @@
 
 
 <?php
-require_once('assets/html/modal1.html');
-require_once('assets/html/modal2.html');
-require_once('assets/html/modal3.html');
-require_once('assets/html/modal4.html');
+require_once('assets/html/MAIN_modal.html');
+require_once('assets/html/SLT_modal.html');
+require_once('assets/html/NUM_modal.html');
+require_once('assets/html/PARAGH_modal.html');
+require_once('assets/html/CHECK_modal.html');
+require_once('assets/html/MCHOICE_modal.html');
+require_once('assets/html/DROPDN_modal.html');
+
 ?>
 
 
