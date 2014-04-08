@@ -77,7 +77,8 @@ class FormsController extends BaseController
 					"(field name 1)": {
 						"label" : (label),
 						"default" : (default value),
-						"css class name" : (class name),
+						"values": 
+						"css_class_name" : (class name),
 						"field_size": (small/medium/large),
 						"required": (0 for no, 1 for yes)
 
@@ -107,14 +108,14 @@ class FormsController extends BaseController
 		//$input = json_decode(file_get_contents("php://input"),true);
 		$input = Input::all();
 		
-		var_dump($input['form_name']);
-// 		$rules_config = array(
-// 					'form_name'=>'required|alpha_num|size:2',
-// 					'form_desc'=>'alpha_num|size:2',
-// 					'form_url'=>'required',
-// 					'desc_order'=>'required',
-// 					'field_num'=>'required'
-// 				 );
+		//$input['form_desc']);
+ 		$rules_config = array(
+					'form_name'=>'required|alpha_num|size:2',
+					'form_desc'=>'alpha_num|size:2',
+					'form_url'=>'required',
+					'desc_order'=>'required',
+					
+				 );
 // 		$validator = Validation::make($input,$rules_config); // Validation for necessary fields
 // 		if($validator->passes()) // If validation is passed then form should be saved
 // 

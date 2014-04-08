@@ -20,11 +20,11 @@
   
 <script src="assets/js/save_form_options.js" type="text/javascript"></script>
 </head>
-<body>
+<div>
  
 <div id="form_builder" class="panel panel-default">
   <h1 class="">Form builder</h1>
-  
+  <h2><input type="button" id="form_set" value="Form settings" class="btn btn-info"  ></h2>
     <h2>Fields</h2>
     <div class="panel-body">
       <ul>
@@ -47,17 +47,19 @@
 
 <?php
 require_once('assets/html/MAIN_modal.html');
-require_once('assets/html/SLT_modal.html');
-require_once('assets/html/NUM_modal.html');
-require_once('assets/html/PARAGH_modal.html');
-require_once('assets/html/CHECK_modal.html');
-require_once('assets/html/MCHOICE_modal.html');
-require_once('assets/html/DROPDN_modal.html');
 
 ?>
+<div id="modal_holder">
+</div>
 
+<br>
+<input type="button" id="save_form_to_db" value="Save form" class="btn btn-success">
 
-
+<div class="progress" style="width:300px">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%" width="100px">
+    <span class="sr-only">40% Complete (success)</span>
+  </div>
+</div>
 <!--  <img src="{{asset('assets/images/fanssignupsplash.png')}}"> -->
  <br>
 <!-- <input type="button" id="send_json" value="Send json" > -->
