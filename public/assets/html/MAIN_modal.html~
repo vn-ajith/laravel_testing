@@ -11,16 +11,19 @@
   <div class="form-group">
     <label for="form_name">Form name</label>
     <input type="text" class="form-control" id="form_name" placeholder="Enter name of form">
-  </div>
+     <div id="form_name_error" ></div>	
+  </label>
 
   <div class="form-group">
     <label for="form_desc">Form description</label>
     <textarea class="form-control" id="form_desc" placeholder="Enter default value"></textarea>
+    
   </div>
   
   <div class="form-group">
     <label for="form_url">Form URL</label>
     <input type="text" class="form-control" id="form_url" placeholder="Enter form redirection URL">
+    <div id="form_url_error" ></div>	
   </div>
   
 
@@ -28,7 +31,8 @@
 
 
       </div>
-	<input type="hidden" value="<script>document.write('SLT_num'); </script>"
+	
+
       <div class="modal-footer">
 <!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
         <button type="button" class="btn btn-primary" id="save_form_name">Save changes</button>

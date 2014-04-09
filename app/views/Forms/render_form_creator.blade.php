@@ -7,20 +7,28 @@
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>	
-  	
   
   
   <style>
   h1 { padding: .2em; margin: 0; }
-	#forms_builder ul { float:left;}
+  .panel-body {
+		float:left;
+		margin-right:50px;
+	}	
+	#form_holder{
+		float:left;
+		margin-right:50px;
+	}
+	
+	
   
+	
   
   
   
   </style>
   
 <script src="assets/js/save_form_options.js" type="text/javascript"></script>
-<script src="assets/js/jquery.validate.js" type="text/javascript"></script>
 </head>
 <div>
  
@@ -43,9 +51,9 @@
 	
   
 </div>
-<form id="form_holder">
+<div id="form_holder">
 	
-</form> 
+</div> 
 
 
 <?php

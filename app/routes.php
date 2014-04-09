@@ -13,7 +13,7 @@
 
 // Default application goes to form -builder
 Route::get('/','FormsController@render_form_creator');
-Route::get('/render_form_creator','FormsController@render_form_creator');
+
 Route::post('/saveForm','FormsController@saveForm');
 
 

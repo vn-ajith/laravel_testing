@@ -7,6 +7,7 @@
 	var CHECK_num = 1;
 	var MCHOICE_num = 1;
 	var DROPDN_num = 1;
+	var flag = 0;
 	var option_num_1 = new Array();
 	//var option_num_2 = new Array();
 	
@@ -26,43 +27,31 @@
 	//
 	$('#save_form_to_db').click(function(){
 		
-		var fields_ar = JSON.stringify(field_array);
-		var n = fields_ar.search("{");
-		var fields = fields_ar.substring(n,fields_ar.length);
-		var j = json+ fields+'}';
-		
-		/*
-		var e = { "form_name" : "d",
-			  "form_desc":"f", 
-			  "form_url" : "f" ,
-			  "desc_order":
-					{ 
-					"SLT_1":
-						{
-						"label":"w",
-						"default_value":"h",
-						"css_class_name":"w",
-						"req_field":"1",
-						"other_values":""
-					}
-				}
-			};
-		*/$.ajax({
-				url: "/laravel_testing/blog/public/saveForm",
-				type:"POST",
-				dataType:"json",
-				data: JSON.parse(j)
-				})
-				
-				.success(function( data ) {
-					alert('done');
-					$('#error_holder').html();
-				});
+		if(flag == 1)
+		{
+			var fields_ar = JSON.stringify(field_array);
+			var n = fields_ar.search("{");
+			var fields = fields_ar.substring(n,fields_ar.length);
+			var j = json+ fields+'}';
+			
+			
+			$.ajax({
+					url: "/laravel_testing/blog/public/saveForm",
+					type:"POST",
+					dataType:"json",
+					data:JSON.parse(j)
+					})
+					.done(function( data ){
+						alert('done');
+					});
+
+		}
+		else{
+			alert("Pease fill form settings")
+		}
 
 
 
-
-		
 		
 	});
 
@@ -146,30 +135,7 @@
 
 	
 
-	// form settings save
-	$( "body" ).on( "click", "input[id^='save_field_settings_']", function() {
-		
-		var id =  $(this).attr('id');
-		
-		var n = id.search("s_")+2;
-		var name = id.substring(n,id.length);
-
-		field_array[name]["label"] = $("#"+name+"_label_1").val();
-		field_array[name]["default_value"] = $("#"+name+"_default_value").val();
-		field_array[name]["css_class_name"] = $("#"+name+"_css_class_name").val();
-		field_array[name]["req_field"] = $("#"+name+"_req_field").val();
-		field_array[name]['other_values'] = '';
-		if(option_num_1[name]>2)
-		{
-			
-			for(var i =2;i<option_num_1[name];i++)
-			{
-			field_array[name]['other_values'] += $("#"+name+"_option_"+i).val()+",";
-			}
-		}
-		$('#myModal_'+name).modal('toggle');
-		
-		});
+	
 	
 	$("body").on("click","input[id^='add_options_']",function(){
  		
@@ -188,13 +154,36 @@
  	});
 	$('#save_form_name').click(function(){
 		
-		
+		var count = 0;
+
 		var form_name = $('#form_name').val();
+		$('#form_name_error').removeClass('alert alert-danger');
+		$('#form_name_error').html("");
+		if(form_name=="")
+		{
+			$('#form_name_error').html("Form name can't be empty").addClass('alert alert-danger');
+			count++;
+		}
+		
 		var form_desc = $('#form_desc').val();
 		var form_url = $('#form_url').val();
-		json =  '{ "form_name" : "'+form_name+'", "form_desc":"'+form_desc+'", "form_url" : "'+form_url+'" , "desc_order":';
 		
-		$('#myModal_MAIN').modal('toggle');
+		$('#form_url_error').removeClass('alert alert-danger');
+		$('#form_url_error').html("");
+		if(form_url=="")
+		{
+			$('#form_url_error').html("Form url can't be empty").addClass('alert alert-danger');
+			count++;
+		}
+		
+
+		
+		if(count==0)
+		{
+			json =  '{ "form_name" : "'+form_name+'", "form_desc":"'+form_desc+'", "form_url" : "'+form_url+'" , "desc_order":';
+			$('#myModal_MAIN').modal('toggle');
+			flag = 1;
+		}
 	});
 	
 	function modal_builder(type,name,field_array)
@@ -203,20 +192,30 @@
 		
 		var str = "<div class='modal fade' id='myModal_"+name+"' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>  <div class='modal-dialog'>    <div class='modal-content'>      <div class='modal-header'>        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>        <h4 class='modal-title' id='myModalLabel'>Field settings</h4>      </div>      <div class='modal-body'>	<div id='settings'>";
 		
-		str = str + "<div class='form-group'>    <label for='"+name+"_label_1'>Label </label>    <input type='text' class='form-control' id='"+name+"_label_1' placeholder='Enter label' value='"+field_array[name]["label"]+"'>  </div>";
+		str = str + "<div class='form-group'>    <label for='"+name+"_label_1'>Label </label>    <input type='text' class='form-control' id='"+name+"_label_1' placeholder='Enter label' >  </div><div id= '"+name+"_label_1_error'></div>";
 		if(type=="PARAGH")
 		{
-		str = str+ "	  <div class='form-group'>    <label for='"+name+"_default_value'>Default value</label>    <textarea class='form-control' id='"+name+"_default_value' placeholder='Enter default value'>"+field_array[name]["default"]+"</textarea>  </div>";
+		str = str+ "	  <div class='form-group'>    <label for='"+name+"_default_value'>Default value</label>    <textarea class='form-control' id='"+name+"_default_value' placeholder='Enter default value'></textarea>  </div><div id= '"+name+"_default_value_error'></div>";
 	
 		}
 		else
 		{
-		str = str+ "	  <div class='form-group'>    <label for='"+name+"_default_value'>Default value</label>    <input type='text' class='form-control' id='"+name+"_default_value' placeholder='Enter default value' value='"+field_array[name]["default"]+"'>  </div>";
+		str = str+ "	  <div class='form-group'>    <label for='"+name+"_default_value'>Default value</label>    <input type='text' class='form-control' id='"+name+"_default_value' placeholder='Enter default value' >  </div><div id= '"+name+"_default_value_error'></div>";
 		
 		}
 
-		if(type=='DROPDN' || type =='MCHOICE')
+		if(type=='DROPDN')
 		{
+		str = str + "<input type='button' class='btn btn-success' id='add_options_"+name+"' value='Add options' > <div class='form-group' id='add_fields_"+name+"'>  </div>";
+	
+		}
+		if(type =='MCHOICE')
+		{
+		str = str+ "<label for='"+name+"_option_"+option_num_1[name]+"' name='"+name+"_option_"+option_num_1[name]+"_label' id='"+name+"_option_"+option_num_1[name]+"_label'>Option "+option_num_1[name]+"</label><br>";
+		
+		str = str+ "<input type='text' name='"+name+"_option_"+option_num_1[name]+"' id='"+name+"_option_"+option_num_1[name]+"'><br>";
+		option_num_1[name]++;
+		
 		str = str + "<input type='button' class='btn btn-success' id='add_options_"+name+"' value='Add options' > <div class='form-group' id='add_fields_"+name+"'>  </div>";
 	
 		}
@@ -224,7 +223,7 @@
 
 
 
-		str = str + " <div class='form-group'>    <label for='"+name+"_css_class_name'>CSS class name</label>    <input type='text' class='form-control' id='"+name+"_css_class_name' placeholder='Enter css class name' value='"+field_array[name]["css_class_name"]+"'>  </div>";
+		str = str + " <div class='form-group'>    <label for='"+name+"_css_class_name'>CSS class name</label>    <input type='text' class='form-control' id='"+name+"_css_class_name' placeholder='Enter css class name' >  </div><div id= '"+name+"_default_value_error'></div>";
 		
 		if(type == 'NUM' || type == 'SLT')
 		{
@@ -238,6 +237,57 @@
 		
 		$('#modal_holder').append(str);
 	}
+
+
+	// form settings save
+	$( "body" ).on( "click", "input[id^='save_field_settings_']", function() {
+		
+		var count=0;
+		var id =  $(this).attr('id');
+		
+		var n = id.search("s_")+2;
+		var name = id.substring(n,id.length);
+		
+		$("#"+name+"_label_1_error").removeClass('alert alert-danger');
+		$("#"+name+"_label_1_error").html("");
+		if($("#"+name+"_label_1").val()=="")
+		{
+			$("#"+name+"_label_1_error").html("Label can't be empty").addClass('alert alert-danger');
+			count++;
+		}
+ 		var t = name.search("_");
+ 		var type = name.substring(0,t);
+		
+		if(type == 'CHECK' || type == 'MCHOICE' || type == 'DROPDN' )
+		{
+			$("#"+name+"_default_value_error").removeClass('alert alert-danger');
+			$("#"+name+"_default_value_error").html("");
+			if($("#"+name+"_default_value").val()=="")
+			{
+				$("#"+name+"_default_value_error").html("Label can't be empty").addClass('alert alert-danger');
+				count++;
+			}	
+		}
+		
+		if(count==0)
+		{
+			$('#myModal_'+name).modal('toggle');
+			field_array[name]["label"] = $("#"+name+"_label_1").val();
+			field_array[name]["default_value"] = $("#"+name+"_default_value").val();
+			field_array[name]["css_class_name"] = $("#"+name+"_css_class_name").val();
+			field_array[name]["req_field"] = $("#"+name+"_req_field").val();
+			field_array[name]['other_values'] = '';
+			if(option_num_1[name]>2)
+			{
+				
+				for(var i =2;i<option_num_1[name];i++)
+				{
+				field_array[name]['other_values'] += $("#"+name+"_option_"+i).val()+",";
+				}
+			}
+		}
+		
+		});
 	
 	
 	

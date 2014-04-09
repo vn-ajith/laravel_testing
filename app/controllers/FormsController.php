@@ -142,7 +142,7 @@ class FormsController extends BaseController
 		}
 		else
 		{
-		return Redirect::action('FormsController@render_form_creator')->withErrors($validator)->withInput();
+		var_dump($validator);
 		}
 		
 		
