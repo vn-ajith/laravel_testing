@@ -33,17 +33,17 @@
 			var n = fields_ar.search("{");
 			var fields = fields_ar.substring(n,fields_ar.length);
 			var j = json+ fields+'}';
+			console.log(j);
 			
-			
-			$.ajax({
-					url: "/laravel_testing/blog/public/saveForm",
-					type:"POST",
-					dataType:"json",
-					data:JSON.parse(j)
-					})
-					.done(function( data ){
-						alert('done');
-					});
+// 			$.ajax({
+// 					url: "/laravel_testing/blog/public/saveForm",
+// 					type:"POST",
+// 					dataType:"json",
+// 					data:JSON.parse(j)
+// 					})
+// 					.done(function( data ){
+// 						alert('done');
+// 					});
 
 		}
 		else{
@@ -60,9 +60,10 @@
 
 	// form -fields addition
 	$('#SLT').click(function(){
-		var str = "<label for='SLT_"+SLT_num+"' name='SLT_"+SLT_num+"_label' id='SLT_"+SLT_num+"_label'>Untitled</label><br>";
-		str = str+ "<input type='text' name='SLT_"+SLT_num+"' id ='SLT_"+SLT_num+"' >";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_SLT_"+SLT_num+"'>  Settings</button><br>";
+		var str = "<p class='p_SLT_"+SLT_num+"'><label for='SLT_"+SLT_num+"' name='SLT_"+SLT_num+"_label' id='SLT_"+SLT_num+"_label'>Untitled</label><br>";
+		str = str+ "<input type='text' name='SLT_"+SLT_num+"' id ='SLT_"+SLT_num+"' class='field' >";
+		str = str+ "<button class='btn btn-success btn-sm set_button' data-toggle='modal' data-target='#myModal_SLT_"+SLT_num+"' id='settings_SLT_"+SLT_num+"'>  Settings</button>";
+		str = str+ "<input type='button' class='btn btn-danger btn-sm del_button' id='delete_SLT_"+SLT_num+"' value='Delete'></p>";
 		field_array["SLT_"+SLT_num] = {};
 		
 		modal_builder("SLT","SLT_"+SLT_num,field_array);
@@ -72,10 +73,10 @@
 	});
 	 
 	$('#NUM').click(function(){
-		var str = "<label for='NUM_"+NUM_num+"' name='NUM_"+NUM_num+"_label' id='NUM_"+NUM_num+"_label'>Untitled</label><br>";
-		str = str+ "<input type='text' name='NUM_"+NUM_num+"' id='NUM_"+NUM_num+"'>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_NUM_"+NUM_num+"'>  Settings</button><br>";
-		
+		var str = "<p class='p_NUM_"+NUM_num+"'><label for='NUM_"+NUM_num+"' name='NUM_"+NUM_num+"_label' id='NUM_"+NUM_num+"_label'>Untitled</label><br>";
+		str = str+ "<input type='text' name='NUM_"+NUM_num+"' id='NUM_"+NUM_num+"' class='field'>";
+		str = str+ "<button class='btn btn-success btn-sm  set_button' data-toggle='modal' data-target='#myModal_NUM_"+NUM_num+"' id='settings_NUM_"+NUM_num+"'>  Settings</button>";
+		str = str+ "<input type='button' class='btn btn-danger btn-sm del_button' id='delete_NUM_"+NUM_num+"' value='Delete'></p>";
 		field_array["NUM_"+NUM_num] = {};
 		
 		modal_builder("NUM","NUM_"+NUM_num,field_array);
@@ -84,9 +85,10 @@
 		$( "#form_holder" ).append( str );	
 	});
 	$('#PARAGH').click(function(){
-		var str = "<label for='PARAGH_"+PARAGH_num+"' name='PARAGH_"+PARAGH_num+"_label' id='PARAGH_"+PARAGH_num+"_label'>Untitled</label><br>";
-		str = str+ "<textarea name='PARAGH_"+PARAGH_num+"'></textarea>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_PARAGH_"+PARAGH_num+"'>  Settings</button><br>";
+		var str = "<p class='p_PARAGH_"+PARAGH_num+"'><label for='PARAGH_"+PARAGH_num+"' name='PARAGH_"+PARAGH_num+"_label' id='PARAGH_"+PARAGH_num+"_label'>Untitled</label><br>";
+		str = str+ "<textarea name='PARAGH_"+PARAGH_num+"' id='PARAGH_"+PARAGH_num+"' class='field'></textarea>";
+		str = str+ "<button class='btn btn-success btn-sm  set_button' data-toggle='modal' data-target='#myModal_PARAGH_"+PARAGH_num+"' id='settings_PARAGH_"+PARAGH_num+"'>  Settings</button>";
+		str = str+ "<input type='button' class='btn btn-danger btn-sm del_button' id='delete_PARAGH_"+PARAGH_num+"' value='Delete'></p>";
 		field_array["PARAGH_"+PARAGH_num] = {};
 		
 		modal_builder("PARAGH","PARAGH_"+PARAGH_num,field_array);
@@ -95,10 +97,11 @@
 		$( "#form_holder" ).append( str );	
 	});
 	$('#CHECK').click(function(){
-		var str = "<label for='CHECK_"+CHECK_num+"' name='CHECK_"+CHECK_num+"_label' id='CHECK_"+CHECK_num+"_label'>Untitled</label><br>";
+		var str = "<p class='p_CHECK_"+CHECK_num+"'><label for='CHECK_"+CHECK_num+"' name='CHECK_"+CHECK_num+"_label' id='CHECK_"+CHECK_num+"_label'>Untitled</label><br>";
 		
-		str = str+ "<input type='checkbox' name='CHECK_"+CHECK_num+"'>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_CHECK_"+CHECK_num+"'>  Settings</button><br>";
+		str = str+ "<input type='checkbox' name='CHECK_"+CHECK_num+"' id='CHECK_"+CHECK_num+"' class='field_c'>";
+		str = str+ "<button class='btn btn-success btn-sm set_button' data-toggle='modal' data-target='#myModal_CHECK_"+CHECK_num+"' id='settings_CHECK_"+CHECK_num+"'>  Settings</button>";
+		str = str+ "<input type='button' class='btn btn-danger btn-sm  del_button' id='delete_CHECK_"+CHECK_num+"' value='Delete'></p>";
 		field_array["CHECK_"+CHECK_num] = {};
 		
 		modal_builder("CHECK","CHECK_"+CHECK_num,field_array);
@@ -108,9 +111,10 @@
 		$( "#form_holder" ).append( str );	
 	});
 	$('#MCHOICE').click(function(){
-		var str = "<label for='MCHOICE_"+MCHOICE_num+"' name='MCHOICE_"+MCHOICE_num+"_label' id='MCHOICE_"+MCHOICE_num+"_label'>Untitled</label><br>";
-		str = str+ "<select name='MCHOICE_"+MCHOICE_num+"'></select>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_MCHOICE_"+MCHOICE_num+"'>  Settings</button><br>";
+		var str = "<p class='p_MCHOICE_"+MCHOICE_num+"'><label for='MCHOICE_"+MCHOICE_num+"' name='MCHOICE_"+MCHOICE_num+"_label' id='MCHOICE_"+MCHOICE_num+"_label'>Untitled</label><br>";
+		str = str+ "<select name='MCHOICE_"+MCHOICE_num+"' id='MCHOICE_"+MCHOICE_num+"' class='field'></select>";
+		str = str+ "<button class='btn btn-success btn-sm set_button' data-toggle='modal' data-target='#myModal_MCHOICE_"+MCHOICE_num+"' id='settings_MCHOICE_"+MCHOICE_num+"'>  Settings</button>";
+		str = str+ "<input type='button' class='btn btn-danger btn-sm  del_button' id='delete_MCHOICE_"+MCHOICE_num+"' value='Delete' ></p>";
 		
 		field_array["MCHOICE_"+MCHOICE_num] = {};
 		option_num_1["MCHOICE_"+MCHOICE_num] = 2;
@@ -120,10 +124,11 @@
 		$( "#form_holder" ).append( str );	
 	});
 	$('#DROPDN').click(function(){
-		var str = "<label for='DROPDN_"+DROPDN_num+"' name='DROPDN_"+DROPDN_num+"_label' id='DROPDN_"+DROPDN_num+"_label'>Untitled</label><br>";
-		str = str+ "<select name='DROPDN_"+DROPDN_num+"'></select>";
-		str = str+ "<button class='btn btn-success btn-sm' data-toggle='modal' data-target='#myModal_DROPDN_"+DROPDN_num+"'>  Settings</button><br>";
+		var str = "<p class='p_DROPDN_"+DROPDN_num+"'><label for='DROPDN_"+DROPDN_num+"' name='DROPDN_"+DROPDN_num+"_label' id='DROPDN_"+DROPDN_num+"_label'>Untitled</label><br>";
+		str = str+ "<select name='DROPDN_"+DROPDN_num+"' id='DROPDN_"+DROPDN_num+"' class='field'></select>";
+		str = str+ "<button class='btn btn-success btn-sm set_button' data-toggle='modal' data-target='#myModal_DROPDN_"+DROPDN_num+"' id='settings_DROPDN_"+DROPDN_num+"'>  Settings</button>";
 
+		str = str+ "<input type='button' class='btn btn-danger btn-sm del_button' id='delete_DROPDN_"+DROPDN_num+"' value='Delete'></p>";
 		field_array["DROPDN_"+DROPDN_num] = {};
 		option_num_1["DROPDN_"+DROPDN_num] = 2;
 		modal_builder("DROPDN","DROPDN_"+DROPDN_num,field_array);
@@ -133,7 +138,20 @@
 	});
 
 
-	
+	$("body").on("click","input[id^='delete_']",function(){
+		var id =  $(this).attr('id');
+		var n = id.search("e_")+2;
+		var name = id.substring(n,id.length);
+		
+		delete field_array[name];
+			
+// 		$( "#"+name+"_label" ).remove();
+// 		$( "#"+name ).remove();
+// 		$( "#settings_"+name ).remove();
+// 		$( "#delete_"+name ).remove();
+		
+		$(".p_"+name).remove();
+	});
 
 	
 	
@@ -242,11 +260,15 @@
 	// form settings save
 	$( "body" ).on( "click", "input[id^='save_field_settings_']", function() {
 		
+		
 		var count=0;
 		var id =  $(this).attr('id');
 		
 		var n = id.search("s_")+2;
 		var name = id.substring(n,id.length);
+		
+		var x = $("#"+name+"_label_1").val();
+		$("#"+name+"_label").html(x);
 		
 		$("#"+name+"_label_1_error").removeClass('alert alert-danger');
 		$("#"+name+"_label_1_error").html("");
@@ -264,7 +286,7 @@
 			$("#"+name+"_default_value_error").html("");
 			if($("#"+name+"_default_value").val()=="")
 			{
-				$("#"+name+"_default_value_error").html("Label can't be empty").addClass('alert alert-danger');
+				$("#"+name+"_default_value_error").html("Default value can't be empty").addClass('alert alert-danger');
 				count++;
 			}	
 		}

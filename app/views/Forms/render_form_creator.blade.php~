@@ -19,6 +19,29 @@
 		float:left;
 		margin-right:50px;
 	}
+	.form_button{
+		width:150px;
+		margin-left:50px;
+		text-align:center;
+		margin-top: 5px;
+	}   
+	.set_button{
+		width:100px;
+		margin-left:10px;
+		text-align:center;
+		
+	}
+	.del_button{
+		width:100px;
+		margin-left:10px;
+		text-align:center;
+		clear:both;
+	
+	}
+	.field_c{
+		margin-right:137px;
+		float:left;
+	}
 	
   
 	
@@ -37,14 +60,14 @@
     <h2>Fields</h2>
 	{{ HTML::ul($errors->all(), array('class'=>'alert alert-danger'))}}
     <div class="panel-body">
-      <ul>
-        <li ><input type="button" id = "SLT" value="Single line text" class="btn btn-primary"></li>
-        <li ><input type="button" id = "NUM" value="Number" class="btn btn-primary"></li>
-        <li ><input type="button" id = "PARAGH" value="Paragraph text" class="btn btn-primary"></li>
-	<li ><input type="button" id = "CHECK" value="Checkboxes" class="btn btn-primary"></li>
-	<li ><input type="button" id = "MCHOICE" value="Multiple choice" class="btn btn-primary"></li>
-	<li ><input type="button" id = "DROPDN" value="Dropdown" class="btn btn-primary"></li>
-      </ul>
+      
+        <input type="button" id = "SLT" value="Single line text" class="btn btn-primary form_button"><br>
+        <input type="button" id = "NUM" value="Number" class="btn btn-primary form_button"><br>
+        <input type="button" id = "PARAGH" value="Paragraph text" class="btn btn-primary form_button"><br>
+	<input type="button" id = "CHECK" value="Checkboxes" class="btn btn-primary form_button"><br>
+	<input type="button" id = "MCHOICE" value="Multiple choice" class="btn btn-primary form_button"><br>
+	<input type="button" id = "DROPDN" value="Dropdown" class="btn btn-primary form_button"><br>
+      
     </div>
 
 	
