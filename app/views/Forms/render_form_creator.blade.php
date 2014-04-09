@@ -6,7 +6,8 @@
   <script src="//code.jquery.com/jquery-1.9.1.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>	
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>	
+  	
   
   
   <style>
@@ -19,6 +20,7 @@
   </style>
   
 <script src="assets/js/save_form_options.js" type="text/javascript"></script>
+<script src="assets/js/jquery.validate.js" type="text/javascript"></script>
 </head>
 <div>
  
@@ -26,6 +28,7 @@
   <h1 class="">Form builder</h1>
   <h2><input type="button" id="form_set" value="Form settings" class="btn btn-info"  ></h2>
     <h2>Fields</h2>
+	{{ HTML::ul($errors->all(), array('class'=>'alert alert-danger'))}}
     <div class="panel-body">
       <ul>
         <li ><input type="button" id = "SLT" value="Single line text" class="btn btn-primary"></li>
@@ -40,9 +43,9 @@
 	
   
 </div>
-<div id="form_holder">
+<form id="form_holder">
 	
-</div> 
+</form> 
 
 
 <?php
@@ -53,13 +56,9 @@ require_once('assets/html/MAIN_modal.html');
 </div>
 
 <br>
+<div id='error_holder'></div>
 <input type="button" id="save_form_to_db" value="Save form" class="btn btn-success">
 
-<div class="progress" style="width:300px">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%" width="100px">
-    <span class="sr-only">40% Complete (success)</span>
-  </div>
-</div>
 <!--  <img src="{{asset('assets/images/fanssignupsplash.png')}}"> -->
  <br>
 <!-- <input type="button" id="send_json" value="Send json" > -->

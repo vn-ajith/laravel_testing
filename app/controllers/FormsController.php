@@ -44,7 +44,6 @@ class FormsController extends BaseController
 		$json_to_view = array('form_name' => $form->form_name,
 					'form_desc' => $form->form_desc,
 					'form_url'  => $form->form_url,
-					'field_num' => $form->field_num,
 					'desc_order'=>json_decode($form->desc_order,true));
 		// returning details of form into view as json
 		return Response::json($json_to_view);
@@ -101,7 +100,7 @@ class FormsController extends BaseController
 	{
 	
 		//return View::make('Forms.saveForm');
-		echo 'hi';
+
 	
 		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
 		//  input is send as json, in above format
@@ -110,33 +109,43 @@ class FormsController extends BaseController
 		
 		//$input['form_desc']);
  		$rules_config = array(
-					'form_name'=>'required|alpha_num|size:2',
-					'form_desc'=>'alpha_num|size:2',
+					'form_name'=>'required|alpha_num',
+					'form_desc'=>'alpha_num',
 					'form_url'=>'required',
 					'desc_order'=>'required',
 					
 				 );
-// 		$validator = Validation::make($input,$rules_config); // Validation for necessary fields
-// 		if($validator->passes()) // If validation is passed then form should be saved
-// 
-// 		{
-// 			$form_config = new Form_config();  // model for saving form configuration
-// 			$form_config->form_name = $input['form_name'];
-// 			
-// 			if(isset($input['form_desc']))
-// 			{
-// 				$form_config->form_desc = $input['form_desc'];
-// 			}
-// 			
-// 			$form_config->form_url = $input['form_url'];
-// 			$form_config->field_num = $input['field_num']; 
-// 			// descriptional order is converted back to json in order to store it in db 
-// 
-// 			$desc_order = json_encode($input['desc-order']);
-// 			
-// 			$form_config->desc_order = $desc_order;
-// 			$form_config->save();
-// 		}
+		var_dump($input['form_name']);
+		var_dump($input['form_desc']);
+		var_dump($input['form_url']);
+		var_dump($input['desc_order']);
+		$validator = Validator::make($input,$rules_config); // Validation for necessary fields
+		if($validator->passes()) // If validation is passed then form should be saved
+
+		{
+			$form_config = new Form_config();  // model for saving form configuration
+			$form_config->form_name = $input['form_name'];
+			
+			if(isset($input['form_desc']))
+			{
+				$form_config->form_desc = $input['form_desc'];
+			}
+			
+			$form_config->form_url = $input['form_url'];
+			
+			// descriptional order is converted back to json in order to store it in db 
+
+			$desc_order = json_encode($input['desc_order']);
+			
+			$form_config->desc_order = $desc_order;
+			$form_config->save();
+		}
+		else
+		{
+		return Redirect::action('FormsController@render_form_creator')->withErrors($validator)->withInput();
+		}
+		
+		
 	}
 
 

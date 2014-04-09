@@ -31,45 +31,22 @@
 		var fields = fields_ar.substring(n,fields_ar.length);
 		var j = json+ fields+'}';
 		
-		/*
-		var e = { "form_name" : "d",
-			  "form_desc":"f", 
-			  "form_url" : "f" ,
-			  "desc_order":
-					{ 
-					"SLT_1":
-						{
-						"label":"w",
-						"default_value":"h",
-						"css_class_name":"w",
-						"req_field":"1",
-						"other_values":""
-					}
-				}
-			};
-		*/$.ajax({
+		
+		$.ajax({
 				url: "/laravel_testing/blog/public/saveForm",
 				type:"POST",
 				dataType:"json",
 				data: JSON.parse(j)
 				})
-				.done(function( data ) {
+				
+				.success(function( data ) {
 					alert('done');
+					$('#error_holder').html();
 				});
 
 
 
 
-
-// 		$.ajax({
-// 				url: "/laravel_testing/blog/public/saveForm",
-// 				type:"POST",
-// 				dataType:"json",
-// 				data: j		
-// 				})
-// 				.done(function( data ) {
-// 					alert('done');
-// 				});
 		
 		
 	});

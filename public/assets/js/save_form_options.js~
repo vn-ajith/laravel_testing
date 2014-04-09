@@ -25,7 +25,7 @@
 	});
 	//
 	$('#save_form_to_db').click(function(){
-		alert(json);
+		
 		var fields_ar = JSON.stringify(field_array);
 		var n = fields_ar.search("{");
 		var fields = fields_ar.substring(n,fields_ar.length);
@@ -53,23 +53,15 @@
 				dataType:"json",
 				data: JSON.parse(j)
 				})
-				.done(function( data ) {
+				
+				.success(function( data ) {
 					alert('done');
+					$('#error_holder').html();
 				});
 
 
 
 
-
-// 		$.ajax({
-// 				url: "/laravel_testing/blog/public/saveForm",
-// 				type:"POST",
-// 				dataType:"json",
-// 				data: j		
-// 				})
-// 				.done(function( data ) {
-// 					alert('done');
-// 				});
 		
 		
 	});
