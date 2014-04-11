@@ -1,13 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Form builder</title>
-  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>	
-  
+@extends('../layout')
+@section('content')
   
   <style>
   h1 { padding: .2em; margin: 0; }
@@ -39,8 +31,11 @@
 	
 	}
 	.field_c{
-		margin-right:41%;
+		margin-right:36%;
 		float:left;
+	}
+	.field{
+		width:150px;
 	}
 	
   
@@ -51,7 +46,7 @@
   </style>
   
 <script src="assets/js/save_form_options.js" type="text/javascript"></script>
-</head>
+
 <div>
  
 <div id="form_builder" class="panel panel-default">
@@ -90,7 +85,5 @@ require_once('assets/html/MAIN_modal.html');
 <input type="button" id="save_form_to_db" value="Save form" class="btn btn-success">
 
 <!--  <img src="{{asset('assets/images/fanssignupsplash.png')}}"> -->
- <br>
-<!-- <input type="button" id="send_json" value="Send json" > -->
-</body>
-</html>
+
+@stop

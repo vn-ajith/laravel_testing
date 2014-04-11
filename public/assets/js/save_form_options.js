@@ -35,15 +35,15 @@
 			var j = json+ fields+'}';
 			console.log(j);
 			
-// 			$.ajax({
-// 					url: "/laravel_testing/blog/public/saveForm",
-// 					type:"POST",
-// 					dataType:"json",
-// 					data:JSON.parse(j)
-// 					})
-// 					.done(function( data ){
-// 						alert('done');
-// 					});
+			$.ajax({
+					url: "/laravel_testing/blog/public/saveForm",
+					type:"POST",
+					dataType:"json",
+					data:JSON.parse(j)
+					})
+					.done(function( data ){
+						alert('done');
+					});
 
 		}
 		else{

@@ -8,7 +8,8 @@ redirection URL, number of fields associated
 class Form_config extends Eloquent
 {
 	protected $table = 'form_configs';
-	public static $key = 'form_id';
+	//public static $key = 'form_id';
+	protected $primaryKey = 'form_id';
 
 	
 	
