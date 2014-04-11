@@ -51,7 +51,7 @@ class FormsController extends BaseController
 		//print_r($json_to_view);
 		//print_r($json_to_view['desc_order']);
 		//echo '<pre>';
-		return View::make('Forms.render_form',array('forms'=>$forms));
+		return View::make('Forms.render_form',array('form'=>$forms));
 	}
 	
 	/*      Function: save_form()

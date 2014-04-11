@@ -103,7 +103,7 @@
 		str = str+ "<button class='btn btn-success btn-sm set_button' data-toggle='modal' data-target='#myModal_CHECK_"+CHECK_num+"' id='settings_CHECK_"+CHECK_num+"'>  Settings</button>";
 		str = str+ "<input type='button' class='btn btn-danger btn-sm  del_button' id='delete_CHECK_"+CHECK_num+"' value='Delete'></p>";
 		field_array["CHECK_"+CHECK_num] = {};
-		
+		option_num_1["CHECK_"+CHECK_num] = 2;
 		modal_builder("CHECK","CHECK_"+CHECK_num,field_array);
 
 		
@@ -222,7 +222,7 @@
 		
 		}
 
-		if(type=='DROPDN')
+		if(type=='DROPDN' || type=='CHECK')
 		{
 		str = str + "<input type='button' class='btn btn-success' id='add_options_"+name+"' value='Add options' > <div class='form-group' id='add_fields_"+name+"'>  </div>";
 	

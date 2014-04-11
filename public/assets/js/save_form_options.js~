@@ -33,7 +33,7 @@
 			var n = fields_ar.search("{");
 			var fields = fields_ar.substring(n,fields_ar.length);
 			var j = json+ fields+'}';
-//			console.log(j);
+			console.log(j);
 			
 			$.ajax({
 					url: "/laravel_testing/blog/public/saveForm",
@@ -222,7 +222,7 @@
 		
 		}
 
-		if(type=='DROPDN')
+		if(type=='DROPDN' || type=='CHECK')
 		{
 		str = str + "<input type='button' class='btn btn-success' id='add_options_"+name+"' value='Add options' > <div class='form-group' id='add_fields_"+name+"'>  </div>";
 	

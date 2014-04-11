@@ -11,8 +11,8 @@
   <div class="form-group">
     <label for="form_name">Form name</label>
     <input type="text" class="form-control" id="form_name" placeholder="Enter name of form">
-     <div id="form_name_error" ></div>	
-  </label>
+   	  <div id="form_name_error" ></div>	
+  </div>
 
   <div class="form-group">
     <label for="form_desc">Form description</label>
