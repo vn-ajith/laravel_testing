@@ -44,13 +44,8 @@ class FormsController extends BaseController
 		$forms = array('form_name' => $form->form_name,
 					'form_desc' => $form->form_desc,
 					'form_url'  => $form->form_url,
+					'form_id'   => $form->form_id,
 					'desc_order'=>json_decode($form->desc_order),true);
-		// returning details of form into view as json
-		//return Response::json($json_to_view);
-		//echo '<pre>';
-		//print_r($json_to_view);
-		//print_r($json_to_view['desc_order']);
-		//echo '<pre>';
 		return View::make('Forms.render_form',array('form'=>$forms));
 	}
 	
@@ -188,35 +183,36 @@ class FormsController extends BaseController
 		$field_num = 1;
 		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
 	
-		$input = json_decode(file_get_contents("php://input"),true);	
+		//$input = json_decode(file_get_contents("php://input"),true);	
+		$input = Input::all();
 
 		$fdata = $input['form_data'];
+		var_dump($fdata);
 		
-		
-		foreach($type_array as $key=>$type)
-		{
-			$i = 1;
-			//checking whether $type_$i exist in input or not
-			// for eg: SLT_1, NUM_4 etc
-			
-			while(array_key_exists($type.'_'.$i,$fdata))
-			{
-				if(Form_data::col_exists('field_'.$field_num.'_name') == false) // check field_(number)_name exist or not. If not create a new one
-				{
-					Form_data::create_col($field_num,$key);
-				}      // field_num is giving idea about which field is created
-				$field = $type.'_'.$i;
-				$col = 'field_'.$field_num.'_name';
-				$col_value = 'field_'.$field_num.'_value';
-				$form_data->$col = $field;
-					
-				$form_data->$col_value = $fdata[$field]['value'];
-				$field_num++;
-				$i++;
-					
-			}
-		}
-		$form_data->save();
+// 		foreach($type_array as $key=>$type)
+// 		{
+// 			$i = 1;
+// 			//checking whether $type_$i exist in input or not
+// 			// for eg: SLT_1, NUM_4 etc
+// 			
+// 			while(array_key_exists($type.'_'.$i,$fdata))
+// 			{
+// 				if(Form_data::col_exists('field_'.$field_num.'_name') == false) // check field_(number)_name exist or not. If not create a new one
+// 				{
+// 					Form_data::create_col($field_num,$key);
+// 				}      // field_num is giving idea about which field is created
+// 				$field = $type.'_'.$i;
+// 				$col = 'field_'.$field_num.'_name';
+// 				$col_value = 'field_'.$field_num.'_value';
+// 				$form_data->$col = $field;
+// 					
+// 				$form_data->$col_value = $fdata[$field]['value'];
+// 				$field_num++;
+// 				$i++;
+// 					
+// 			}
+// 		}
+// 		$form_data->save();
 		
 	}
 	

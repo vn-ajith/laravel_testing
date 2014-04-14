@@ -11,11 +11,15 @@ $fields = $form['desc_order']  ;
 ?>
 <script type="text/javascript" src="../assets/js/save_form_data.js"></script>
 <div class="container">
-<form role="form">
-		
-	<h1>{{$form['form_name']}}</h1>
-	<h3>{{$form['form_desc']}}</h3>
 
+<form role="form" id="form">
+	
+	<input type="hidden" id="form_id" value="{{$form['form_id']}}">	
+	<h1 id="form_name">{{$form['form_name']}}</h1>
+	<h3>{{$form['form_desc']}}</h3>
+	
+
+	<p>* fields are required</p>
 
 	@foreach ($fields as $key=>$field)
 	<?php
@@ -43,6 +47,7 @@ $fields = $form['desc_order']  ;
 			<input type="hidden" id="{{$key.'_required'}}" value="{{$field->req_field}}" >
 			
 			<input type="text" class="form-control {{$field->css_class_name}}" id="{{$key}}" name='{{$key}}' value='{{$field->default_value}}'>
+			<div id="{{$key.'_error'}}" class='alert alert-danger' style="width:50%"></div>
 		</div>
 	@elseif($name == 'PARAGH')
 		<div class="form-group">
@@ -51,6 +56,7 @@ $fields = $form['desc_order']  ;
 
 			<label for="{{$key}}" id="{{$key.'_label'}}">{{$label}}</label>
 			<textarea class="form-control {{$field->css_class_name}}" name='{{$key}}' id='{{$key}}' rows="3">{{$field->default_value}}</textarea>
+			<div id="{{$key.'_error'}}" class='alert alert-danger' style="width:50%"></div>
 		</div>
 	@elseif($name == 'CHECK')
 		
@@ -81,6 +87,7 @@ $fields = $form['desc_order']  ;
 			
 		
 		@endif
+			<div id="{{$key.'_error'}}" class='alert alert-danger' style="width:50%"></div>
 	@elseif($name == 'DROPDN')
 		
 		
@@ -94,6 +101,7 @@ $fields = $form['desc_order']  ;
 			@endforeach
 		@endif
 		</select>
+		<div id="{{$key.'_error'}}" class='alert alert-danger' style="width:50%"></div>
 	@elseif($name == 'MCHOICE')
 		
 		<input type="hidden" id="{{$key.'_required'}}" value="{{$field->req_field}}" >
@@ -107,11 +115,14 @@ $fields = $form['desc_order']  ;
 				<option value="{{$other}}">{{$other}}</option>
 			@endforeach
 		@endif
-		</select>
+		</select>	
+		<div id="{{$key.'_error'}}" class='alert alert-danger' style="width:50%"></div>
+
 		
 	@endif
 	@endforeach
-<button type="submit" class="btn btn-default">Submit</button>
+<br>
+<input type="button" class="btn btn-success" value="Save" id="save_form_data">
 </form>
 
 </div>
