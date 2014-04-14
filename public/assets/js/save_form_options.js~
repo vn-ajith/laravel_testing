@@ -103,7 +103,7 @@
 		str = str+ "<button class='btn btn-success btn-sm set_button' data-toggle='modal' data-target='#myModal_CHECK_"+CHECK_num+"' id='settings_CHECK_"+CHECK_num+"'>  Settings</button>";
 		str = str+ "<input type='button' class='btn btn-danger btn-sm  del_button' id='delete_CHECK_"+CHECK_num+"' value='Delete'></p>";
 		field_array["CHECK_"+CHECK_num] = {};
-		
+		option_num_1["CHECK_"+CHECK_num] = 2;
 		modal_builder("CHECK","CHECK_"+CHECK_num,field_array);
 
 		
@@ -145,11 +145,7 @@
 		
 		delete field_array[name];
 			
-// 		$( "#"+name+"_label" ).remove();
-// 		$( "#"+name ).remove();
-// 		$( "#settings_"+name ).remove();
-// 		$( "#delete_"+name ).remove();
-		
+
 		$(".p_"+name).remove();
 	});
 
@@ -161,12 +157,12 @@
 		
 		var n = id.search("s_")+2;
 		var name = id.substring(n,id.length);
-		
+		alert(option_num_1[name]);
 		var str = "<label for='"+name+"_option_"+option_num_1[name]+"' name='"+name+"_option_"+option_num_1[name]+"_label' id='"+name+"_option_"+option_num_1[name]+"_label'>Option "+option_num_1[name]+"</label><br>";
 		
 		str = str+ "<input type='text' name='"+name+"_option_"+option_num_1[name]+"' id='"+name+"_option_"+option_num_1[name]+"'><br>";
 		option_num_1[name]++;
-		$( "div[id^='add_fields_']" ).append( str );	
+		$( "#add_fields_"+name ).append( str );	
 		
 		 
  	});
@@ -304,6 +300,7 @@
 				
 				for(var i =2;i<option_num_1[name];i++)
 				{
+			
 				field_array[name]['other_values'] += $("#"+name+"_option_"+i).val()+",";
 				}
 			}

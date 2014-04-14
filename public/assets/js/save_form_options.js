@@ -145,11 +145,7 @@
 		
 		delete field_array[name];
 			
-// 		$( "#"+name+"_label" ).remove();
-// 		$( "#"+name ).remove();
-// 		$( "#settings_"+name ).remove();
-// 		$( "#delete_"+name ).remove();
-		
+
 		$(".p_"+name).remove();
 	});
 
@@ -166,7 +162,7 @@
 		
 		str = str+ "<input type='text' name='"+name+"_option_"+option_num_1[name]+"' id='"+name+"_option_"+option_num_1[name]+"'><br>";
 		option_num_1[name]++;
-		$( "div[id^='add_fields_']" ).append( str );	
+		$( "#add_fields_"+name ).append( str );	
 		
 		 
  	});
@@ -304,6 +300,7 @@
 				
 				for(var i =2;i<option_num_1[name];i++)
 				{
+			
 				field_array[name]['other_values'] += $("#"+name+"_option_"+i).val()+",";
 				}
 			}

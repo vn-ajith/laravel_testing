@@ -17,7 +17,7 @@ class FormsController extends BaseController
 	public function select_form()
 	{
 		$forms = Form_config::all();
-		return View::make('select_form',compact($forms));
+		return View::make('Forms.select_form',compact('forms'));
 	}
 	
 
@@ -41,12 +41,17 @@ class FormsController extends BaseController
 	*/
 	public function render_form(Form_config $form)
 	{
-		$json_to_view = array('form_name' => $form->form_name,
+		$forms = array('form_name' => $form->form_name,
 					'form_desc' => $form->form_desc,
 					'form_url'  => $form->form_url,
-					'desc_order'=>json_decode($form->desc_order,true));
+					'desc_order'=>json_decode($form->desc_order),true);
 		// returning details of form into view as json
-		return Response::json($json_to_view);
+		//return Response::json($json_to_view);
+		//echo '<pre>';
+		//print_r($json_to_view);
+		//print_r($json_to_view['desc_order']);
+		//echo '<pre>';
+		return View::make('Forms.render_form',array('forms'=>$forms));
 	}
 	
 	/*      Function: save_form()
@@ -109,16 +114,12 @@ class FormsController extends BaseController
 		
 		//$input['form_desc']);
  		$rules_config = array(
-					'form_name'=>'required|alpha_num',
-					'form_desc'=>'alpha_num',
+					'form_name'=>'required',
 					'form_url'=>'required',
 					'desc_order'=>'required',
 					
 				 );
-		var_dump($input['form_name']);
-		var_dump($input['form_desc']);
-		var_dump($input['form_url']);
-		var_dump($input['desc_order']);
+		
 		$validator = Validator::make($input,$rules_config); // Validation for necessary fields
 		if($validator->passes()) // If validation is passed then form should be saved
 
@@ -142,7 +143,7 @@ class FormsController extends BaseController
 		}
 		else
 		{
-		return Redirect::action('FormsController@render_form_creator')->withErrors($validator)->withInput();
+			echo 'error!!';
 		}
 		
 		
