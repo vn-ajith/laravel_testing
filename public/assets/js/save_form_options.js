@@ -304,6 +304,7 @@
 				field_array[name]['other_values'] += $("#"+name+"_option_"+i).val()+",";
 				}
 			}
+			alert('Form saved' );
 		}
 		
 		});

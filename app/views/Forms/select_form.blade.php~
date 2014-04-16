@@ -40,7 +40,7 @@
 							<td>{{$form->form_name }}</td>
 							<td>{{$form->form_desc}}</td>
 							<td>{{$form->form_url}}</td>
-							<td><a href="{{ action('FormsController@render_form', $form->form_id) }}" class="btn btn-info">Edit</a></td>>
+							<td><a href="{{ action('FormsController@render_form', $form->form_id) }}" class="btn btn-info">Edit</a></td>
 							</tr>
 							@endforeach
 							</tbody>

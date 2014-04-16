@@ -12,6 +12,8 @@
 */
 
 // Default application goes to form -builder
+
+//Route::get('/','FormsController@index');
 Route::get('/','FormsController@render_form_creator');
 
 Route::post('/saveForm','FormsController@saveForm');
@@ -22,3 +24,4 @@ Route::model('form_c','Form_config');
 // routes are added to render a particular form,, a form identifies by model using its form id
 Route::get('/render_form/{form_c}','FormsController@render_form');
 Route::post('/save_form_data','FormsController@save_form_data');
+Route::get('/save_form_data','FormsController@save_form_data');

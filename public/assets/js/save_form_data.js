@@ -14,6 +14,7 @@ $(document).ready(function(){
 	});
 	$('#save_form_data').click(function(){
 		
+		//alert(JSON.stringify(all_req));
 		var form_data =  {};
 		form_data ['form_data'] =  {};
 		form_data["form_id"] = $("#form_id").val();
@@ -24,31 +25,102 @@ $(document).ready(function(){
 			var n = all_req[i].search("_required");
 			var name = all_req[i].substring(0,n);
 			
-			if($('#'+name).val()=="" || $("#"+name+" :selected").val()==undefined)
-			{		
+			var m = name.search("_");
+			var type = name.substring(0,m);
+// 			alert(type);
+			//$("#"+name+" :selected").val()==undefined
+			if(type=='SLT' || type=='NUM' || type=='PARAGH' || type=='DROPDN')
+			{
+				var v = $('#'+name).val();
+				if($('#'+name).val()=="")
+				{		
+					
+					$('#'+name+'_error').addClass('alert alert-danger');
+					$('#'+name+'_error').html("This field is required");
+					count++;
+				}
+				else if(type=='NUM' && $.isNumeric(v) ==false)
+				{
+					
+					$('#'+name+'_error').addClass('alert alert-danger');
+					$('#'+name+'_error').html("This field can only contain numbers");
+					count++;
+				}
+				else{
 				
-				$('#'+name+'_error').addClass('alert alert-danger');
-				$('#'+name+'_error').html("This field is required");
-				count++;
+					$('#'+name+'_error').html("");
+					$('#'+name+'_error').removeClass("alert alert-danger");
+				}
 			}
-			else{
-				$('#'+name+'_error').html("");
-				$('#'+name+'_error').removeClass("alert alert-danger");
+			else if(type=='CHECK')
+			{
+				if($("input[id^='"+name+"']").is(':checked')==false)
+				{		
+					
+					$('#'+name+'_error').addClass('alert alert-danger');
+					$('#'+name+'_error').html("This field is required");
+					count++;
+				}
+
+				else{
+				
+					$('#'+name+'_error').html("");
+					$('#'+name+'_error').removeClass("alert alert-danger");
+				}
 			}
+			else if(type=='MCHOICE')
+			{
+				if($("#"+name+" :selected").val()==undefined)
+				{		
+					
+					$('#'+name+'_error').addClass('alert alert-danger');
+					$('#'+name+'_error').html("This field is required");
+					count++;
+				}
+
+				else{
+				
+					$('#'+name+'_error').html("");
+					$('#'+name+'_error').removeClass("alert alert-danger");
+				}
+			}
+			
 		}
 		if(count==0)
 		{
 			var fdata = $('#form').serialize();
 			console.log(fdata);
 			var field_value = fdata.split('&');
+			
 			for(var i=0; i<field_value.length;i++)
 			{
 				var f  = field_value[i].split('=');
 				var field = f[0];
 				var value = f[1];
-				alert('field='+field+' value='+value);
-				form_data["form_data"][field] = value;
+				value = value.replace('+',' ');
+				
+				var key_arr = Object.keys(form_data["form_data"]);
+					
+				if(key_arr.length>=1)
+				{
+					
+					if(key_arr.indexOf(field)>=0)
+					{
+						form_data["form_data"][field] = form_data["form_data"][field]+','+ value;
+					}
+					else
+					{
+						form_data["form_data"][field] = value;
+					}
+				}
+				else
+				{
+					form_data["form_data"][field] = value;
+				}
+				
+				
 			}
+			
 			console.log(JSON.stringify(form_data));
 			$.ajax({
 					url: "/laravel_testing/blog/public/save_form_data",
@@ -59,6 +131,7 @@ $(document).ready(function(){
 					.done(function( data ){
 						alert('done');
 					});
+			alert('Data saved');
 		}
 	});
 	

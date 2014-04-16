@@ -14,7 +14,7 @@ class CreateFormDataTable extends Migration {
 	{
 		Schema::create('form_datas',function($table)
 			{
-				$table->increments('form_id');
+				$table->integer('form_id');
 				$table->foreign('form_id')->references('form_id')->on('form_configs');
 			});
 	}

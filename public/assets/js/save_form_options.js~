@@ -157,7 +157,7 @@
 		
 		var n = id.search("s_")+2;
 		var name = id.substring(n,id.length);
-		alert(option_num_1[name]);
+		
 		var str = "<label for='"+name+"_option_"+option_num_1[name]+"' name='"+name+"_option_"+option_num_1[name]+"_label' id='"+name+"_option_"+option_num_1[name]+"_label'>Option "+option_num_1[name]+"</label><br>";
 		
 		str = str+ "<input type='text' name='"+name+"_option_"+option_num_1[name]+"' id='"+name+"_option_"+option_num_1[name]+"'><br>";
@@ -304,6 +304,7 @@
 				field_array[name]['other_values'] += $("#"+name+"_option_"+i).val()+",";
 				}
 			}
+			alert('Form saved' )
 		}
 		
 		});

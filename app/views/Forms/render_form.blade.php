@@ -67,14 +67,14 @@ $fields = $form['desc_order']  ;
 		@if(count($other_values)>0)
 		
 			<div class="checkbox">	
-				<input type="checkbox" name="{{$key}}[]" id="{{$key.'_'.$number}}" class='{{$field->css_class_name}}' value="{{$field->default_value}}">
+				<input type="checkbox" name="{{$key}}" id="{{$key.'_'.$number}}" class='{{$field->css_class_name}}' value="{{$field->default_value}}">
 				{{$field->default_value}}
 			</div>
 			@foreach ($other_values as $other)
 			<?php $number++; ?>
 			<div class="checkbox">
 			
-				<input type="checkbox" name="{{$key}}[]" id="{{$key.'_'.$number}}" class='{{$field->css_class_name}}' value="{{$other}}">
+				<input type="checkbox" name="{{$key}}" id="{{$key.'_'.$number}}" class='{{$field->css_class_name}}' value="{{$other}}">
 				{{$other}}
 			</div>
 			@endforeach

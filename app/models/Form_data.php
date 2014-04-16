@@ -6,7 +6,8 @@ different fields and its values saved using this model
 class Form_data extends Eloquent
 {
 	protected $table = 'form_datas';
-	public static $key = 'form_id';
+	//public static $key = 'form_id';
+	public $timestamps = false;
 	
 	
 
@@ -55,14 +56,19 @@ class Form_data extends Eloquent
 	public static function create_col($num = 0,$type)
 	{
 			//$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
-						
-			$col_name_db = 'field_'.$num.'_name';		// new column to be generated
-			$value_name_db = 'field_'.$num.'_value';  // value field of new column 
+				/*ALTER TABLE table_name
+				ADD column_name datatype*/	
 			
-			Schema::table('form_datas', function($table)
-			{
+			
+			
+// 			Schema::table('form_datas',function($table,)
+// 			{
+				$col_name_db = 'field_'.$num.'_name';		// new column to be generated
+				$value_name_db = 'field_'.$num.'_value';  // value field of new column 
+				//echo $col_name_db.' '.$value_name_db.' '.$type;
 				
-				$table->string($col_name_db,'100');  // new column for field is created
+				//$table->string($col_name_db,'100');  // new column for field is created
+				DB::statement('ALTER TABLE form_datas ADD '.$col_name_db.' varchar(100)');	
 				/*
 					According to type value field is created
 					single line text=> string (varchar)
@@ -71,15 +77,19 @@ class Form_data extends Eloquent
 				*/
 				if($type == 1)
 				{
-					$table->string($value_name_db,'100')->after($col_name_db);
+					//$table->string($value_name_db,'100')->after($col_name_db);
+					DB::statement('ALTER TABLE form_datas ADD '.$value_name_db.' varchar(100)');	
 				}
 				else if($type == 2)
 				{
-					$table->float($value_name_db,'100')->after($col_name_db);
+					
+					//$table->float($value_name_db,'100')->after($col_name_db);
+					DB::statement('ALTER TABLE form_datas ADD '.$value_name_db.' float');	
 				}
 				else
 				{
-					$table->text($value_name_db,'100')->after($col_name_db);
+					//$table->text($value_name_db,'100')->after($col_name_db);
+					DB::statement('ALTER TABLE form_datas ADD '.$value_name_db.' text');	
 				}
 				
 				/*
@@ -87,7 +97,7 @@ class Form_data extends Eloquent
 				*/
 
 				
-			});
+// 			});
 		
 		
 	}

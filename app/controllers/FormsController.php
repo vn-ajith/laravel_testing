@@ -13,7 +13,10 @@ class FormsController extends BaseController
 		This function gives control to user,, as to select a particular form from already created ones
 		after selecting form, control goes to render form
 	*/
-	
+	public function index()
+	{
+		return View::make('Forms.index');
+	}
 	public function select_form()
 	{
 		$forms = Form_config::all();
@@ -183,36 +186,46 @@ class FormsController extends BaseController
 		$field_num = 1;
 		$type_array = array(1=>'SLT',2=>'NUM',3=>'PARAGH',4=>'CHECK',5=>'MCHOICE',6=>'DROPDN');
 	
-		//$input = json_decode(file_get_contents("php://input"),true);	
+		
 		$input = Input::all();
 
 		$fdata = $input['form_data'];
-		var_dump($fdata);
-		
-// 		foreach($type_array as $key=>$type)
-// 		{
-// 			$i = 1;
-// 			//checking whether $type_$i exist in input or not
-// 			// for eg: SLT_1, NUM_4 etc
-// 			
-// 			while(array_key_exists($type.'_'.$i,$fdata))
-// 			{
-// 				if(Form_data::col_exists('field_'.$field_num.'_name') == false) // check field_(number)_name exist or not. If not create a new one
-// 				{
-// 					Form_data::create_col($field_num,$key);
-// 				}      // field_num is giving idea about which field is created
-// 				$field = $type.'_'.$i;
-// 				$col = 'field_'.$field_num.'_name';
-// 				$col_value = 'field_'.$field_num.'_value';
-// 				$form_data->$col = $field;
-// 					
-// 				$form_data->$col_value = $fdata[$field]['value'];
-// 				$field_num++;
-// 				$i++;
-// 					
-// 			}
-// 		}
-// 		$form_data->save();
+ 		$form_data->form_id = $input['form_id'];
+ 		$form_data->form_name = $input['form_name'];
+
+ 		
+		foreach($type_array as $key=>$type)
+		{
+			$i = 1;
+			//checking whether $type_$i exist in input or not
+			// for eg: SLT_1, NUM_4 etc
+			
+			while(array_key_exists($type.'_'.$i,$fdata))
+			{
+				if(Form_data::col_exists('field_'.$field_num.'_name') == false) // check field_(number)_name exist or not. If not create a new one
+				{
+					Form_data::create_col($field_num,$key);
+				}      // field_num is giving idea about which field is created
+				$field = $type.'_'.$i;
+				$col = 'field_'.$field_num.'_name';
+				$col_value = 'field_'.$field_num.'_value';
+				$form_data->$col = $field;
+				$value = $fdata[$field];
+				if(is_numeric($fdata[$field]))		
+				{
+					$form_data->$col_value = floatval($value);
+					echo 'numeric';
+				}
+				else
+				{
+				$form_data->$col_value = $value;
+				}
+				$field_num++;
+				$i++;
+					
+			}
+		}
+		$form_data->save();
 		
 	}
 	
