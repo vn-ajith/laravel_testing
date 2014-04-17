@@ -30,7 +30,7 @@
 			<span> 2 column view with left sidebar</span>
 		</div>
 		<div class="col-md-3 radio">
-			<input type="radio" id="view_type_3" name="view_type" value="2-col_right_view"> 
+			<input type="radio" id="view_type_3" name="view_type" value="2_col_right_view"> 
 			<img src="assets/images/2_column_right_view.jpg" alt="..." class="img-rounded"><br>
 			<span> 2 column view with right sidebar</span>
 		</div>
@@ -74,10 +74,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Select forms</h4>
       </div>
-      <div class="modal-body">
-        
+      <div class="modal-body">	
+				<label for="position">Position</label>
+        			<select id="position">
+				
+				
+				</select>
 
 					@if ($forms->isEmpty())
 					<p> Currently, there is no form available !</p>
