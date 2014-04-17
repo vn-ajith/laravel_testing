@@ -9,11 +9,6 @@
 
 </head>
 <body>
-<ul class="nav nav-tabs">
-  <li><a href="{{action('FormsController@render_form_creator')}}">Home</a></li>
-  <li><a href="{{action('FormsController@select_form')}}">Select a form</a></li>
-  
-</ul>
 
 @yield('content')
 

@@ -7,23 +7,30 @@ class FormsController extends BaseController
 {
 	
 
-		
+	
+
+
+	public function index()
+	{
+		return View::make('Forms.index');
+	}	
 	
 	/*
 		This function gives control to user,, as to select a particular form from already created ones
 		after selecting form, control goes to render form
 	*/
-	public function index()
-	{
-		return View::make('Forms.index');
-	}
+	
 	public function select_form()
 	{
 		$forms = Form_config::all();
 		return View::make('Forms.select_form',compact('forms'));
 	}
 	
-
+	public function page_builder()
+	{
+		$forms = Form_config::all();
+		return View::make('Forms.page_builder',compact('forms'))	;
+	}
 
 
 	/*

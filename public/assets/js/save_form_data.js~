@@ -96,6 +96,8 @@ $(document).ready(function(){
 			{
 				var f  = field_value[i].split('=');
 				var field = f[0];
+				var label = $("#"+field+"_label").html();
+				label = label.substring(0, label.length - 1);
 				var value = f[1];
 				value = value.replace('+',' ');
 				
@@ -106,16 +108,16 @@ $(document).ready(function(){
 					
 					if(key_arr.indexOf(field)>=0)
 					{
-						form_data["form_data"][field] = form_data["form_data"][field]+','+ value;
+						form_data["form_data"][label] = form_data["form_data"][label]+','+ value;
 					}
 					else
 					{
-						form_data["form_data"][field] = value;
+						form_data["form_data"][label] = value;
 					}
 				}
 				else
 				{
-					form_data["form_data"][field] = value;
+					form_data["form_data"][label] = value;
 				}
 				
 				
