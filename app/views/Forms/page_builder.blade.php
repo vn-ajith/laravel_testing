@@ -15,7 +15,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Select template view</h3>
+    <h3 class="panel-title">1. Select template view</h3>
   </div>
   <div class="panel-body">
 	<div class="row">
@@ -45,7 +45,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Select form</h3>
+    <h3 class="panel-title">2. Select form</h3>
   </div>
   <div class="panel-body">
 	<div class="row">
@@ -77,12 +77,12 @@
         <h4 class="modal-title" id="myModalLabel">Select forms</h4>
       </div>
       <div class="modal-body">	
-				<label for="position">Position</label>
+				<label for="position">1. Position to which form should be included</label>
         			<select id="position">
 				
 				
 				</select>
-
+				<label >2. Select any one of the following forms</label>
 					@if ($forms->isEmpty())
 					<p> Currently, there is no form available !</p>
 					@else
@@ -99,7 +99,7 @@
 							<tbody>
 							@foreach($forms as $form)
 							<tr>
-							<td><input type="checkbox" id="{{$form->form_name}}" name="check" value="{{$form->form_name }}"  ></td>
+							<td><input type="radio" id="{{$form->form_id}}" name="radio" value="{{$form->form_name }}"  ></td>
 							<td>{{$form->form_name }}</td>
 							<td>{{$form->form_desc}}</td>
 							

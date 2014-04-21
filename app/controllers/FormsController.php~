@@ -7,24 +7,66 @@ class FormsController extends BaseController
 {
 	
 
-		
+	
+
+
+	public function index()
+	{
+		return View::make('Forms.index');
+	}	
 	
 	/*
 		This function gives control to user,, as to select a particular form from already created ones
 		after selecting form, control goes to render form
 	*/
-	public function index()
-	{
-		return View::make('');
-	}
+	
 	public function select_form()
 	{
 		$forms = Form_config::all();
 		return View::make('Forms.select_form',compact('forms'));
 	}
+	/*
+		Function page_builder is used to set properties for page builder
+		In this function user can select options for layout of page, forms that to be displayed in page and its position
+	*/
+	public function page_builder()
+	{
+		$forms = Form_config::all();
+		return View::make('Forms.page_builder',compact('forms'))	;
+	}
 	
+	
+	public function save_page_build()
+	{	
+		$page_builds = new Page_build();
+		$input = Input::all();
+		
+		//$form_config = new Form_config();
+		$rules = array('selected_form'=>'required',
+				'view_type'=>'required',
+				'position'=>'required',
+				'form_id'=>'required');
+		$validator = Validator::make($input,$rules);
+		if($validator->passes())
+		{
+			//page_settings
+			$page_builds['form_d'] = $input['form_id'];
+			$page_settings = array('position'=>$input['position'],
+						'selected_form' =>$input['selected_form'],
+						'view_type'=>$input['view_type']
+						);
+			
+			$page_builds['page_settings'] = json_encode($page_settings);
+			$page_builds->save();
+			echo 'page settings saved';
 
-
+		}
+		else
+		{
+			echo 'Errors................>>>!@';
+		}
+		
+	}
 
 	/*
 		Function for rendering form builder. This functions view is showing form builder	
