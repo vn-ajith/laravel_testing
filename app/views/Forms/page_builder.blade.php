@@ -1,7 +1,7 @@
 @extends('../layout')
 @section('content')
 <style>
-.radio {
+.rad {
 	text-align:center;
 }
 </style>
@@ -19,22 +19,22 @@
   </div>
   <div class="panel-body">
 	<div class="row">
-		<div class="col-md-3 radio">
+		<div class="col-md-3 rad">
 			<input type="radio" id="view_type_1" name="view_type" value="3_col_view"> 
-			<img src="assets/images/3_column_view.jpg" alt="..." class="img-rounded"><br>
+			<img src="assets/images/3_column_view.jpg" alt="..." class="img-rounded"><br><br>
 			<span>3 column view</span>
 		</div>
-		<div class="col-md-3 radio">
+		<div class="col-md-3 rad">
 			<input type="radio" id="view_type_2" name="view_type" value="2_col_left_view"> 
-			<img src="assets/images/2_column_left_view.jpg" alt=" " class="img-rounded"><br>
+			<img src="assets/images/2_column_left_view.jpg" alt=" " class="img-rounded"><br><br>
 			<span> 2 column view with left sidebar</span>
 		</div>
-		<div class="col-md-3 radio">
+		<div class="col-md-3 rad">
 			<input type="radio" id="view_type_3" name="view_type" value="2_col_right_view"> 
-			<img src="assets/images/2_column_right_view.jpg" alt="..." class="img-rounded"><br>
+			<img src="assets/images/2_column_right_view.jpg" alt="..." class="img-rounded"><br><br>
 			<span> 2 column view with right sidebar</span>
 		</div>
-		<div class="col-md-3 radio"></div>
+		<div class="col-md-3 rad"></div>
 		
 	</div>
 		
