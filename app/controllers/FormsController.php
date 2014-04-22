@@ -32,10 +32,17 @@ class FormsController extends BaseController
 	public function page_builder()
 	{
 		$forms = Form_config::all();
-		return View::make('Forms.page_builder',compact('forms'))	;
+		$form_data = Form_data::all();
+		return View::make('Forms.page_builder',array('forms'=>$forms,'form_data'=>$form_data))	;
 	}
 	
-	
+	public function generate_form_data_table()
+	{
+		$input = Input::all();
+		$id = $input['id'] ;
+		$form_data = Form_data::find($id);
+		
+	}
 	public function save_page_build()
 	{	
 		$page_builds = new Page_build();
@@ -230,7 +237,7 @@ class FormsController extends BaseController
 	
 		
 		$input = Input::all();
-
+		var_dump($input);
 		$fdata = $input['form_data'];
  		$form_data->form_id = $input['form_id'];
  		$form_data->form_name = $input['form_name'];
@@ -251,12 +258,12 @@ class FormsController extends BaseController
 				$field = $type.'_'.$i;
 				$col = 'field_'.$field_num.'_name';
 				$col_value = 'field_'.$field_num.'_value';
-				$form_data->$col = $field;
-				$value = $fdata[$field];
+				$form_data->$col = $field."#".$fdata[$field]['label'];
+				$value = $fdata[$field]["value"];
 				if(is_numeric($fdata[$field]))		
 				{
 					$form_data->$col_value = floatval($value);
-					echo 'numeric';
+					
 				}
 				else
 				{

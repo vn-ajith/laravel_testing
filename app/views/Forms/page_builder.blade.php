@@ -5,6 +5,7 @@
 	text-align:center;
 }
 </style>
+
 <script type="text/javascript" src="assets/js/page_builder.js"></script>
 <div class="container">
 <section id="page_builder_header">
@@ -164,50 +165,33 @@
 
 
 
-<section id="modal_2">
+<section id="modal2_2">
 <div class="modal fade" id="myModal_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Select forms</h4>
+        <h4 class="modal-title" id="myModalLabel">Select forms data</h4>
       </div>
       <div class="modal-body">	
 				
-        			
-				<label > Select forms from the following </label>
+					        			
+					<label>Select a form</label>
 					@if ($forms->isEmpty())
 					<p> Currently, there is no form available !</p>
 					@else
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-							<tr>
-							<td></td>					
-							<th>Form name</th>
-							<th>Form description</th>
-							
-							</tr>
-							</thead>
-							<tbody>
-							@foreach($forms as $form)
-							<tr>
-							<td><input type="checkbox" id="{{$form->form_id}}" name="check" value="{{$form->form_name }}_1"  ></td>
-							<td>{{$form->form_name }}</td>
-							<td>{{$form->form_desc}}</td>
-							
-							<td>	
-								<select id="position_{{$form->form_id}}_1">
-				
+					
+							<select id="form_selector">
+							@foreach ($forms as $form)
+								<option id="{{$form->form_id}}">{{$form->form_name }}</option>
+								@endforeach
 				
 								</select>
-							</td>			
-							</tr>
-							@endforeach
-							</tbody>
-						</table>
+							<input type="button" id="add_data" value="ADD DATA">
+							<div id="form_data_display"></div>
+						
 						@endif
-					</div>
+					
 
 
 

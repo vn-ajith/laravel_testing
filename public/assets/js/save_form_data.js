@@ -89,7 +89,7 @@ $(document).ready(function(){
 		if(count==0)
 		{
 			var fdata = $('#form').serialize();
-			console.log(fdata);
+			//console.log(fdata);
 			var field_value = fdata.split('&');
 			
 			for(var i=0; i<field_value.length;i++)
@@ -97,27 +97,30 @@ $(document).ready(function(){
 				var f  = field_value[i].split('=');
 				var field = f[0];
 				var label = $("#"+field+"_label").html();
+					
 				label = label.substring(0, label.length - 1);
+				
 				var value = f[1];
 				value = value.replace('+',' ');
-				
-				var key_arr = Object.keys(form_data["form_data"]);
+				form_data["form_data"][field]={};
+				form_data["form_data"][field]['label']=label;
+				var key_arr = Object.keys(form_data["form_data"][field]);
 					
 				if(key_arr.length>=1)
 				{
 					
 					if(key_arr.indexOf(field)>=0)
 					{
-						form_data["form_data"][label] = form_data["form_data"][label]+','+ value;
+						form_data["form_data"][field]["value"] = form_data["form_data"][field]["value"]+','+ value;
 					}
 					else
 					{
-						form_data["form_data"][label] = value;
+						form_data["form_data"][field]["value"] = value;
 					}
 				}
 				else
 				{
-					form_data["form_data"][label] = value;
+					form_data["form_data"][field]["value"] = value;
 				}
 				
 				
@@ -127,7 +130,7 @@ $(document).ready(function(){
 			$.ajax({
 					url: "/laravel_testing/blog/public/save_form_data",
 					type:"POST",
-					dataType:"json",
+					
 					data:form_data
 					})
 					.done(function( data ){
