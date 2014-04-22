@@ -27,3 +27,4 @@ Route::post('/save_form_data','FormsController@save_form_data');
 Route::get('/save_form_data','FormsController@save_form_data');
 Route::get('/page_builder','FormsController@page_builder');
 Route::post('/save_page_build','FormsController@save_page_build');
+Route::post('/generate_form_data_table','FormsController@generate_form_data_table');

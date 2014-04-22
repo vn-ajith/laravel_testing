@@ -39,8 +39,81 @@ class FormsController extends BaseController
 	public function generate_form_data_table()
 	{
 		$input = Input::all();
-		$id = $input['id'] ;
-		$form_data = Form_data::find($id);
+ 		$id = $input['id'] ;
+		
+		$form_data = Form_data::where('form_id', '=', $id)->get();;
+		$t_head = array();
+		if ($form_data->isEmpty())
+		{
+			echo '<p> Currently, there is no form data available !</p>';
+		}
+		else
+		{
+			foreach($form_data as $f)
+			{
+				$i = 1;
+				while(array_key_exists('field_'.$i.'_name',$f))
+				{
+					$field = $f['field_'.$i.'_name'];
+						if(!($field==NULL))
+						{
+							$field_name = $f->$field;	
+							$pos = strpos($field_name,"#");
+							$c = strlen($field_name)-$pos-1;
+							$sub = substr($field_name,$pos+1,$c);
+							var_dump($sub);
+							$t_head =  $sub;
+						}
+					$i++;
+				}
+			}
+		}					
+// 			echo '	<div class="table-responsive">';
+// 			echo '<table class="table">';
+// 			echo '<thead>';
+// 			echo '<tr>';
+// 							
+// 							<th>Form name</th>
+// 							<th>Form description</th>
+// 							
+// 							</tr>
+// 							</thead>
+// 							<tbody>
+// 							@foreach($forms as $form)
+// 							<tr>
+// 							<td><input type="checkbox" id="{{$form->form_id}}" name="check" value="{{$form->form_name }}"  ></td>
+// 							<td>{{$form->form_name }}</td>
+// 							<td>{{$form->form_desc}}</td>
+// 							
+// 							<td>	
+// 								<select id="position_{{$form->form_id}}">
+// 				
+// 				
+// 								</select>
+// 							</td>			
+// 							</tr>
+// 							@endforeach
+// 							</tbody>
+// 						</table>
+// 						@endif
+// 					</div>
+// 
+// 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 	public function save_page_build()
 	{	

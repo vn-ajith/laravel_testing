@@ -67,5 +67,19 @@ $(document).ready(function(){
 						//$('#something').html(d);
 					});
 	});
+	$("#form_selector").change(function(){
+		var id = $(this).children(":selected").attr("id");
+		alert(id);
+		$.ajax({
+					url: "/laravel_testing/blog/public/generate_form_data_table",
+					type:"POST",
+					
+					data:{"id":id}
+					})
+					.done(function( d ){
+						
+						$('#something').html(d);
+					});
+	});
 	
 });
