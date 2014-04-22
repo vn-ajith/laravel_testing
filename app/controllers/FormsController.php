@@ -41,30 +41,30 @@ class FormsController extends BaseController
 		$page_builds = new Page_build();
 		$input = Input::all();
 		
-		//$form_config = new Form_config();
-		$rules = array('selected_form'=>'required',
-				'view_type'=>'required',
-				'position'=>'required',
-				'form_id'=>'required');
-		$validator = Validator::make($input,$rules);
-		if($validator->passes())
-		{
-			//page_settings
-			$page_builds['form_id'] = $input['form_id'];
-			$page_settings = array('position'=>$input['position'],
-						'selected_form' =>$input['selected_form'],
-						'view_type'=>$input['view_type']
-						);
-			
-			$page_builds['page_settings'] = json_encode($page_settings);
-			$page_builds->save();
-			echo 'page settings saved';
-
-		}
-		else
-		{
-			echo 'Errors................>>>!@';
-		}
+		print_r($input);
+// 		$rules = array('selected_form'=>'required',
+// 				'view_type'=>'required',
+// 				'position'=>'required',
+// 				'form_id'=>'required');
+// 		$validator = Validator::make($input,$rules);
+// 		if($validator->passes())
+// 		{
+// 			page_settings
+// 			$page_builds['form_id'] = $input['form_id'];
+// 			$page_settings = array('position'=>$input['position'],
+// 						'selected_form' =>$input['selected_form'],
+// 						'view_type'=>$input['view_type']
+// 						);
+// 			
+// 			$page_builds['page_settings'] = json_encode($page_settings);
+// 			$page_builds->save();
+// 			echo 'page settings saved';
+// 
+// 		}
+// 		else
+// 		{
+// 			echo 'Errors................>>>!@';
+// 		}
 		
 	}
 

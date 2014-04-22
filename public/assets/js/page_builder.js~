@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	var page_settings={};
-	page_settings["selected_form"] = "";
+	page_settings["settings"] = {};
  	$("input[id^='view_type']").click(function(){
 		var str="";
 		
@@ -20,7 +20,7 @@ $(document).ready(function(){
 			str = str+"<option value='right_side_bar'>Right side bar</option>";
 		}
 		
-		$("#position").html(str);
+		$("select[id^='position_']").html(str);
 
 	});
 	
@@ -33,34 +33,38 @@ $(document).ready(function(){
 			alert('First select template style');
 			
 		}
-		var position = $("#position").val();
+		
 		page_settings["view_type"] = value_radio;
 		
-		page_settings["position"] = position;
-// 		$("input:radio[name='check']:checked").each(function()
-// 		{
-//     			page_settings["selected_forms"] = page_settings["selected_forms"]+","+$(this).val();
-// 		
-// 			});
-		page_settings["selected_form"] = $("input[name='radio']:checked").val();
 		
-		page_settings["form_id"] = alert($("input[name='radio']:checked").attr('id');
+		$("input:checkbox[name='check']:checked").each(function()
+		{
+			var id = this.id;
+			page_settings["settings"][id] = {};
+    			page_settings["settings"][id]["id"] = id;
+			page_settings["settings"][id]["form_name"] = $(this).val();
+			page_settings["settings"][id]["position"] = $("#position_"+id).val(); 
+			});
 		
-		console.log(page_settings);
+		
+		
+		
+		//console.log(page_settings);
 		$('#myModal').modal('toggle');
 		
 		
 	});
 	$("#build_page").click(function(){
-		//console.log(page_settings);
+		console.log(page_settings);
 		$.ajax({
 					url: "/laravel_testing/blog/public/save_page_build",
 					type:"POST",
-					dataType:"json",
+					
 					data:page_settings
 					})
-					.done(function( data ){
-						alert('done');
+					.done(function( d ){
+						
+						$('#something').html(d);
 					});
 	});
 	

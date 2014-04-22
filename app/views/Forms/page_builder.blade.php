@@ -67,6 +67,35 @@
    	
 	
 </div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">3. Select form data</h3>
+  </div>
+  <div class="panel-body">
+	<div class="row">
+		<div class="col-md-3 radio">
+			<button class="btn btn-success" data-toggle="modal" data-target="#myModal_2">
+				  Add Form data 
+			</button>
+
+		</div> 
+		<div class="col-md-3 radio">
+		</div>
+		<div class="col-md-3 radio">
+		</div>
+		<div class="col-md-3 radio"></div>
+		
+	</div>
+		
+  </div>
+   	
+	
+</div>
+<div id="something"></div>
+
+
 </section>
 <section id="modal">
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -77,12 +106,9 @@
         <h4 class="modal-title" id="myModalLabel">Select forms</h4>
       </div>
       <div class="modal-body">	
-				<label for="position">1. Position to which form should be included</label>
-        			<select id="position">
 				
-				
-				</select>
-				<label >2. Select any one of the following forms</label>
+        			
+				<label > Select forms from the following </label>
 					@if ($forms->isEmpty())
 					<p> Currently, there is no form available !</p>
 					@else
@@ -99,11 +125,16 @@
 							<tbody>
 							@foreach($forms as $form)
 							<tr>
-							<td><input type="radio" id="{{$form->form_id}}" name="radio" value="{{$form->form_name }}"  ></td>
+							<td><input type="checkbox" id="{{$form->form_id}}" name="check" value="{{$form->form_name }}"  ></td>
 							<td>{{$form->form_name }}</td>
 							<td>{{$form->form_desc}}</td>
 							
-							
+							<td>	
+								<select id="position_{{$form->form_id}}">
+				
+				
+								</select>
+							</td>			
 							</tr>
 							@endforeach
 							</tbody>
@@ -128,6 +159,93 @@
 
 
 </section>
+
+
+
+
+
+<section id="modal_2">
+<div class="modal fade" id="myModal_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Select forms</h4>
+      </div>
+      <div class="modal-body">	
+				
+        			
+				<label > Select forms from the following </label>
+					@if ($forms->isEmpty())
+					<p> Currently, there is no form available !</p>
+					@else
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+							<tr>
+							<td></td>					
+							<th>Form name</th>
+							<th>Form description</th>
+							
+							</tr>
+							</thead>
+							<tbody>
+							@foreach($forms as $form)
+							<tr>
+							<td><input type="checkbox" id="{{$form->form_id}}" name="check" value="{{$form->form_name }}_1"  ></td>
+							<td>{{$form->form_name }}</td>
+							<td>{{$form->form_desc}}</td>
+							
+							<td>	
+								<select id="position_{{$form->form_id}}_1">
+				
+				
+								</select>
+							</td>			
+							</tr>
+							@endforeach
+							</tbody>
+						</table>
+						@endif
+					</div>
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="1select_form_save_">Select forms</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section id="generate_page_contents">
 <button type="button" class="btn btn-success" id="build_page">Build a page</button>
 </section>
