@@ -49,71 +49,57 @@ class FormsController extends BaseController
 		}
 		else
 		{
+			echo '<div class="table-responsive">';
+			echo '<table class="table">';
+			echo '<thead>';
+			echo '<tr>';
 			foreach($form_data as $f)
 			{
 				$i = 1;
-				while(array_key_exists('field_'.$i.'_name',$f))
+				
+				$name = 'field_'.$i.'_name';
+									
+ 				$field_num = intval($f['field_num']);
+				echo '<th></th>';
+ 				for($i=1;$i<=$field_num;$i++)
 				{
-					$field = $f['field_'.$i.'_name'];
-					var_dump($field);	
+					
+ 					$field = $f['field_'.$i.'_name'];
+ 					
 						if(!($field==NULL))
 						{
-							$field_name = $f->$field;	
-							$pos = strpos($field_name,"#");
-							$c = strlen($field_name)-$pos-1;
-							$sub = substr($field_name,$pos+1,$c);
-							var_dump($sub);
-							$t_head =  $sub;
+							
+							$pos = strpos($field,"#");
+							
+							$c = strlen($field)-$pos-1;
+							$sub = substr($field,$pos+1,$c);
+							echo '<th>'.$sub.'</th>';
+							
 						}
-					$i++;
-				}
+					
+ 				}
 			}
+				echo '</tr>';
+				echo '</thead>';
+			
+				echo '<tbody>';
+			foreach($form_data as $f)
+			{	
+				echo '<tr>';
+				echo '<td><input type="checkbox"></td>';
+				for($i=1;$i<=$field_num;$i++)
+				{
+					echo '<td>'.$f['field_'.$i.'_value'].'</td>';
+					
+				}
+				echo '</tr>';
+				
+
+			}
+			echo '</tbody>';
+ 			echo '</table>';
+			echo '</div>';
 		}					
-// 			echo '	<div class="table-responsive">';
-// 			echo '<table class="table">';
-// 			echo '<thead>';
-// 			echo '<tr>';
-// 							
-// 							<th>Form name</th>
-// 							<th>Form description</th>
-// 							
-// 							</tr>
-// 							</thead>
-// 							<tbody>
-// 							@foreach($forms as $form)
-// 							<tr>
-// 							<td><input type="checkbox" id="{{$form->form_id}}" name="check" value="{{$form->form_name }}"  ></td>
-// 							<td>{{$form->form_name }}</td>
-// 							<td>{{$form->form_desc}}</td>
-// 							
-// 							<td>	
-// 								<select id="position_{{$form->form_id}}">
-// 				
-// 				
-// 								</select>
-// 							</td>			
-// 							</tr>
-// 							@endforeach
-// 							</tbody>
-// 						</table>
-// 						@endif
-// 					</div>
-// 
-// 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	}
 	public function save_page_build()

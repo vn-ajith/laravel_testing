@@ -187,8 +187,8 @@
 								@endforeach
 				
 								</select>
-							<input type="button" id="add_data" value="ADD DATA">
-							<div id="form_data_display">
+							<input type="button" id="add_data" value="Select form" class="btn btn-success">
+							<div id="form_data_display"></div>
 						
 						@endif
 					
