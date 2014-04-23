@@ -17,9 +17,8 @@ class CreatePageBuilds extends Migration {
 	{
 		Schema::create('page_builds',function($table)
 			{
-				$table->integer('id');
-				$table->integer('form_id');
-				$table->foreign('form_id')->references('form_id')->on('form_configs');
+				$table->increments('page_id');
+				$table->string('view_type');
 				$table->text('page_settings');
 			});
 	}

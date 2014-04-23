@@ -2,6 +2,7 @@ $(document).ready(function(){
 	$('#select_form_data').hide();
 	var page_settings={};
 	page_settings["settings"] = {};
+	page_settings["settings"]["form"]= {}
 	page_settings["settings"]["form_data"] = {};
  	$("input[id^='view_type']").click(function(){
 		var str="";
@@ -29,7 +30,7 @@ $(document).ready(function(){
 	
 	$("body").on("click","#select_form_save",function(){
 		var counter = 0;
-		page_settings["settings"]["form"]= {}
+		
 		var value_radio = $( "input:radio[name='view_type']:checked" ).val();
 		if(value_radio==undefined)
 		{
@@ -43,7 +44,10 @@ $(document).ready(function(){
 		$("input:checkbox[name='check']:checked").each(function()
 		{
 			var id = this.id;
+			if(typeof page_settings["settings"]["form"][id] == "undefined")
+			{
 			page_settings["settings"]["form"][id] = {};
+			}
     			page_settings["settings"]["form"][id]["form_id"] = id;
 			page_settings["settings"]["form"][id]["form_name"] = $(this).val();
 			page_settings["settings"]["form"][id]["position"] = $("#position_"+id).val(); 
@@ -80,16 +84,28 @@ $(document).ready(function(){
 	$("body").on("click","#select_form_data",function(){
 		var form_name = $('#form_selector').children(":selected").val();	
 		var form_id = $('#form_selector').children(":selected").attr("id");
+		if(typeof page_settings["settings"]["form_data"][form_id] == "undefined")
+		{
+		alert('created new obj formid');
 		page_settings["settings"]["form_data"][form_id] = {}
+		}
 		page_settings["settings"]["form_data"][form_id]["form_id"] = form_id;
 		page_settings["settings"]["form_data"][form_id]["form_name"] = form_name;
+		if(typeof page_settings["settings"]["form_data"][form_id]["elements"] == "undefined")
+		{
+		alert('created new obj elements');
 		page_settings["settings"]["form_data"][form_id]["elements"] = {};
+		}
 		$("input:checkbox[name='element']:checked").each(function()
 		{
 			var id = this.id;
-			page_settings["settings"]["form_data"][form_id]["elements"]["id"] = id ;
-			alert("#pos_data_"+form_id+"_"+id)
-			page_settings["settings"]["form_data"][form_id]["elements"]["position"] = $("#pos_data_"+form_id+"_"+id).val();
+			if(typeof page_settings["settings"]["form_data"][form_id]["elements"][id] == "undefined")
+			{
+				page_settings["settings"]["form_data"][form_id]["elements"][id] = {};
+			}
+			page_settings["settings"]["form_data"][form_id]["elements"][id]["id"] = id ;
+			
+			page_settings["settings"]["form_data"][form_id]["elements"][id]["position"] = $("#pos_data_"+form_id+"_"+id).val();
 		});	
 		alert("data added");
 		$("#myModal_2").modal("toggle");
@@ -98,16 +114,16 @@ $(document).ready(function(){
 	
 	$("#build_page").click(function(){
 		console.log(page_settings);
-// 		$.ajax({
-// 					url: "/laravel_testing/blog/public/save_page_build",
-// 					type:"POST",
-// 					
-// 					data:page_settings
-// 					})
-// 					.done(function( d ){
-// 						
-// 						//$('#something').html(d);
-// 					});
+		$.ajax({
+					url: "/laravel_testing/blog/public/save_page_build",
+					type:"POST",
+					
+					data:page_settings
+					})
+					.done(function( d ){
+						alert("page saved");
+						//$('#something').html(d);
+					});
 	});
 	
 	

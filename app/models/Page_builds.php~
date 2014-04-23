@@ -2,7 +2,7 @@
 class Page_builds extends Eloquent
 {
 	protected $table = 'page_builds';
-	protected $primaryKey = 'page_id';
+	protected $primaryKey = 'id';
 	
 }
 ?>

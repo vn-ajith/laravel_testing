@@ -17,8 +17,8 @@ class CreatePageBuilds extends Migration {
 	{
 		Schema::create('page_builds',function($table)
 			{
-				$table->integer('id');
-				
+				$table->increments('id');
+				$table->string('view_type');
 				$table->text('page_settings');
 			});
 	}

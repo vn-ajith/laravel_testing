@@ -56,6 +56,9 @@ class FormsController extends BaseController
 		}
 		return $str;
 	}
+	public function arrange_page_elements()
+	{
+	}
 	public function generate_form_data_table()
 	{
 		$input = Input::all();
@@ -94,12 +97,18 @@ class FormsController extends BaseController
 							
 							$c = strlen($field)-$pos-1;
 							$sub = substr($field,$pos+1,$c);
-							echo '<th>'.$sub.'</th>';
+							$t_head[] = $sub; 			
+							
 							
 						}
 					
  				}
+				break;
 			}
+				for($k=0;$k<count($t_head);$k++)
+				{
+					echo '<th>'.$t_head[$k].'</th>';
+				}
 				echo '</tr>';
 				echo '</thead>';
 			
@@ -129,30 +138,23 @@ class FormsController extends BaseController
 		$page_builds = new Page_build();
 		$input = Input::all();
 		
-		print_r($input);
-// 		$rules = array('selected_form'=>'required',
-// 				'view_type'=>'required',
-// 				'position'=>'required',
-// 				'form_id'=>'required');
-// 		$validator = Validator::make($input,$rules);
-// 		if($validator->passes())
-// 		{
-// 			page_settings
-// 			$page_builds['form_id'] = $input['form_id'];
-// 			$page_settings = array('position'=>$input['position'],
-// 						'selected_form' =>$input['selected_form'],
-// 						'view_type'=>$input['view_type']
-// 						);
-// 			
-// 			$page_builds['page_settings'] = json_encode($page_settings);
-// 			$page_builds->save();
-// 			echo 'page settings saved';
-// 
-// 		}
-// 		else
-// 		{
-// 			echo 'Errors................>>>!@';
-// 		}
+		
+		$rules = array('view_type'=>'required',
+				'settings'=>'required',
+				);
+		$validator = Validator::make($input,$rules);
+		if($validator->passes())
+		{
+			$page_builds['view_type'] = $input['view_type'];
+			$page_builds['page_settings'] = json_encode($input["settings"]);
+			$page_builds->save();
+			echo 'page settings saved';
+
+		}
+		else
+		{
+			echo 'Errors................>>>!@';
+		}
 		
 	}
 
