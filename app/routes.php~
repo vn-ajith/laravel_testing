@@ -13,7 +13,7 @@
 
 // Default application goes to form -builder
 
-//Route::get('/','FormsController@index');
+
 Route::get('/','FormsController@render_form_creator');
 
 Route::post('/saveForm','FormsController@saveForm');
@@ -27,4 +27,6 @@ Route::post('/save_form_data','FormsController@save_form_data');
 Route::get('/save_form_data','FormsController@save_form_data');
 Route::get('/page_builder','FormsController@page_builder');
 Route::post('/save_page_build','FormsController@save_page_build');
-Route::post('/generate_form_data_table','');
+Route::post('/generate_form_data_table','FormsController@generate_form_data_table');
+Route::model("page","Page_build")
+Route::get("/arrange_page_elements/{page}","FormsController@arrange_page_elements");

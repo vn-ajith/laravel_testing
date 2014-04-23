@@ -38,12 +38,13 @@
 			$.ajax({
 					url: "/laravel_testing/blog/public/saveForm",
 					type:"POST",
-					dataType:"json",
+// 					
 					data:JSON.parse(j)
 					})
 					.done(function( data ){
-						alert('done');
+						
 					});
+					alert('Form saved' );
 
 		}
 		else{
@@ -304,7 +305,7 @@
 				field_array[name]['other_values'] += $("#"+name+"_option_"+i).val()+",";
 				}
 			}
-			alert('Form saved' );
+
 		}
 		
 		});

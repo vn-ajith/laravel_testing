@@ -237,7 +237,8 @@
 
 
 <section id="generate_page_contents">
-<button type="button" class="btn btn-success" id="build_page">Build a page</button>
+<!-- <button type="button" class="btn btn-success" id="build_page">Build a page</button> -->
+<a href='{{action("FormsController@arrange_page_elements",$page_id);}}' class="btn btn-success" id="build_page">Build a page</a>
 </section>
 </div>
 @stop

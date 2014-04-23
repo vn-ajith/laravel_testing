@@ -134,7 +134,7 @@ $(document).ready(function(){
 					data:form_data
 					})
 					.done(function( data ){
-						alert('done');
+						
 					});
 			alert('Data saved');
 		}

@@ -86,14 +86,14 @@ $(document).ready(function(){
 		var form_id = $('#form_selector').children(":selected").attr("id");
 		if(typeof page_settings["settings"]["form_data"][form_id] == "undefined")
 		{
-		alert('created new obj formid');
+		
 		page_settings["settings"]["form_data"][form_id] = {}
 		}
 		page_settings["settings"]["form_data"][form_id]["form_id"] = form_id;
 		page_settings["settings"]["form_data"][form_id]["form_name"] = form_name;
 		if(typeof page_settings["settings"]["form_data"][form_id]["elements"] == "undefined")
 		{
-		alert('created new obj elements');
+		
 		page_settings["settings"]["form_data"][form_id]["elements"] = {};
 		}
 		$("input:checkbox[name='element']:checked").each(function()
@@ -112,7 +112,8 @@ $(document).ready(function(){
 			
 	});
 	
-	$("#build_page").click(function(){
+	$("#build_page").click(function(e){
+		
 		console.log(page_settings);
 // 		$.ajax({
 // 					url: "/laravel_testing/blog/public/save_page_build",
@@ -124,6 +125,7 @@ $(document).ready(function(){
 // 						alert("page saved");
 // 						//$('#something').html(d);
 // 					});
+		return true;
 	});
 	
 	

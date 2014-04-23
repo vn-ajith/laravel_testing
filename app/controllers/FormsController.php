@@ -33,7 +33,9 @@ class FormsController extends BaseController
 	{
 		$forms = Form_config::all();
 		$form_data = Form_data::all();
-		return View::make('Forms.page_builder',array('forms'=>$forms,'form_data'=>$form_data))	;
+		$page_id = DB::table('page_builds')->max('id');
+		$page_id++;
+		return View::make('Forms.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'page_id'=>$page_id))	;
 	}
 	public function generate_select_box($val)
 	{
@@ -56,8 +58,11 @@ class FormsController extends BaseController
 		}
 		return $str;
 	}
-	public function arrange_page_elements()
+	public function arrange_page_elements(Page_build $page)
 	{
+		return View::make("Forms.arrange_page_elements",array('page'=>$page));
+		//$page_builds = Page_build::findOrFail();
+		
 	}
 	public function generate_form_data_table()
 	{
@@ -155,6 +160,7 @@ class FormsController extends BaseController
 		{
 			echo 'Errors................>>>!@';
 		}
+		
 		
 	}
 

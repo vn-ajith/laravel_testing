@@ -130,7 +130,7 @@ $(document).ready(function(){
 			$.ajax({
 					url: "/laravel_testing/blog/public/save_form_data",
 					type:"POST",
-					dataType:"json",
+					
 					data:form_data
 					})
 					.done(function( data ){
