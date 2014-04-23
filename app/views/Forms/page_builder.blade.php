@@ -4,6 +4,11 @@
 .rad {
 	text-align:center;
 }
+/*.modal-dialog{
+	max-width:750px !important;
+}*/
+.
+
 </style>
 
 <script type="text/javascript" src="assets/js/page_builder.js"></script>
@@ -167,7 +172,7 @@
 
 <section id="modal2_2">
 <div class="modal fade" id="myModal_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="max-width:750px !important;">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -183,12 +188,13 @@
 					
 							<select id="form_selector">
 							@foreach ($forms as $form)
-								<option id="{{$form->form_id}}">{{$form->form_name }}</option>
+								<option id="{{$form->form_id}}" >{{$form->form_name }}</option>
 								@endforeach
 				
 								</select>
 							<input type="button" id="select_form" value="Select form" class="btn btn-success">
 							<div id="form_data_display"></div>
+							<input type="button"  id="select_form_data" value="Add data " class="btn btn-success">
 						
 						@endif
 					

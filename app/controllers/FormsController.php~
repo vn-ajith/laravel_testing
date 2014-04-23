@@ -35,13 +35,34 @@ class FormsController extends BaseController
 		$form_data = Form_data::all();
 		return View::make('Forms.page_builder',array('forms'=>$forms,'form_data'=>$form_data))	;
 	}
-	
+	public function generate_select_box($val)
+	{
+		
+		$str="";
+		
+		$str = $str."<option value='main_content'>Main content</option>";
+		if($val=="3_col_view"){
+		
+			$str = $str."<option value='left_side_bar'>Left side bar</option>";
+			$str = $str."<option value='right_side_bar'>Right side bar</option>";
+		}
+		else if($val=="2_col_left_view"){
+		
+			$str = $str."<option value='left_side_bar'>Left side bar</option>";
+		}
+		else{
+		
+			$str = $str."<option value='right_side_bar'>Right side bar</option>";
+		}
+		return $str;
+	}
 	public function generate_form_data_table()
 	{
 		$input = Input::all();
  		$id = $input['id'] ;
+		$radio = $input['radio'];
+		$form_data = Form_data::where('form_id', '=', $id)->get();
 		
-		$form_data = Form_data::where('form_id', '=', $id)->get();;
 		$t_head = array();
 		if ($form_data->isEmpty())
 		{
@@ -86,12 +107,13 @@ class FormsController extends BaseController
 			foreach($form_data as $f)
 			{	
 				echo '<tr>';
-				echo '<td><input type="checkbox"></td>';
+				echo '<td><input type="checkbox" id="'.$f['id'].'"></td>';
 				for($i=1;$i<=$field_num;$i++)
 				{
 					echo '<td>'.$f['field_'.$i.'_value'].'</td>';
 					
 				}
+				echo '<td><select id="pos_data_'.$id.'_'.$f['id'].'">'.$this->generate_select_box($radio).'</select></td>';
 				echo '</tr>';
 				
 
@@ -100,20 +122,6 @@ class FormsController extends BaseController
  			echo '</table>';
 			echo '</div>';
 		}					
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	}
 	public function save_page_build()
@@ -347,6 +355,8 @@ class FormsController extends BaseController
 					
 			}
 		}
+		$field_num--;
+		$form_data->field_num = $field_num;
 		$form_data->save();
 		
 	}
