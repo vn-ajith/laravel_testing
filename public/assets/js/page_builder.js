@@ -2,6 +2,7 @@ $(document).ready(function(){
 	$('#select_form_data').hide();
 	var page_settings={};
 	page_settings["settings"] = {};
+	page_settings["settings"]["form_data"] = {};
  	$("input[id^='view_type']").click(function(){
 		var str="";
 		
@@ -63,7 +64,7 @@ $(document).ready(function(){
 		var id = $('#form_selector').children(":selected").attr("id");	
 		var value_radio = $( "input:radio[name='view_type']:checked" ).val();
 
-		page_settings["settings"]["form_data"] = {};
+		
 		$.ajax({
 					url: "/laravel_testing/blog/public/generate_form_data_table",
 					type:"POST",
@@ -87,9 +88,11 @@ $(document).ready(function(){
 		{
 			var id = this.id;
 			page_settings["settings"]["form_data"][form_id]["elements"]["id"] = id ;
+			alert("#pos_data_"+form_id+"_"+id)
 			page_settings["settings"]["form_data"][form_id]["elements"]["position"] = $("#pos_data_"+form_id+"_"+id).val();
 		});	
 		alert("data added");
+		$("#myModal_2").modal("toggle");
 			
 	});
 	

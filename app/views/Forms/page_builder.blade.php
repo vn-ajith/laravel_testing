@@ -194,7 +194,7 @@
 								</select>
 							<input type="button" id="select_form" value="Select form" class="btn btn-success">
 							<div id="form_data_display"></div>
-							<input type="button"  id="select_form_data" value="Add data " class="btn btn-success">
+							
 						
 						@endif
 					
@@ -206,8 +206,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="1select_form_save_">Select forms</button>
+<!--         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <input type="button"  id="select_form_data" value="Add data " class="btn btn-success">
       </div>
     </div>
   </div>

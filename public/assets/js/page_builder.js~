@@ -87,8 +87,11 @@ $(document).ready(function(){
 		{
 			var id = this.id;
 			page_settings["settings"]["form_data"][form_id]["elements"]["id"] = id ;
+			alert("#pos_data_"+form_id+"_"+id)
 			page_settings["settings"]["form_data"][form_id]["elements"]["position"] = $("#pos_data_"+form_id+"_"+id).val();
 		});	
+		alert("data added");
+		$("#myModal_2").modal("toggle");
 			
 	});
 	
