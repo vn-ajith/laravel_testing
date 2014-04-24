@@ -1,16 +1,16 @@
-@extends('../layout')
-@section('content')
+
 <style>
 .form-control {
 	width:50%;
 }
 </style>
 <?php
-$fields = $form['desc_order']  ;
+$fields = $form["desc_order"]  ;
+
 
 ?>
 <script type="text/javascript" src="../assets/js/save_form_data.js"></script>
-<div class="container">
+<!--<div class="container">-->
 
 <form role="form" id="form">
 	
@@ -125,6 +125,5 @@ $fields = $form['desc_order']  ;
 <input type="button" class="btn btn-success" value="Save" id="save_form_data">
 </form>
 
-</div>
-@stop
+
 

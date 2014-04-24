@@ -1,16 +1,17 @@
-@extends('../layout')
-@section('content')
+<!--@extends('../layout')
+@section('content')-->
 <style>
 .form-control {
 	width:50%;
 }
 </style>
 <?php
-$fields = $form['desc_order']  ;
+$fields = $form["desc_order"]  ;
+
 
 ?>
 <script type="text/javascript" src="../assets/js/save_form_data.js"></script>
-<div class="container">
+<!--<div class="container">-->
 
 <form role="form" id="form">
 	
@@ -74,7 +75,7 @@ $fields = $form['desc_order']  ;
 			<?php $number++; ?>
 			<div class="checkbox">
 			
-				<input type="checkbox" name="{{$key}}[]" id="{{$key.'_'.$number}}" class='{{$field->css_class_name}}' value="{{$other}}">
+				<input type="checkbox" name="{{$key}}" id="{{$key.'_'.$number}}" class='{{$field->css_class_name}}' value="{{$other}}">
 				{{$other}}
 			</div>
 			@endforeach
@@ -125,6 +126,6 @@ $fields = $form['desc_order']  ;
 <input type="button" class="btn btn-success" value="Save" id="save_form_data">
 </form>
 
-</div>
-@stop
+<!-- </div> -->
+<!-- @stop -->
 
