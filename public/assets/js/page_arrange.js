@@ -8,10 +8,7 @@ $(document).ready(function(){
 	});
 	$("div[id^='right_']").sortable({
 	});
-	$("#click").click(function(){
-			$("li").each(function(){
-				alert($(this).html());
-			});
-		});
-// 	$( "ul, li" ).disableSelection();
+	$("#left").sortable({
+	});
+	$( "#left" ).disableSelection();
 });

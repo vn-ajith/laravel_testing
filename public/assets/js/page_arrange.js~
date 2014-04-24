@@ -8,5 +8,7 @@ $(document).ready(function(){
 	});
 	$("div[id^='right_']").sortable({
 	});
-// 	$( "ul, li" ).disableSelection();
+	$("#left']").sortable({
+	});
+	$( "#left" ).disableSelection();
 });
