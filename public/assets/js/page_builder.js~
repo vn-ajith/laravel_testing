@@ -115,16 +115,16 @@ $(document).ready(function(){
 	$("#build_page").click(function(e){
 		
 		console.log(page_settings);
-// 		$.ajax({
-// 					url: "/laravel_testing/blog/public/save_page_build",
-// 					type:"POST",
-// 					
-// 					data:page_settings
-// 					})
-// 					.done(function( d ){
-// 						alert("page saved");
-// 						//$('#something').html(d);
-// 					});
+		$.ajax({
+					url: "/laravel_testing/blog/public/save_page_build",
+					type:"POST",
+					
+					data:page_settings
+					})
+					.done(function( d ){
+						alert("page saved");
+						//$('#something').html(d);
+					});
 		return true;
 	});
 	
