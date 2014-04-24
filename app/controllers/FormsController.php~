@@ -64,29 +64,50 @@ class FormsController extends BaseController
 		$left_side_bar = array();
 		$right_side_bar = array();
 		$p = json_decode($page->page_settings,true);
+		$i = 1;	
+		if(isset($p["form"]))
+		{
 		$form = $p["form"];
-		$form_data = $p["form_data"];
-		$i = 1;
+			
+		
 		foreach($form as $f)
 		{
+			$form = Form_config::findOrFail($f["form_id"]);
+		
+			$f_data = array('form_name' => $form->form_name,
+					'form_desc' => $form->form_desc,
+					'form_url'  => $form->form_url,
+					'form_id'   => $form->form_id,
+					'desc_order'=>json_decode($form->desc_order),true);
+
 			if($f["position"]=="main_content")		
 			{
 				$main_content["item_".$i]["form_id"] = $f["form_id"];
 				$main_content["item_".$i]["form_name"] = $f["form_name"];
+				$main_content["item_".$i]["form"] = $f_data;
 
 			}
 			else if($f["position"]=="left_side_bar")
 			{
 				$left_side_bar["item_".$i]["form_id"] = $f["form_id"];
 				$left_side_bar["item_".$i]["form_name"] = $f["form_name"];
+				$left_side_bar["item_".$i]["form"] = $f_data;
 			}
 			else if($f["position"]=="right_side_bar")
 			{
 				$right_side_bar["item_".$i]["form_id"] = $f["form_id"];
 				$right_side_bar["item_".$i]["form_name"] = $f["form_name"];
+				$right_side_bar["item_".$i]["form"] = $f_data;
 			}
 			$i++;
 		}
+
+		}
+
+
+		if(isset($p["form_data"]))
+		{
+		$form_data = $p["form_data"];
 		foreach($form_data as $fd)
 		{
 			$form_id = $fd["form_id"];
@@ -122,7 +143,8 @@ class FormsController extends BaseController
 			}
 		
 		}
-		return View::make("Forms.arrange_page_elements",array('page'=>$page,'main_content'=>$main_content,'form_data'=>$form_data));
+		}
+		return View::make("Forms.arrange_page_elements",array('page'=>$page,'main_content'=>$main_content,'left_side_bar'=>$left_side_bar,'right_side_bar'=>$right_side_bar));
 		//$page_builds = Page_build::findOrFail();
 		
 	}

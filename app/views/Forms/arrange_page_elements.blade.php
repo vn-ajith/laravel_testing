@@ -4,7 +4,7 @@
 $view_type = $page->view_type;
 $i=1;
 
-$form = Form_config::findOrFail(4);
+/*$form = Form_config::findOrFail(4);
 // var_dump($form->form_name);
 // echo 'hi';
 $f = array('form_name' => $form->form_name,
@@ -21,7 +21,9 @@ $g = array('form_name' => $form->form_name,
 					'form_url'  => $form->form_url,
 					'form_id'   => $form->form_id,
 					'desc_order'=>json_decode($form->desc_order),true);
+*/
 
+// print_r($)
   ?>
 
 <style>
@@ -34,6 +36,9 @@ text-align:center;
 	margin:5px;
 }
 </style>
+<script>
+
+</script>
 <script type="text/javascript" src="../assets/js/page_arrange.js"></script>
 <script type="text/javascript" src="../assets/js/save_form_data.js"></script>
 <div class="container">
@@ -61,6 +66,9 @@ text-align:center;
 				@if(isset($left["e_id"])) 
 					<p>{{$left["e_id"]}}</p>
 				@endif
+				@if(isset($left["form"])) 
+					<div class="box">@include('Forms.render_form', array('form'=>$left['form']))</div>					
+				@endif
 			</div>
 		@endforeach
 	
@@ -74,6 +82,9 @@ text-align:center;
 				@if(isset($main["e_id"])) 
 					<p>{{$main["e_id"]}}</p>
 				@endif
+				@if(isset($main["form"])) 
+					<div class="box">@include('Forms.render_form', array('form'=>$main['form']))</div>					
+				@endif
 			</div>
 		@endforeach
 	</div>
@@ -85,6 +96,9 @@ text-align:center;
 				<p>{{$right["form_name"]}}</p>
 				@if(isset($right["e_id"])) 
 					<p>{{$right["e_id"]}}</p>
+				@endif
+				@if(isset($right["form"])) 
+					<div class="box">@include('Forms.render_form', array('form'=>$right['form']))</div>					
 				@endif
 			</div>
 		@endforeach
@@ -151,8 +165,8 @@ text-align:center;
 
   
 <div class="col-md-3"  id="left">
-<div class="box">@include('Forms.render_form', array('form'=>$f))</div>
-<div class="box">@include('Forms.render_form', array('form'=>$g))</div>
+
+
 </div>
 <div class="col-md-6"></div>
 <div class="col-md-3" >
