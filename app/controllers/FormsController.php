@@ -247,6 +247,13 @@ class FormsController extends BaseController
 	
 	public function save_page_order()
 	{
+		$input = Input::all();
+		$page_id = $input["page_id"];
+		$box_order = $input["box_order"];
+		
+		$page = Page_build::findOrFail($page_id);
+		$page->box_order = json_encode($box_order);
+		$page->save();
 		
 	}
 

@@ -122,7 +122,8 @@ $(document).ready(function(){
 					data:page_settings
 					})
 					.done(function( d ){
-						alert("page saved");
+						setTimeout(function(){alert("Hello")},3000);
+						//alert("page saved");
 						//$('#something').html(d);
 					});
 		return true;

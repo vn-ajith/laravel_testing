@@ -4,31 +4,12 @@
 $view_type = $page->view_type;
 $i=1;
 
-/*$form = Form_config::findOrFail(4);
-// var_dump($form->form_name);
-// echo 'hi';
-$f = array('form_name' => $form->form_name,
-					'form_desc' => $form->form_desc,
-					'form_url'  => $form->form_url,
-					'form_id'   => $form->form_id,
-					'desc_order'=>json_decode($form->desc_order),true);
-
-$form = Form_config::findOrFail(3);
-// var_dump($form->form_name);
-// echo 'hi';
-$g = array('form_name' => $form->form_name,
-					'form_desc' => $form->form_desc,
-					'form_url'  => $form->form_url,
-					'form_id'   => $form->form_id,
-					'desc_order'=>json_decode($form->desc_order),true);
-*/
-
-// print_r($)
-  ?>
+?>
 
 <style>
 div {
-text-align:center;
+text-align:left;
+padding : 5px;
 }
 .box {
 	border-color:grey;
@@ -39,7 +20,7 @@ text-align:center;
 <script>
 
 </script>
-<input type="hidden" id="page_id" value="{{$page->id}}"
+<input type="hidden" id="page_id" value="{{$page->id}}">
 <script type="text/javascript" src="../assets/js/page_arrange.js"></script>
 <script type="text/javascript" src="../assets/js/save_form_data.js"></script>
 <div class="container">
@@ -49,7 +30,7 @@ text-align:center;
 <div class="col-md-12"></div>
 <div class="col-md-12"></div>
 <div class="col-md-12"></div>
-<div class="col-md-12"><h1>heading</h1></div>
+<div class="col-md-12"><h1>To change order of elements in sidebars and main content please drag them</h1></div>
 <div class="col-md-12"></div>
 <div class="col-md-12"></div>
 <div class="col-md-12"></div>

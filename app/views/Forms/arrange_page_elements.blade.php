@@ -4,35 +4,15 @@
 $view_type = $page->view_type;
 $i=1;
 
-/*$form = Form_config::findOrFail(4);
-// var_dump($form->form_name);
-// echo 'hi';
-$f = array('form_name' => $form->form_name,
-					'form_desc' => $form->form_desc,
-					'form_url'  => $form->form_url,
-					'form_id'   => $form->form_id,
-					'desc_order'=>json_decode($form->desc_order),true);
-
-$form = Form_config::findOrFail(3);
-// var_dump($form->form_name);
-// echo 'hi';
-$g = array('form_name' => $form->form_name,
-					'form_desc' => $form->form_desc,
-					'form_url'  => $form->form_url,
-					'form_id'   => $form->form_id,
-					'desc_order'=>json_decode($form->desc_order),true);
-*/
-
-// print_r($)
-  ?>
+?>
 
 <style>
 div {
-text-align:center;
+text-align:left;
+padding : 5px;
 }
 .box {
-	border-color:grey;
-	border:1px solid;
+	
 	margin:5px;
 }
 </style>
@@ -49,7 +29,7 @@ text-align:center;
 <div class="col-md-12"></div>
 <div class="col-md-12"></div>
 <div class="col-md-12"></div>
-<div class="col-md-12"><h1>heading</h1></div>
+<div class="col-md-12"><h1>To change order of elements in sidebars and main content please drag them</h1></div>
 <div class="col-md-12"></div>
 <div class="col-md-12"></div>
 <div class="col-md-12"></div>

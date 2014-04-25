@@ -30,3 +30,4 @@ Route::post('/save_page_build','FormsController@save_page_build');
 Route::post('/generate_form_data_table','FormsController@generate_form_data_table');
 Route::model("page","Page_build");
 Route::get("/arrange_page_elements/{page}","FormsController@arrange_page_elements");
+Route::post("/save_page_order","FormsController@save_page_order");
