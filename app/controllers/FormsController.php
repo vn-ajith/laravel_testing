@@ -10,10 +10,7 @@ class FormsController extends BaseController
 	
 
 
-	public function index()
-	{
-		return View::make('Forms.index');
-	}	
+	
 	
 	/*
 		This function gives control to user,, as to select a particular form from already created ones
@@ -245,6 +242,11 @@ class FormsController extends BaseController
 			echo 'Errors................>>>!@';
 		}
 		
+		
+	}
+	
+	public function save_page_order()
+	{
 		
 	}
 
