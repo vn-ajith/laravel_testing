@@ -12,14 +12,14 @@ text-align:left;
 padding : 5px;
 }
 .box {
-	border-color:grey;
-	border:1px solid;
+	
 	margin:5px;
 }
 </style>
-<script>
 
-</script>
+<!-- Tab panes -->
+
+
 <input type="hidden" id="page_id" value="{{$page->id}}">
 <script type="text/javascript" src="../assets/js/page_arrange.js"></script>
 <script type="text/javascript" src="../assets/js/save_form_data.js"></script>
@@ -56,7 +56,7 @@ padding : 5px;
 	
 	</div>
 	<div class="col-md-6" id="main_3_column">
-	<h3>Main</h3>
+	<h3>Main content</h3>
 		@foreach($main_content as $main)	
 			<div id="box_{{$main['form_id'].'#'}}{{ isset($main['e_id']) ? $main['e_id'] : 0}}" class="box">
 				<p>{{$main["form_id"]}}</p>

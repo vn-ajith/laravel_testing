@@ -16,9 +16,22 @@ padding : 5px;
 	margin:5px;
 }
 </style>
-<script>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+  <li><a href="#profile" data-toggle="tab">Profile</a></li>
+  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+</ul>
 
-</script>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home">.home..</div>
+  <div class="tab-pane" id="profile">profie</div>
+  <div class="tab-pane" id="messages">message</div>
+  <div class="tab-pane" id="settings">settings</div>
+</div>
+
+
 <input type="hidden" id="page_id" value="{{$page->id}}">
 <script type="text/javascript" src="../assets/js/page_arrange.js"></script>
 <script type="text/javascript" src="../assets/js/save_form_data.js"></script>
@@ -55,7 +68,7 @@ padding : 5px;
 	
 	</div>
 	<div class="col-md-6" id="main_3_column">
-	<h3>Main</h3>
+	<h3>Main content</h3>
 		@foreach($main_content as $main)	
 			<div id="box_{{$main['form_id'].'#'}}{{ isset($main['e_id']) ? $main['e_id'] : 0}}" class="box">
 				<p>{{$main["form_id"]}}</p>

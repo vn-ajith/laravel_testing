@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$("div[id^='right_']").sortable({
 	});
 	$("#left").sortable({
-	});
+	}); 
 	$("div[id^='main_']").disableSelection();
 	$("div[id^='left_']").disableSelection();
 	$("div[id^='right_']").disableSelection();

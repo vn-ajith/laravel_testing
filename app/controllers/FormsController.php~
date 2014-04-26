@@ -9,6 +9,7 @@ class FormsController extends BaseController
 
 	
 
+	
 
 	
 	
@@ -31,7 +32,9 @@ class FormsController extends BaseController
 		$forms = Form_config::all();
 		$form_data = Form_data::all();
 		$page_id = DB::table('page_builds')->max('id');
+		
 		$page_id++;
+
 		return View::make('Forms.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'page_id'=>$page_id))	;
 	}
 	public function generate_select_box($val)
@@ -55,96 +58,7 @@ class FormsController extends BaseController
 		}
 		return $str;
 	}
-	public function arrange_page_elements(Page_build $page)
-	{
-		$main_content = array();
-		$left_side_bar = array();
-		$right_side_bar = array();
-		$p = json_decode($page->page_settings,true);
-		$i = 1;	
-		if(isset($p["form"]))
-		{
-			$form = $p["form"];
-			
-		
-			foreach($form as $f)
-			{
-				$form = Form_config::findOrFail($f["form_id"]);
-			
-				$f_data = array('form_name' => $form->form_name,
-						'form_desc' => $form->form_desc,
-						'form_url'  => $form->form_url,
-						'form_id'   => $form->form_id,
-						'desc_order'=>json_decode($form->desc_order),true);
 	
-				if($f["position"]=="main_content")		
-				{
-					$main_content["item_".$i]["form_id"] = $f["form_id"];
-					$main_content["item_".$i]["form_name"] = $f["form_name"];
-					$main_content["item_".$i]["form"] = $f_data;
-	
-				}
-				else if($f["position"]=="left_side_bar")
-				{
-					$left_side_bar["item_".$i]["form_id"] = $f["form_id"];
-					$left_side_bar["item_".$i]["form_name"] = $f["form_name"];
-					$left_side_bar["item_".$i]["form"] = $f_data;
-				}
-				else if($f["position"]=="right_side_bar")
-				{
-					$right_side_bar["item_".$i]["form_id"] = $f["form_id"];
-					$right_side_bar["item_".$i]["form_name"] = $f["form_name"];
-					$right_side_bar["item_".$i]["form"] = $f_data;
-				}
-				$i++;
-			}
-
-		}
-
-
-		if(isset($p["form_data"]))
-		{
-			$form_data = $p["form_data"];
-			foreach($form_data as $fd)
-			{
-				$form_id = $fd["form_id"];
-				$form_name = $fd["form_name"];
-				$elements  = $fd["elements"];
-	
-				foreach($elements as $e)
-				{
-					
-					if($e["position"]=="main_content")		
-					{
-						$main_content["item_".$i]["form_id"] = $form_id;
-						$main_content["item_".$i]["form_name"] = $form_name;
-						$main_content["item_".$i]["e_id"] = $e["id"];
-	
-					}
-					else if($e["position"]=="left_side_bar")		
-					{
-						$left_side_bar["item_".$i]["form_id"] = $form_id;
-						$left_side_bar["item_".$i]["form_name"] = $form_name;
-						$left_side_bar["item_".$i]["e_id"] = $e["id"];
-	
-					}
-					else if($e["position"]=="right_side_bar")		
-					{
-						$right_side_bar["item_".$i]["form_id"] = $form_id;
-						$right_side_bar["item_".$i]["form_name"] = $form_name;
-						$right_side_bar["item_".$i]["e_id"] = $e["id"];
-	
-					}
-	
-					$i++;
-				}
-			
-			}
-		}
-		return View::make("Forms.arrange_page_elements",array('page'=>$page,'main_content'=>$main_content,'left_side_bar'=>$left_side_bar,'right_side_bar'=>$right_side_bar));
-		//$page_builds = Page_build::findOrFail();
-		
-	}
 	public function generate_form_data_table()
 	{
 		$input = Input::all();
@@ -219,7 +133,7 @@ class FormsController extends BaseController
 		}					
 
 	}
-	public function save_page_build()
+	public function save_page()
 	{	
 		$page_builds = new Page_build();
 		$input = Input::all();
@@ -227,8 +141,33 @@ class FormsController extends BaseController
 		
 		$rules = array('view_type'=>'required',
 				'settings'=>'required',
+				'box_order' =>'required'
 				);
 		$validator = Validator::make($input,$rules);
+		if($validator->passes())
+		{
+			$page_builds->view_type = $input['view_type'];
+			$page_builds->page_settings = json_encode($input["settings"]);
+			$page_builds->box_order = json_encode($input["box_order"]);
+			$page_builds->save();
+			echo 'page settings saved';
+
+		}
+		else
+		{
+			echo 'Errors................>>>!@';
+		}
+		
+		
+	}
+	public function save_page()
+	{
+		$input = Input::all();
+		$inp = $input["page_settings"];
+		$page_id = $input["page_id"];
+		$page = Page_builds::findOrFail($page_id);
+			
+		$validator = Validator::make($inp,$rules);
 		if($validator->passes())
 		{
 			$page_builds['view_type'] = $input['view_type'];
@@ -242,20 +181,9 @@ class FormsController extends BaseController
 			echo 'Errors................>>>!@';
 		}
 		
-		
 	}
 	
-	public function save_page_order()
-	{
-		$input = Input::all();
-		$page_id = $input["page_id"];
-		$box_order = $input["box_order"];
-		
-		$page = Page_build::findOrFail($page_id);
-		$page->box_order = $box_order;
-		$page->save();
-		
-	}
+	
 
 	/*
 		Function for rendering form builder. This functions view is showing form builder	

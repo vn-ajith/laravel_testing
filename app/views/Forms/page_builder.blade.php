@@ -4,167 +4,207 @@
 .rad {
 	text-align:center;
 }
-/*.modal-dialog{
-	max-width:750px !important;
-}*/
-.
 
+#generate_page_contents > div {
+    margin-bottom: 15px;
+    padding: 7px;
+}
+#save_page {
+    margin-left: 50%;
+}
 </style>
 
 <script type="text/javascript" src="assets/js/page_builder.js"></script>
+<!-- <script type="text/javascript" src="assets/js/page_arrange.js"></script> -->
+<!-- <script type="text/javascript" src="assets/js/save_form_data.js"></script> -->
+
 <div class="container">
 <section id="page_builder_header">
   <div class="page-header">
 	<h1>Page Builder</h1>
   </div>
-<section id="settings">
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#page_builder_page_layout" data-toggle="tab">Page layout</a></li>
+  <li><a href="#page_builder_layout_editor" data-toggle="tab">Layout editor</a></li>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">1. Select template view</h3>
-  </div>
-  <div class="panel-body">
-	<div class="row">
-		<div class="col-md-3 rad">
-			<input type="radio" id="view_type_1" name="view_type" value="3_col_view"> 
-			<img src="assets/images/3_column_view.jpg" alt="..." class="img-rounded"><br><br>
-			<span>3 column view</span>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="page_builder_page_layout">
+
+
+
+
+		<section id="settings">
+
+
+
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">1. Select template view</h3>
+		  </div>
+		  <div class="panel-body">
+			<div class="row">
+				<div class="col-md-3 rad">
+					<input type="radio" id="view_type_1" name="view_type" value="3_col_view"> 
+					<img src="assets/images/3_column_view.jpg" alt="..." class="img-rounded"><br><br>
+					<span>3 column view</span>
+				</div>
+				<div class="col-md-3 rad">
+					<input type="radio" id="view_type_2" name="view_type" value="2_col_left_view"> 
+					<img src="assets/images/2_column_left_view.jpg" alt=" " class="img-rounded"><br><br>
+					<span> 2 column view with left sidebar</span>
+				</div>
+				<div class="col-md-3 rad">
+					<input type="radio" id="view_type_3" name="view_type" value="2_col_right_view"> 
+					<img src="assets/images/2_column_right_view.jpg" alt="..." class="img-rounded"><br><br>
+					<span> 2 column view with right sidebar</span>
+				</div>
+				<div class="col-md-3 rad"></div>
+		
+			</div>
+		
+		  </div>
+		   	
+	
 		</div>
-		<div class="col-md-3 rad">
-			<input type="radio" id="view_type_2" name="view_type" value="2_col_left_view"> 
-			<img src="assets/images/2_column_left_view.jpg" alt=" " class="img-rounded"><br><br>
-			<span> 2 column view with left sidebar</span>
+
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">2. Select form</h3>
+		  </div>
+		  <div class="panel-body">
+			<div class="row">
+				<div class="col-md-3 radio">
+					<button class="btn btn-success" data-toggle="modal" data-target="#myModal">
+						  Form List
+					</button>
+
+				</div> 
+				<div class="col-md-3 radio">
+				</div>
+				<div class="col-md-3 radio">
+				</div>
+				<div class="col-md-3 radio"></div>
+		
+			</div>
+		
+		  </div>
+		   	
+	
 		</div>
-		<div class="col-md-3 rad">
-			<input type="radio" id="view_type_3" name="view_type" value="2_col_right_view"> 
-			<img src="assets/images/2_column_right_view.jpg" alt="..." class="img-rounded"><br><br>
-			<span> 2 column view with right sidebar</span>
+
+
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">3. Select form data</h3>
+		  </div>
+		  <div class="panel-body">
+			<div class="row">
+				<div class="col-md-3 radio">
+					<button class="btn btn-success" data-toggle="modal" data-target="#myModal_2">
+						  Add Form data 
+					</button>
+
+				</div> 
+				<div class="col-md-3 radio">
+				</div>
+				<div class="col-md-3 radio">
+				</div>
+				<div class="col-md-3 radio"></div>
+		
+			</div>
+		
+		  </div>
+		   	
+	
 		</div>
-		<div class="col-md-3 rad"></div>
+
+
+
+		</section>
+		<section id="generate_page_contents">
+		
+		<div id ="place_generate_page_contents">
+		<input type="button" class="btn btn-success" id="generate_layout" value="Generate layout">
+		</div>
+		</section>		
 		
 	</div>
-		
-  </div>
-   	
-	
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">2. Select form</h3>
-  </div>
-  <div class="panel-body">
-	<div class="row">
-		<div class="col-md-3 radio">
-			<button class="btn btn-success" data-toggle="modal" data-target="#myModal">
-				  Form List
-			</button>
-
-		</div> 
-		<div class="col-md-3 radio">
-		</div>
-		<div class="col-md-3 radio">
-		</div>
-		<div class="col-md-3 radio"></div>
-		
+	<div class="tab-pane" id="page_builder_layout_editor">
+				
+			
 	</div>
-		
-  </div>
-   	
-	
-</div>
+</div>	
+
+<input type="button" value="Save page"  id="save_page"  class="btn btn-sucess">
 
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">3. Select form data</h3>
-  </div>
-  <div class="panel-body">
-	<div class="row">
-		<div class="col-md-3 radio">
-			<button class="btn btn-success" data-toggle="modal" data-target="#myModal_2">
-				  Add Form data 
-			</button>
-
-		</div> 
-		<div class="col-md-3 radio">
-		</div>
-		<div class="col-md-3 radio">
-		</div>
-		<div class="col-md-3 radio"></div>
-		
-	</div>
-		
-  </div>
-   	
-	
-</div>
-<div id="something"></div>
 
 
-</section>
 <section id="modal">
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Select forms</h4>
-      </div>
-      <div class="modal-body">	
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title" id="myModalLabel">Select forms</h4>
+		      </div>
+		      <div class="modal-body">	
 				
-        			
-				<label > Select forms from the following </label>
-					@if ($forms->isEmpty())
-					<p> Currently, there is no form available !</p>
-					@else
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-							<tr>
-							<td></td>					
-							<th>Form name</th>
-							<th>Form description</th>
+					
+						<label > Select forms from the following </label>
+							@if ($forms->isEmpty())
+							<p> Currently, there is no form available !</p>
+							@else
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+									<tr>
+									<td></td>					
+									<th>Form name</th>
+									<th>Form description</th>
 							
-							</tr>
-							</thead>
-							<tbody>
-							@foreach($forms as $form)
-							<tr>
-							<td><input type="checkbox" id="{{$form->form_id}}" name="check" value="{{$form->form_name }}"  ></td>
-							<td>{{$form->form_name }}</td>
-							<td>{{$form->form_desc}}</td>
+									</tr>
+									</thead>
+									<tbody>
+									@foreach($forms as $form)
+									<tr>
+									<td><input type="checkbox" id="{{$form->form_id}}" name="check" value="{{$form->form_name }}"  ></td>
+									<td>{{$form->form_name }}</td>
+									<td>{{$form->form_desc}}</td>
 							
-							<td>	
-								<select id="position_{{$form->form_id}}">
+									<td>	
+										<select id="position_{{$form->form_id}}">
 				
 				
-								</select>
-							</td>			
-							</tr>
-							@endforeach
-							</tbody>
-						</table>
-						@endif
-					</div>
+										</select>
+									</td>			
+									</tr>
+									@endforeach
+									</tbody>
+								</table>
+								@endif
+							</div>
 
 
 
 
 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="select_form_save">Select forms</button>
-      </div>
-    </div>
-  </div>
+		      </div>
+		      <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" id="select_form_save">Select forms</button>
+		      </div>
+		    </div>
+		  </div>
 
 
 
 
-</section>
+		</section>
 
 
 
@@ -236,10 +276,6 @@
 
 
 
-<section id="generate_page_contents">
-<!-- <button type="button" class="btn btn-success" id="build_page">Build a page</button> -->
-<a href='{{action("FormsController@arrange_page_elements",$page_id);}}' class="btn btn-success" id="build_page">Build a page</a>
-</section>
+
 </div>
 @stop
-

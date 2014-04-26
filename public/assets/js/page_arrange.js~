@@ -55,17 +55,17 @@ $(document).ready(function(){
 		}
 		console.log(box_order);
 		var page_id = $("#page_id").val();
-// 		$.ajax({
-// 					url: "/laravel_testing/blog/public/save_page_order",
-// 					type:"POST",
-// 					
-// 					data:{"box_order":box_order,"page_id":page_id}
-// 					})
-// 					.done(function( d ){
-// 						
-// 						alert("page order saved");
-// 						
-// 					});
+		$.ajax({
+					url: "/laravel_testing/blog/public/save_page_order",
+					type:"POST",
+					
+					data:{"box_order":box_order,"page_id":page_id}
+					})
+					.done(function( d ){
+						
+						alert("page order saved");
+						
+					});
 		
 	});
 	
