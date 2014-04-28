@@ -24,8 +24,8 @@
 	<h1>Page Builder</h1>
   </div>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#page_builder_page_layout" data-toggle="tab">Page layout</a></li>
-  <li><a href="#page_builder_layout_editor" data-toggle="tab">Layout editor</a></li>
+  <li class="active" id='li_page_layout'><a href="#page_builder_page_layout" data-toggle="tab">Page layout</a></li>
+  <li><a href="#page_builder_layout_editor" id="li_layout_editor" data-toggle="tab">Layout editor</a></li>
 
 </ul>
 
@@ -132,10 +132,7 @@
 		</section>		
 		
 	</div>
-	<div class="tab-pane" id="page_builder_layout_editor">
-				
-			
-	</div>
+	<div class="tab-pane" id="page_builder_layout_editor"></div>
 </div>	
 
 <input type="button" value="Save page"  id="save_page"  class="btn btn-sucess">
@@ -165,7 +162,7 @@
 									<td></td>					
 									<th>Form name</th>
 									<th>Form description</th>
-							
+									<th>Position</th>
 									</tr>
 									</thead>
 									<tbody>

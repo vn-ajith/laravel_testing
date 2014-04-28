@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	$('#select_form_data').hide();
+	$('#save_page').hide();
+	
 	var page_settings={};
 	page_settings["settings"] = {};
 	page_settings["settings"]["form"]= {}
@@ -57,7 +58,7 @@ $(document).ready(function(){
 		
 		
 		
-		//console.log(page_settings);
+		
 		$('#myModal').modal('toggle');
 		
 		
@@ -115,8 +116,10 @@ $(document).ready(function(){
 	
 	$("#generate_layout").click(function(e){
 		console.log(page_settings);
-	
+		
      		generate_layout();
+		alert("Now you can edit layout");
+		$('#save_page').show();
 	});
 	$("#save_page").click(function(e){
 		var i=1;
@@ -284,7 +287,7 @@ $(document).ready(function(){
 					{
 						e_id = 0;
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name'+form_name+'</p><p>Selected entry (ID)'+e_id+'</p>';
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 					
@@ -307,7 +310,7 @@ $(document).ready(function(){
 					{
 						e_id = 0;
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name'+form_name+'</p><p>Selected entry (ID)'+e_id+'</p>';
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}
@@ -330,7 +333,7 @@ $(document).ready(function(){
 					{
 						e_id = 0;
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name'+form_name+'</p><p>Selected entry (ID)'+e_id+'</p>';
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}	
@@ -355,7 +358,7 @@ $(document).ready(function(){
 					{
 						e_id = 0;
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name'+form_name+'</p><p>Selected entry (ID)'+e_id+'</p>';
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}
@@ -378,7 +381,7 @@ $(document).ready(function(){
 					{
 						e_id = 0;
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name'+form_name+'</p><p>Selected entry (ID)'+e_id+'</p>';
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}	
@@ -402,7 +405,7 @@ $(document).ready(function(){
 					{
 						e_id = 0;
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name'+form_name+'</p><p>Selected entry (ID)'+e_id+'</p>';
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 					
@@ -425,7 +428,7 @@ $(document).ready(function(){
 					{
 						e_id = 0;
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name'+form_name+'</p><p>Selected entry (ID)'+e_id+'</p>';
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}
@@ -434,7 +437,7 @@ $(document).ready(function(){
 		str = str + '</div></div>';
 
 
-		str = str + '<input type="button" value="arraange_elements" class="btn btn-primary" >';
+		
 		
 	
 		$('#page_builder_layout_editor').html(str);
@@ -453,7 +456,16 @@ $(document).ready(function(){
 
 		
 	}// end of function generate layout()
-	
+	$("#li_layout_editor").click(function(){
+		
+		if($('#page_builder_layout_editor').html()=="")
+			{
+				alert("inside");
+				str = "<h3>First select page layout , generate page layout and then edit it here </h3>";
+				$('#page_builder_layout_editor').html(str);
+				
+			}
+	});
 	
 	
 	

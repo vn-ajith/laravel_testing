@@ -37,6 +37,12 @@ class FormsController extends BaseController
 
 		return View::make('Forms.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'page_id'=>$page_id))	;
 	}
+	
+	/*
+		function: generate_select_box
+			this function generates options for position in both form and form data selection 
+			
+	*/
 	public function generate_select_box($val)
 	{
 		
@@ -59,6 +65,11 @@ class FormsController extends BaseController
 		return $str;
 	}
 	
+	/*
+		Function : generate_form_data_table()
+			This function generates table of data which is already entered using a particular form
+			It is generated when a form is selected
+	*/
 	public function generate_form_data_table()
 	{
 		$input = Input::all();
@@ -85,7 +96,7 @@ class FormsController extends BaseController
 									
  				$field_num = intval($f['field_num']);
 				echo '<th></th>';
- 				for($i=1;$i<=$field_num;$i++)
+ 				for($i=1;$i<=$field_num;$i++) //  loop for getting label names of selected table
 				{
 					
  					$field = $f['field_'.$i.'_name'];
@@ -109,6 +120,7 @@ class FormsController extends BaseController
 				{
 					echo '<th>'.$t_head[$k].'</th>';
 				}
+				echo '<th>Position</th>';
 				echo '</tr>';
 				echo '</thead>';
 			
@@ -133,6 +145,17 @@ class FormsController extends BaseController
 		}					
 
 	}
+
+	/*
+		Function save_page()
+			This function saves properties of page ie., selected layout, forms, form data, their order of display etc. to database
+			box_order as well as settings are passed as json from view
+
+			box order is order of elements in a page
+				format: item#number : (form_id)#(form_data_id)
+			settings saves overall elements in page
+				format: every element is saved with form id, form name if form data id if exists
+	*/
 	public function save_page()
 	{	
 		$page_builds = new Page_build();
