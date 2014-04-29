@@ -15,7 +15,16 @@ li {
 	float:right;
 }
 .box{
-	padding-left:15px;
+	padding-left:15px;	
+	font-size:18px;
+}
+.task{
+	padding:4px;
+}
+#save_nav{
+	margin-left:30%;
+	margin-top:6%;  
+	
 }
 	
 </style>
@@ -41,7 +50,9 @@ li {
 		</div>
 	</div>
 
-
+	<div class="col-md-12">
+		<input type="button" class="btn btn-success" value="Save navigation bar" id="save_nav">
+	</div>
 
 	<div id="modal_holder">
 		<div class="modal fade" id="myModal_add_menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -1,26 +1,27 @@
 $(document).ready(function(){
-	
+	$("#save_nav").hide();
 	var navigation = {};
 	var item_num = 0
-	
+	navigation["nav_details"] = {};
 	document.title = "Navigation builder";
 	$("#add_menu").click(function(){
 		$('#nav_title').val("");
 		$('#nav_url').val("");
 		$('#myModal_add_menu').modal('toggle');
+		$("#save_nav").show();
 			
 	});
 	$("#add_new_menu").click(function(){
 		var nav_title = $('#nav_title').val();
 		var nav_url = $('#nav_url').val();
 		var str="<div class='box' id='"+nav_title+"' >"+nav_title;
-		str = str +  "<div class='edit'><img src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
-		str = str + "<img src='assets/images/add_new.png' id= '"+nav_title+"_add_new'>";
-		str = str + "<img src='assets/images/delete.png' id ='"+nav_title+"_delete'></div></div>";
-		navigation[nav_title] = {};
-		navigation[nav_title]["title"] = nav_title;
-		navigation[nav_title]["url"] = nav_url;
-		navigation[nav_title]["parent"] = "";
+		str = str +  "<div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
+		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_title+"_add_new'>";
+		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div></div>";
+		navigation["nav_details"][nav_title] = {};
+		navigation["nav_details"][nav_title]["title"] = nav_title;
+		navigation["nav_details"][nav_title]["url"] = nav_url;
+		navigation["nav_details"][nav_title]["parent"] = "";
 		$("#menu_holder").append(str);
 		$('#myModal_add_menu').modal('toggle');
 		item_num ++;
@@ -41,8 +42,8 @@ $(document).ready(function(){
 		var name = id.substring(0,n);
 		
 		$("#myModalLabel_2").html("Edit menu");
-		$('#nav_sub_title').val(navigation[name]["title"]);
-		$('#nav_sub_url').val(navigation[name]["url"]);
+		$('#nav_sub_title').val(navigation["nav_details"][name]["title"]);
+		$('#nav_sub_url').val(navigation["nav_details"][name]["url"]);
 		$('#myModal_add_sub_menu').modal('toggle');
 		
 
@@ -69,30 +70,48 @@ $(document).ready(function(){
 		var nav_url = $('#nav_sub_url').val();
 		
 		var str =  "<div class='box' id='"+nav_title+"' ><div style='margin-left:10px;'></div>";
-		str = str +nav_title+  "<div class='edit'><img src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
-		str = str + "<img src='assets/images/add_new.png' id= '"+nav_title+"_add_new'>";
+		str = str +nav_title+  "<div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
+		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_title+"_add_new'>";
 		
-		str = str + "<img src='assets/images/delete.png' id ='"+nav_title+"_delete'></div></div>";
+		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div></div>";
 		
 		
 		$("#"+menu).append(str);
-		navigation[nav_title] = {};
-		navigation[nav_title]["title"] = nav_title;
-		navigation[nav_title]["url"] = nav_url;
-		if(navigation[menu]["parent"] !="")
+		navigation["nav_details"][nav_title] = {};
+		navigation["nav_details"][nav_title]["title"] = nav_title;
+		navigation["nav_details"][nav_title]["url"] = nav_url;
+		if(navigation["nav_details"][menu]["parent"] !="")
 		{
-			navigation[nav_title]["parent"] = navigation[menu]["parent"]+"_"+menu;		
+			navigation["nav_details"][nav_title]["parent"] = navigation["nav_details"][menu]["parent"]+"_"+menu;		
 		}
 		else
 		{
-			navigation[nav_title]["parent"] = menu;
+			navigation["nav_details"][nav_title]["parent"] = menu;
 		}
 		
 		console.log(navigation);
 		$('#myModal_add_sub_menu').modal('toggle');
 		
 	});
-	
+	$("#save_nav").click(function(){
+		$.ajax({
+				method: "POST",
+				url: "/laravel_testing/blog/public/save_navigation",
+				data:navigation
+			}).done(function(){
+				alert("Navigation bar saved successfully");
+			});
+// 		$.ajax({
+// 					url: "/laravel_testing/blog/public/generate_form_data_table",
+// 					type:"POST",
+// 					
+// 					data:{"id":id,"radio":value_radio}
+// 					})
+// 					.done(function( d ){
+// 						
+// 						$('#form_data_display').html(d);
+// 					});
+	});
 	
 	
 	

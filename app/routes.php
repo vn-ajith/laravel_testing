@@ -34,3 +34,4 @@ Route::post("/save_page_order","FormsController@save_page_order");
 Route::post("/save_page","FormsController@save_page");
 Route::get("/get_latest_page","FormsController@get_latest_page");
 Route::get("/navigation_builder","NavigationsController@navigation_builder");
+Route::post("/save_navigation","NavigationsController@save_navigation");
