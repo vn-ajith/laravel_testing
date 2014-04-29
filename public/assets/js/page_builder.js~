@@ -39,7 +39,8 @@ $(document).ready(function(){
 			alert('First select template style');
 			
 		}
-		
+		else
+		{
 		page_settings["view_type"] = value_radio;
 		
 		
@@ -60,7 +61,7 @@ $(document).ready(function(){
 		
 		
 		$('#myModal').modal('toggle');
-		
+		}
 		
 	});
 		
@@ -69,8 +70,13 @@ $(document).ready(function(){
 		
 		var id = $('#form_selector').children(":selected").attr("id");	
 		var value_radio = $( "input:radio[name='view_type']:checked" ).val();
-
-		
+		if(value_radio==undefined)
+		{
+			alert('First select template style');
+			
+		}
+		else
+		{
 		$.ajax({
 					url: "/laravel_testing/blog/public/generate_form_data_table",
 					type:"POST",
@@ -82,6 +88,7 @@ $(document).ready(function(){
 						$('#form_data_display').html(d);
 					});
 		$('#select_form_data').show();
+		}
 	});	
 	$("body").on("click","#select_form_data",function(){
 		var form_name = $('#form_selector').children(":selected").val();	
@@ -118,7 +125,7 @@ $(document).ready(function(){
 		console.log(page_settings);
 		
      		generate_layout();
-		alert()
+		alert("Now you can edit layout");
 		$('#save_page').show();
 	});
 	$("#save_page").click(function(e){
@@ -165,7 +172,7 @@ $(document).ready(function(){
 					data:page_settings
 					})
 					.done(function( d ){
-						setTimeout(function(){alert("Page saved")},3000);
+						setTimeout(function(){alert("Page saved")},2000);
 						
 					});
 		
@@ -460,7 +467,7 @@ $(document).ready(function(){
 		
 		if($('#page_builder_layout_editor').html()=="")
 			{
-				alert("inside");
+				
 				str = "<h3>First select page layout , generate page layout and then edit it here </h3>";
 				$('#page_builder_layout_editor').html(str);
 				

@@ -15,8 +15,6 @@
 </style>
 
 <script type="text/javascript" src="assets/js/page_builder.js"></script>
-<!-- <script type="text/javascript" src="assets/js/page_arrange.js"></script> -->
-<!-- <script type="text/javascript" src="assets/js/save_form_data.js"></script> -->
 
 <div class="container">
 <section id="page_builder_header">
@@ -48,17 +46,17 @@
 			<div class="row">
 				<div class="col-md-3 rad">
 					<input type="radio" id="view_type_1" name="view_type" value="3_col_view"> 
-					<img src="assets/images/3_column_view.jpg" alt="..." class="img-rounded"><br><br>
+					<img src="{{asset('assets/images/3_column_view.jpg')}}" alt="..." class="img-rounded"><br><br>
 					<span>3 column view</span>
 				</div>
 				<div class="col-md-3 rad">
 					<input type="radio" id="view_type_2" name="view_type" value="2_col_left_view"> 
-					<img src="assets/images/2_column_left_view.jpg" alt=" " class="img-rounded"><br><br>
+					<img src="{{asset('assets/images/2_column_left_view.jpg')}}" alt=" " class="img-rounded"><br><br>
 					<span> 2 column view with left sidebar</span>
 				</div>
 				<div class="col-md-3 rad">
 					<input type="radio" id="view_type_3" name="view_type" value="2_col_right_view"> 
-					<img src="assets/images/2_column_right_view.jpg" alt="..." class="img-rounded"><br><br>
+					<img src="{{asset('assets/images/2_column_right_view.jpg')}}" alt="..." class="img-rounded"><br><br>
 					<span> 2 column view with right sidebar</span>
 				</div>
 				<div class="col-md-3 rad"></div>
@@ -135,7 +133,7 @@
 	<div class="tab-pane" id="page_builder_layout_editor"></div>
 </div>	
 
-<input type="button" value="Save page"  id="save_page"  class="btn btn-sucess">
+<input type="button" value="Save page"  id="save_page"  class="btn btn-primary">
 
 
 
