@@ -49,10 +49,6 @@
 
 <div>
  
-<div class="container">
-<section class="section-padding">
-<div class="jumbotron text-center">
-
 <div id="form_builder" class="panel panel-default">
   <h1 class="">Form builder</h1>
   <h2><input type="button" id="form_set" value="Form settings" class="btn btn-info"  ></h2>
@@ -69,30 +65,25 @@
       
     </div>
 
-	<div id="form_holder">
-	
-	</div> 
-	<div id="modal_holder">
-	</div>
-	<input type="button" id="save_form_to_db" value="Save form" class="btn btn-success">
 	
   
 </div>
-
+<div id="form_holder">
+	
+</div> 
 
 
 <?php
 require_once('assets/html/MAIN_modal.html');
 
 ?>
-
+<div id="modal_holder">
+</div>
 
 <br>
 <div id='error_holder'></div>
+<input type="button" id="save_form_to_db" value="Save form" class="btn btn-success">
 
-
-</div>
-</section>
-</div>
+<!--  <img src="{{asset('assets/images/fanssignupsplash.png')}}"> -->
 
 @stop

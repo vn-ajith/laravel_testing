@@ -98,9 +98,9 @@
 		$( "#form_holder" ).append( str );	
 	});
 	$('#CHECK').click(function(){
-		var str = "<p class='p_CHECK_"+CHECK_num+"'><label for='CHECK_"+CHECK_num+"' name='CHECK_"+CHECK_num+"_label' id='CHECK_"+CHECK_num+"_label'>Untitled</label><br>";
+		var str = "<p class='p_wid p_CHECK_"+CHECK_num+"'><label for='CHECK_"+CHECK_num+"' name='CHECK_"+CHECK_num+"_label' id='CHECK_"+CHECK_num+"_label'>Untitled</label><br>";
 		
-		str = str+ "<div class='field_c'><input type='checkbox' name='CHECK_"+CHECK_num+"' id='CHECK_"+CHECK_num+"' ></div>";
+		str = str+ "<input type='checkbox' style='margin-right:36%;' name='CHECK_"+CHECK_num+"' id='CHECK_"+CHECK_num+"' >";
 		str = str+ "<button class='btn btn-success btn-sm set_button' data-toggle='modal' data-target='#myModal_CHECK_"+CHECK_num+"' id='settings_CHECK_"+CHECK_num+"'>  Settings</button>";
 		str = str+ "<input type='button' class='btn btn-danger btn-sm  del_button' id='delete_CHECK_"+CHECK_num+"' value='Delete'></p>";
 		field_array["CHECK_"+CHECK_num] = {};
@@ -148,6 +148,7 @@
 			
 
 		$(".p_"+name).remove();
+		$("#myModal_"+name).remove();
 	});
 
 	

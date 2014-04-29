@@ -37,6 +37,9 @@
 	.field{
 		width:150px;
 	}
+	.p_wid{
+	min-width:386px !important;
+	}
 	
   
 	
