@@ -163,7 +163,7 @@ class PageBuilderController extends BaseController
 		}
 		else
 		{
-			echo 'Errors................>>>!@';
+			echo 'Errors...!';
 		}
 		
 		

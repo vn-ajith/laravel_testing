@@ -165,19 +165,46 @@ $(document).ready(function(){
 				i++;
 			});
 			
-		}		
-		console.log(page_settings);
-		$.ajax({
-					url: "/laravel_testing/blog/public/save_page",
-					type:"POST",
-					
-					data:page_settings
-					})
-					.done(function( d ){
-						setTimeout(function(){alert("Page saved")},2000);
-						
-					});
+		}
+		if($("#header_disp").html()!=undefined)
+		{
+			
+			page_settings["box_order"]["header"] = {};
 		
+			$("#header_disp div[id^='box_']").each(function(){
+				var box_id = this.id.substring(4,this.id.length);
+				page_settings["box_order"]["header"]["item#"+i]  = box_id;
+				i++;
+ 				
+			});
+			
+		}
+		if($("#footer_disp").html()!=undefined)
+		{
+			
+			page_settings["box_order"]["footer"] = {};
+		
+			$("#footer_disp div[id^='box_']").each(function(){
+				var box_id = this.id.substring(4,this.id.length);
+				page_settings["box_order"]["footer"]["item#"+i]  = box_id;
+				i++;
+ 				
+			});
+			
+		}		
+		page_settings["page_name"] = $("#page_name").val();
+		console.log(page_settings);
+// 		$.ajax({
+// 					url: "/laravel_testing/blog/public/save_page",
+// 					type:"POST",
+// 					
+// 					data:page_settings
+// 					})
+// 					.done(function( d ){
+// 						setTimeout(function(){alert(d)},2000);
+// 						
+// 					});
+// 		
 		
 	});
 
@@ -188,6 +215,8 @@ $(document).ready(function(){
 		var main_content = {};
 		var left_side_bar = {};
 		var right_side_bar = {};
+		var header = {};
+		var footer = {};
 		
 		
 		var i = 1;	
@@ -222,6 +251,20 @@ $(document).ready(function(){
 					right_side_bar["item_"+i] = {};
 					right_side_bar["item_"+i]["form_id"] = f["form_id"];
 					right_side_bar["item_"+i]["form_name"] = f["form_name"];
+					
+				}
+				else if(f["position"]=="header")
+				{
+					header["item_"+i] = {};
+					header["item_"+i]["form_id"] = f["form_id"];
+					header["item_"+i]["form_name"] = f["form_name"];
+					
+				}
+				else if(f["position"]=="footer")
+				{
+					footer["item_"+i] = {};
+					footer["item_"+i]["form_id"] = f["form_id"];
+					footer["item_"+i]["form_name"] = f["form_name"];
 					
 				}
 				i++;
@@ -270,13 +313,54 @@ $(document).ready(function(){
 						right_side_bar["item_"+i]["e_id"] = e["id"];
 	
 					}
+					else if(e["position"]=="header")		
+					{
+						right_side_bar["item_"+i] = {};
+						right_side_bar["item_"+i]["form_id"] = form_id;
+						right_side_bar["item_"+i]["form_name"] = form_name;
+						right_side_bar["item_"+i]["e_id"] = e["id"];
 	
+					}
+					else if(e["position"]=="footer")		
+					{
+						footer["item_"+i] = {};
+						footer["item_"+i]["form_id"] = form_id;
+						footer["item_"+i]["form_name"] = form_name;
+						footer["item_"+i]["e_id"] = e["id"];
+	
+					}
 					i++;
 				}
 			
 			}
 		}
-		var str = '<div class="row">	<div class="col-md-12"></div> 	<div class="col-md-12"></div>		<div class="col-md-12"></div>	<div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12"><h1>To change order of elements in sidebars and main content please drag them</h1></div>	<div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12">';
+		
+		var str = '<div class="row">	<div class="col-md-12"></div> 	<div class="col-md-12"></div>		<div class="col-md-12"></div>	<div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12">';
+		
+		str = str +'<div class="col-md-3 " id="header_disp"><h3>Header</h3>';
+				for(var head in header)
+				{	
+					var form = header[head];
+					var form_id = form["form_id"];
+					var form_name = form["form_name"];
+					var e_id;
+					if(typeof form['e_id']!='undefined')	
+					{
+						e_id =  form['e_id'];
+					}
+					else
+					{
+						e_id = 0;
+					}
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+	
+					str = str + '</div>';
+					
+				}	
+			str = str + '</div>';
+		
+		
+		str = str+'</div><div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12">';
 	
 		var view_type = page_settings["view_type"];
 		if(view_type=='3_col_view')
@@ -443,7 +527,32 @@ $(document).ready(function(){
 				}
 			str = str + '</div>';
 		}
-		str = str + '</div></div>';
+		str = str + '</div>';
+		str = str + '<div class="col-md-12">';
+
+		str = str + '<div class="col-md-9 " id="footer_disp"><h3>Footer</h3>';
+				
+				for(var foo in footer)
+				{
+					var form = footer[foo];
+					var form_id = form["form_id"];
+					var form_name = form["form_name"];
+					var e_id;
+					if(typeof form['e_id']!='undefined')	
+					{
+						e_id =  form['e_id'];
+					}
+					else
+					{
+						e_id = 0;
+					}
+					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+	
+					str = str + '</div>';
+				}
+			str = str + '</div>';
+
+		str = str + '</div></div></div>';
 
 
 		
@@ -451,18 +560,17 @@ $(document).ready(function(){
 	
 		$('#page_builder_layout_editor').html(str);
 
-		$("div[id^='main_']").sortable({
-		});
-
-		$("div[id^='left_']").sortable({
-		});
-		$("div[id^='right_']").sortable({
-		});
-		
+		$("div[id^='main_']").sortable({});
+		$("div[id^='left_']").sortable({});
+		$("div[id^='right_']").sortable({});
+		$("#header_disp").sortable({});
+		$("#footer_disp").sortable({});
+			
 		$("div[id^='main_']").disableSelection();
 		$("div[id^='left_']").disableSelection();
 		$("div[id^='right_']").disableSelection();
-
+		$("#header_disp").disableSelection();
+		$("#footer_disp").disableSelection();
 		
 	}// end of function generate layout()
 	$("#li_layout_editor").click(function(){

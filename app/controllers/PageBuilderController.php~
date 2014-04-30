@@ -15,7 +15,7 @@ class PageBuilderController extends BaseController
 		
 		$page_id++;
 
-		return View::make('Forms.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'page_id'=>$page_id))	;
+		return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'page_id'=>$page_id))	;
 	}
 	
 	/*
