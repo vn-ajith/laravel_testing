@@ -23,6 +23,8 @@ $(document).ready(function(){
 		
 			str = str+"<option value='right_side_bar'>Right side bar</option>";
 		}
+		str = str+"<option value='header'>Header</option>";
+		str = str+"<option value='footer'>Footer</option>";
 		
 		$("select[id^='position_']").html(str);
 		

@@ -53,15 +53,20 @@ class FormsController extends BaseController
 		
 			$str = $str."<option value='left_side_bar'>Left side bar</option>";
 			$str = $str."<option value='right_side_bar'>Right side bar</option>";
+			
 		}
 		else if($val=="2_col_left_view"){
 		
 			$str = $str."<option value='left_side_bar'>Left side bar</option>";
+		
 		}
 		else{
 		
 			$str = $str."<option value='right_side_bar'>Right side bar</option>";
 		}
+		$str = $str."<option value='header'>Header</option>";
+		$str = $str."<option value='footer'>Footer</option>";
+		
 		return $str;
 	}
 	
@@ -96,7 +101,7 @@ class FormsController extends BaseController
 									
  				$field_num = intval($f['field_num']);
 				echo '<th></th>';
- 				for($i=1;$i<=$field_num;$i++)
+ 				for($i=1;$i<=$field_num;$i++) //  loop for getting label names of selected table
 				{
 					
  					$field = $f['field_'.$i.'_name'];
@@ -154,7 +159,7 @@ class FormsController extends BaseController
 			box order is order of elements in a page
 				format: item#number : (form_id)#(form_data_id)
 			settings saves overall elements in page
-				format: every element is saved with form id, form name if form data id if exits
+				format: every element is saved with form id, form name if form data id if exists
 	*/
 	public function save_page()
 	{	

@@ -12,6 +12,10 @@
 #save_page {
     margin-left: 50%;
 }
+.form-group{
+	width:50%;
+}
+
 </style>
 
 <script type="text/javascript" src="assets/js/page_builder.js"></script>
@@ -37,22 +41,20 @@
 		<section id="settings">
 			
 			<div class="panel panel-default">
-		  		<div class="panel-heading">
+				 <div class="panel-heading">
 		    			<h3 class="panel-title">1. Page name</h3>
 		  		</div>
 		  		<div class="panel-body">
-				
+					<div class="form-group">
+					<input type="text" class="form-control" id="page_name" placeholder="Enter a page name">
+					</div>
+					
+				</div>
 		
-		  		</div>
+		  	</div>
 		   	
 	
-			</div>
-
-
-
-
-
-
+		
 
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -112,7 +114,7 @@
 
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">3. Select form data</h3>
+		    <h3 class="panel-title">4. Select form data</h3>
 		  </div>
 		  <div class="panel-body">
 			<div class="row">

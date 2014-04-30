@@ -39,16 +39,22 @@ li {
 
 	<section id="page_builder_header">
    		<div class="page-header">
-			<h1>Navigation Builder</h1>
+			<h1>List Builder</h1>
 		</div>
 	</section>
 
 
 	<div class="col-md-12">
 		<div class="col-md-2">
+			<div class="form-group">
+				<input type="text" id="list_name" placeholder="Enter list name"  class="form-control">
+			</div>
+		</div>
+
+		<div class="col-md-2">
 			<input type="button" id="add_menu" value="Add a menu" class="btn btn-primary">
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-8">
 			<div id="menu_holder">
 
 			</div>

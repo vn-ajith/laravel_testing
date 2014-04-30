@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNavigationsTable extends Migration {
+class CreateListsBuildTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,13 @@ class CreateNavigationsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('navigations',function($table)
+		Schema::create('lists_build',function($table)
 		{
-			$table->increments('nav_id');
-			$table->text("nav_details");
-		}
-		);
+			$table->increments('list_id');
+			$table->string('list_name');
+			$table->text("list_details");
+
+		});
 	}
 
 	/**
@@ -27,7 +28,7 @@ class CreateNavigationsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop("navigations");
+		Schema::drop("lists_build");
 	}
 
 }

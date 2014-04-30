@@ -23,6 +23,8 @@ $(document).ready(function(){
 		
 			str = str+"<option value='right_side_bar'>Right side bar</option>";
 		}
+		str = str+"<option value='header'>Header</option>";
+		str = str."<option value='footer'>Footer</option>";
 		
 		$("select[id^='position_']").html(str);
 		
@@ -467,7 +469,6 @@ $(document).ready(function(){
 		
 		if($('#page_builder_layout_editor').html()=="")
 			{
-				
 				str = "<h3>First select page layout , generate page layout and then edit it here </h3>";
 				$('#page_builder_layout_editor').html(str);
 				

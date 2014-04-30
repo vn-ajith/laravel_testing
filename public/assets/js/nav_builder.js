@@ -2,9 +2,11 @@ $(document).ready(function(){
 	$("#save_nav").hide();	
 	var navigation = {};
 	var item_num = 0
+	
 	navigation["nav_details"] = {};
 	document.title = "Navigation builder";
 	$("#add_menu").click(function(){
+		
 		$('#nav_title').val("");
 		$('#nav_url').val("");
 		$('#myModal_add_menu').modal('toggle');
@@ -94,12 +96,14 @@ $(document).ready(function(){
 
 	});
 	$("#save_nav").click(function(){
+		var list_name = $("#list_name").val();
 		$.ajax({
 				method: "POST",
-				url: "/laravel_testing/blog/public/save_navigation",
-				data:navigation
-			}).done(function(){
-				alert("Navigation bar saved successfully");
+				url: "/laravel_testing/blog/public/save_list",
+				data:{"list_name":list_name,"list_details":navigation}
+			}).done(function(d){
+				alert(d);
+// 				alert("Navigation bar saved successfully");
 			});
 
 		});
