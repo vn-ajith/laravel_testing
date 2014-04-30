@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("#save_nav").hide();
+	$("#save_nav").hide();	
 	var navigation = {};
 	var item_num = 0
 	navigation["nav_details"] = {};
@@ -9,15 +9,15 @@ $(document).ready(function(){
 		$('#nav_url').val("");
 		$('#myModal_add_menu').modal('toggle');
 		$("#save_nav").show();
-			
+
 	});
 	$("#add_new_menu").click(function(){
 		var nav_title = $('#nav_title').val();
 		var nav_url = $('#nav_url').val();
-		var str="<div class='box' id='"+nav_title+"' >"+nav_title;
-		str = str +  "<div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
+		var str="<div class='box' id='"+nav_title+"' ><span class='box_test'>"+nav_title+"</span>";
+		str = str + "<div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
 		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_title+"_add_new'>";
-		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div></div>";
+		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div><p></p></div>";
 		navigation["nav_details"][nav_title] = {};
 		navigation["nav_details"][nav_title]["title"] = nav_title;
 		navigation["nav_details"][nav_title]["url"] = nav_url;
@@ -27,14 +27,14 @@ $(document).ready(function(){
 		item_num ++;
 		console.log(navigation);
 	});
-	
-	
+
+
 	$("body").on("click","img[id$='_delete']",function(){
 		var id = this.id;
 		var n = id.search("_delete");
 		var name = id.substring(0,n);
 		$('#'+name).remove();
-		
+
 	});
 	$("body").on("click","img[id$='_settings']",function(){
 		var id = this.id;
@@ -46,8 +46,8 @@ $(document).ready(function(){
 		$('#nav_sub_url').val(navigation["nav_details"][name]["url"]);
 		$('#myModal_add_sub_menu').modal('toggle');
 		
-
 		
+
 	});
 	$("body").on("click","img[id$='_add_new']",function(){
 		var id = this.id;
@@ -62,18 +62,18 @@ $(document).ready(function(){
 		
 	});
 	$("#add_new_sub_menu").click(function(){
-		
+
 		var menu = $('#menu').val();
 		
 		
 		var nav_title = $('#nav_sub_title').val();
 		var nav_url = $('#nav_sub_url').val();
 		
-		var str =  "<div class='box' id='"+nav_title+"' ><div style='margin-left:10px;'></div>";
-		str = str +nav_title+  "<div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
+		var str = "<div class='box' id='"+nav_title+"' ><img class='task' src='assets/images/arrow.png'>";
+		str = str +"<span class='box_test'>"+nav_title+ "</span><div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
 		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_title+"_add_new'>";
 		
-		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div></div>";
+		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div><p></p></div>";
 		
 		
 		$("#"+menu).append(str);
@@ -82,37 +82,29 @@ $(document).ready(function(){
 		navigation["nav_details"][nav_title]["url"] = nav_url;
 		if(navigation["nav_details"][menu]["parent"] !="")
 		{
-			navigation["nav_details"][nav_title]["parent"] = navigation["nav_details"][menu]["parent"]+"_"+menu;		
+		navigation["nav_details"][nav_title]["parent"] = navigation["nav_details"][menu]["parent"]+"_"+menu;	
 		}
 		else
 		{
-			navigation["nav_details"][nav_title]["parent"] = menu;
+		navigation["nav_details"][nav_title]["parent"] = menu;
 		}
 		
 		console.log(navigation);
 		$('#myModal_add_sub_menu').modal('toggle');
-		
+
 	});
 	$("#save_nav").click(function(){
 		$.ajax({
 				method: "POST",
-				url: "/laravel_testing/blog/public/save_navigation"
+				url: "/laravel_testing/blog/public/save_navigation",
+				data:navigation
 			}).done(function(){
 				alert("Navigation bar saved successfully");
 			});
-		$.ajax({
-					url: "/laravel_testing/blog/public/generate_form_data_table",
-					type:"POST",
-					
-					data:{"id":id,"radio":value_radio}
-					})
-					.done(function( d ){
-						
-						$('#form_data_display').html(d);
-					});
-	});
-	
-	
-	
-	
+
+		});
+
+
+
+
 });
