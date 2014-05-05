@@ -6,6 +6,7 @@ $(document).ready(function(){
 	page_settings["settings"]["form"]= {}
 	page_settings["settings"]["form_data"] = {};
 	page_settings["box_order"] = {}
+	page_settings["lists"] = {};
  	$("input[id^='view_type']").click(function(){
 		var str="";
 		
@@ -122,6 +123,41 @@ $(document).ready(function(){
 		alert("data added");
 		$("#myModal_2").modal("toggle");
 			
+	});
+		
+	$("body").on("click","#select_list",function(){
+		var counter = 0;
+		
+		var value_radio = $( "input:radio[name='view_type']:checked" ).val();
+		if(value_radio==undefined)
+		{
+			alert('First select template style');
+			
+		}
+		else
+		{
+		
+		
+		
+		$("input:checkbox[name='list_check']:checked").each(function()
+		{
+			var id = this.id;
+			if(typeof page_settings["lists"][id] == "undefined")
+			{
+			page_settings["lists"][id] = {};
+			}
+    			page_settings["lists"][id]["list_id"] = id;
+			page_settings["lists"][id]["list_name"] = $(this).val();
+			page_settings["lists"][id]["position"] = $("#lists_position_"+id).val(); 
+			});
+		
+		
+		
+		
+		
+		$('#myModal_3').modal('toggle');
+		}
+		
 	});
 	
 	$("#generate_layout").click(function(e){
@@ -335,25 +371,90 @@ $(document).ready(function(){
 			
 			}
 		}
+		if(typeof page_settings !='undefined')
+		{
+			var lists = page_settings["lists"];
+ 			
+			 
+			 for(var val in lists)
+			{
+    				
+    				f = lists[val];
+				
+				
+				if(f["position"]=="main_content")		
+				{
+					main_content["item_"+i] = {};
+					main_content["item_"+i]["list_id"] = f["list_id"];
+					main_content["item_"+i]["list_name"] = f["list_name"];
+					
+	
+				}
+				else if(f["position"]=="left_side_bar")
+				{
+					left_side_bar["item_"+i] = {}; 
+					left_side_bar["item_"+i]["list_id"] = f["list_id"];
+					left_side_bar["item_"+i]["list_name"] = f["list_name"];
+					
+				}
+				else if(f["position"]=="right_side_bar")
+				{
+					right_side_bar["item_"+i] = {};
+					right_side_bar["item_"+i]["list_id"] = f["list_id"];
+					right_side_bar["item_"+i]["list_name"] = f["list_name"];
+					
+				}
+				else if(f["position"]=="header")
+				{
+					header["item_"+i] = {};
+					header["item_"+i]["list_id"] = f["list_id"];
+					header["item_"+i]["list_name"] = f["list_name"];
+					
+				}
+				else if(f["position"]=="footer")
+				{
+					footer["item_"+i] = {};
+					footer["item_"+i]["list_id"] = f["list_id"];
+					footer["item_"+i]["list_name"] = f["list_name"];
+					
+				}
+				i++;
+			}
+
+		}
+		console.log(header);
 		
-		var str = '<div class="row">	<div class="col-md-12"></div> 	<div class="col-md-12"></div>		<div class="col-md-12"></div>	<div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12">';
+		var str = '<div class="row">	<div class="col-md-12"></div> 	<div class="col-md-12"></div>		<div class="col-md-12"></div>	<div class="col-md-12"></div>	<div class="col-md-12"><h3>Header</h3></div> <div class="col-md-12">';
 		
-		str = str +'<div class="col-md-3 " id="header_disp"><h3>Header</h3>';
+		str = str +'<div class="col-md-3 " id="header_disp">';
 				for(var head in header)
 				{	
-					var form = header[head];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = header[head];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
+					 
 	
 					str = str + '</div>';
 					
@@ -361,73 +462,106 @@ $(document).ready(function(){
 			str = str + '</div>';
 		
 		
-		str = str+'</div><div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12">';
-	
+		str = str+'</div><div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12"></div>';	
+		str = str + '<div class="col-md-3"><h3>Left side bar</h3></div><div class="col-md-6"><h3>Main content</h3></div><div class="col-md-3"><h3>Right side bar</h3></div><div class="col-md-12"></div> <div class="col-md-12">'
 		var view_type = page_settings["view_type"];
 		if(view_type=='3_col_view')
 		{
-			str = str +'<div class="col-md-3 " id="left_3_column">					<h3>Left side bar</h3>';
+			str = str +'<div class="col-md-3 " id="left_3_column">';
 				for(var left in left_side_bar)
 				{	
-					var form = left_side_bar[left];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = left_side_bar[left];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 					
 				}	
 			str = str + '</div>';
 			
-			str = str + '<div class="col-md-6 " id="main_3_column">				<h3>Main content</h3>';
+			str = str + '<div class="col-md-6 " id="main_3_column">';
 				
 				for(var main in main_content)
 				{
-					var form = main_content[main];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = main_content[main];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}
 			str = str + '</div>';
 		
-			str = str + '<div class="col-md-3 " id="right_3_column">	<h3>Right side bar </h3>';
+			str = str + '<div class="col-md-3 " id="right_3_column">';
 
 				for(var right in right_side_bar)
 				{
 					
-					var form = right_side_bar[right];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = right_side_bar[right];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}	
@@ -436,46 +570,68 @@ $(document).ready(function(){
 		}
 		else if(view_type=='2_col_right_view')
 		{
-			str = str + '<div class="col-md-9 " id="main_2_column_right">				<h3>Main content</h3>';
+			str = str + '<div class="col-md-9 " id="main_2_column_right">';
 				
 				for(var main in main_content)
 				{
-					var form = main_content[main];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = main_content[main];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}
 			str = str + '</div>';
 			
-			str = str + '<div class="col-md-3 " id="right_2_column_right">	<h3>Right side bar </h3>';
+			str = str + '<div class="col-md-3 " id="right_2_column_right">';
 
 				for(var right in right_side_bar)
 				{
 					
-					var form = right_side_bar[right];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = right_side_bar[right];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}	
@@ -484,70 +640,104 @@ $(document).ready(function(){
 		}
 		else if(view_type == '2_col_left_view' )
 		{
-			str = str +'<div class="col-md-3 " id="left_2_column_left">					<h3>Left side bar</h3>';
+			str = str +'<div class="col-md-3 " id="left_2_column_left">';
 				for(var left in left_side_bar)
 				{	
-					var form = left_side_bar[left];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = left_side_bar[left];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 					
 				}	
 			str = str + '</div>';
 
-			str = str + '<div class="col-md-9 " id="main_2_column_left">				<h3>Main content</h3>';
+			str = str + '<div class="col-md-9 " id="main_2_column_left">';
 				
 				for(var main in main_content)
 				{
-					var form = main_content[main];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = main_content[main];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}
 			str = str + '</div>';
 		}
 		str = str + '</div>';
+		str = str + '<div class="col-md-12"><h3>Footer</h3></div>'
 		str = str + '<div class="col-md-12">';
 
-		str = str + '<div class="col-md-9 " id="footer_disp"><h3>Footer</h3>';
+		str = str + '<div class="col-md-9 " id="footer_disp">';
 				
 				for(var foo in footer)
 				{
-					var form = footer[foo];
-					var form_id = form["form_id"];
-					var form_name = form["form_name"];
-					var e_id;
-					if(typeof form['e_id']!='undefined')	
+					var item = footer[foo];
+					if(typeof item["form_id"]!='undefined')	
 					{
-						e_id =  form['e_id'];
+						var form_id = item["form_id"];
+						var form_name = item["form_name"];
+						var e_id;
+						if(typeof item['e_id']!='undefined')	
+						{
+							e_id =  item['e_id'];
+						}
+						else
+						{
+							e_id = 0;
+						}
+						str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
+					
 					}
-					else
+					else if(typeof item["list_id"]!='undefined')
 					{
-						e_id = 0;
+						var list_id = item["list_id"];
+						var list_name = item["list_name"];
+						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
+						
 					}
-					 str = str +'<div id="box_'+form_id+'#'+e_id+'" class="panel panel-default">		<p>Form ID: '+form_id+'</p>	<p>Form Name: '+form_name+'</p><p>Selected entry (ID) (0 if not a form data): '+e_id+'</p>';
 	
 					str = str + '</div>';
 				}

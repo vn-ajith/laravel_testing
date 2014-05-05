@@ -315,8 +315,8 @@
 									<tbody>
 									@foreach($lists as $list)
 									<tr>
-									<td><input type="checkbox" id="{{$list->list_id}}" name="check" value="{{$list->list_name }}"  ></td>
-									<td>{{$form->form_name }}</td>
+									<td><input type="checkbox" id="{{$list->list_id}}" name="list_check" value="{{$list->list_name }}"  ></td>
+									<td>{{$list->list_name }}</td>
 									
 							
 									<td>	
@@ -335,7 +335,7 @@
       				</div>
       				<div class="modal-footer">
 
-				        <input type="button"  id="select_form_data" value="Add data " class="btn btn-success">
+				        <input type="button"  id="select_list" value="Select list " class="btn btn-success">
       				</div>
     			</div>
   		</div>
@@ -344,21 +344,6 @@
 
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
