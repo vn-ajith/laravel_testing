@@ -12,6 +12,7 @@ class PageBuilderController extends BaseController
 		$forms = Form_config::all();
 		$form_data = Form_data::all();
 		$page_id = DB::table('page_builds')->max('id');
+		$lists = ListBuild::all();
 		
 		$page_id++;
 
@@ -163,7 +164,7 @@ class PageBuilderController extends BaseController
 		}
 		else
 		{
-			echo 'Errors................>>>!@';
+			echo 'Errors...!';
 		}
 		
 		

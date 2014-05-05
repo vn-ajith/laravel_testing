@@ -6,6 +6,7 @@ $(document).ready(function(){
 	page_settings["settings"]["form"]= {}
 	page_settings["settings"]["form_data"] = {};
 	page_settings["box_order"] = {}
+	page_settings["lists"] = {};
  	$("input[id^='view_type']").click(function(){
 		var str="";
 		
@@ -27,6 +28,7 @@ $(document).ready(function(){
 		str = str+"<option value='footer'>Footer</option>";
 		
 		$("select[id^='position_']").html(str);
+		$("select[id^='lists_']").html(str);	
 		
 			
 

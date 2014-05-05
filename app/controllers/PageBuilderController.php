@@ -12,10 +12,11 @@ class PageBuilderController extends BaseController
 		$forms = Form_config::all();
 		$form_data = Form_data::all();
 		$page_id = DB::table('page_builds')->max('id');
+		$lists = ListBuild::all();
 		
 		$page_id++;
 
-		return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'page_id'=>$page_id))	;
+		return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'page_id'=>$page_id,'lists'=>$lists))	;
 	}
 	
 	/*
