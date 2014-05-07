@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration {
 			$table->string("email");
 			$table->string("password");
 			$table->integer("account_id");
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('account_id')->references('account_id')->on('accounts');
 			$table->timestamps();
 		}
 		);

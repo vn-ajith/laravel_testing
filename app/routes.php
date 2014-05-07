@@ -33,6 +33,9 @@ Route::post("/save_page","PageBuilderController@save_page");
 
 Route::get("/list_builder","ListBuilderController@list_builder");
 Route::post("/save_list","ListBuilderController@save_list");
-Route::get("/register","UsersController@register");
 
+Route::get("/register","UsersController@register");
 Route::post("/doRegister","UsersController@doRegister");
+Route::get("/login","UsersController@login");
+Route::post("/doLogin","UsersController@doLogin");
+Route::get("/dashboard","UsersController@dashboard");

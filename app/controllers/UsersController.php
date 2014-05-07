@@ -25,39 +25,55 @@ class UsersController extends BaseController
 		$validator = Validator::make($input,$rules);
 		if(!$validator->fails())
 		{
+			
 			$user =  new User();
 			$account = new Account();
+		
+			$account->account_name = $input['username'];
+			$account->email = $input['email'];
+			$account->save();
+			
+			$user->user_id = DB::table('accounts')->max('account_id');
 			$user->username = $input['username'];
 			$user->email = $input['email'];
 			$user->password = Hash::make($input['password']);
+			$user->account_id = DB::table('accounts')->max('account_id');
 			$user->save();
 			
-			$account->account_name = $input['username'];
-			$account->email = $input['email'];
+			
 			return Redirect::action('FormsController@render_form_creator');
 		}
 		return Redirect::action('UsersController@register')->withErrors($validator)->withInput();
 	}
+	
 	public function login()
 	{
-		return View::make('login');
+		return View::make('Users.login');
 	}
 	public function doLogin()
 	{
-		if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) 
+		if (Auth::attempt(array('username'=>Input::get('username'), 'password'=>Input::get('password')))) 
 		{
-			$user = Input::get('email');	
+			$user = Input::get('username');	
 			Session::put('user',$user);
 			
- 			return Redirect::action('TasksController@user_home')->with('message', 'You are now logged in!');
+ 			echo "<h1>login successful</h1><br>";
+			echo "<h3>Hello ".Session::get('user')." </h3>";
+			return Redirect::action('UsersController@dashboard');
 		}
 		else
 		{
-    			return Redirect::to('users/login')
+// 			echo "<h1>login Failed</h1>";
+    			return Redirect::action('UsersController@login')
         		->with('message', 'Your username/password combination was incorrect')->withInput();
+// 			return Redirect::action('UsersController@login')->withErrors($validator)->withInput();
 		}
 	}
 	
+	public function dashboard()
+	{
+		return View::make('Users.dashboard');
+	}
 	public function logout()
 	{	
 		Session::forget('user');
