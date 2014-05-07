@@ -3,7 +3,7 @@ class UsersController extends BaseController
 {
 	public function __construct() 
 	{
- 		$this->beforeFilter('csrf', array('on'=>'post'));
+//  		$this->beforeFilter('csrf', array('on'=>'post'));
 		
 	}
 	public function register()
@@ -41,7 +41,7 @@ class UsersController extends BaseController
 			$user->save();
 			
 			
-			return Redirect::action('FormsController@render_form_creator');
+			return Redirect::action('UsersController@login');
 		}
 		return Redirect::action('UsersController@register')->withErrors($validator)->withInput();
 	}
@@ -56,9 +56,10 @@ class UsersController extends BaseController
 		{
 			$user = Input::get('username');	
 			Session::put('user',$user);
+			$account_id = DB::table('users')->where('username', $user)->pluck('account_id');
+				
+ 			Session::put("account_id",$account_id);
 			
- 			echo "<h1>login successful</h1><br>";
-			echo "<h3>Hello ".Session::get('user')." </h3>";
 			return Redirect::action('UsersController@dashboard');
 		}
 		else
@@ -72,7 +73,39 @@ class UsersController extends BaseController
 	
 	public function dashboard()
 	{
-		return View::make('Users.dashboard');
+		$user = Session::get("user");
+		
+		$account_id = Session::get("account_id");
+		$pages = DB::table('page_builds')->where('account_id', $account_id)->get();
+		return View::make('Users.dashboard',array("user"=>$user,"pages"=>$pages));
+	}
+	public function new_user()
+	{
+		$input = Input::all();
+		$rules = $rules = array(
+				'username'=>'required|alpha|min:2|unique:users',
+				'email'=>'required|email|unique:users',
+				'password'=>'required|alpha_num|between:6,12');
+		$validator = Validator::make($input,$rules);
+		if($validator->passes())
+		{
+			$user = new User();
+			$user->user_id = DB::table("users")->max("user_id")+1;
+			$user->username = $input["username"];
+			$user->email = $input["email"];
+			$user->password = Hash::make($input["password"]);
+			$user->account_id = Session::get("account_id");
+			$user->save();
+			echo 'New user added successfully';
+		}
+		else
+		{
+			echo 'Username and email should be unique';
+		}
+	}
+	public function page_list()
+	{
+		
 	}
 	public function logout()
 	{	

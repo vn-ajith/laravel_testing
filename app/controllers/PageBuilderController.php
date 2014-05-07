@@ -11,12 +11,12 @@ class PageBuilderController extends BaseController
 	{
 		$forms = Form_config::all();
 		$form_data = Form_data::all();
-		$page_id = DB::table('page_builds')->max('id');
+		
 		$lists = ListBuild::all();
 		
-		$page_id++;
+		
 
-		return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'page_id'=>$page_id,'lists'=>$lists))	;
+		return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'lists'=>$lists))	;
 	}
 	
 	/*
@@ -144,29 +144,37 @@ class PageBuilderController extends BaseController
 	*/
 	public function save_page()
 	{	
-		$page_builds = new Page_build();
-		$input = Input::all();
-		
-		
-		$rules = array('view_type'=>'required',
-				'settings'=>'required',
-				'box_order' =>'required'
-				);
-		$validator = Validator::make($input,$rules);
-		if($validator->passes())
+		if(Session::get("account_id")!=NULL)
 		{
-			$page_builds->view_type = $input['view_type'];
-			$page_builds->page_settings = json_encode($input["settings"]);
-			$page_builds->box_order = json_encode($input["box_order"]);
-			$page_builds->save();
-			echo 'page settings saved';
-
+			
+			$page_builds = new Page_builds();
+			$input = Input::all();
+			
+			
+			$rules = array('view_type'=>'required',
+					'settings'=>'required',
+					'box_order' =>'required'
+					);
+			$validator = Validator::make($input,$rules);
+			if($validator->passes())
+			{
+				$page_builds->view_type = $input['view_type'];
+				$page_builds->page_settings = json_encode($input["settings"]);
+				$page_builds->box_order = json_encode($input["box_order"]);
+				$page_builds->account_id = Session::get("account_id");
+				$page_builds->save();
+				echo 'page settings saved';
+	
+			}
+			else
+			{
+				echo 'Errors...!';
+			}
 		}
 		else
 		{
-			echo 'Errors...!';
+			echo 'Login first!!';
 		}
-		
 		
 	}	
 }

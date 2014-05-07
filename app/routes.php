@@ -39,3 +39,6 @@ Route::post("/doRegister","UsersController@doRegister");
 Route::get("/login","UsersController@login");
 Route::post("/doLogin","UsersController@doLogin");
 Route::get("/dashboard","UsersController@dashboard");
+Route::post("/new_user","UsersController@new_user");
+Route::post("/page_list","UsersController@page_list");
+Route::post("/user_list","UsersController@user_list")

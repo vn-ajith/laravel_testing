@@ -231,16 +231,16 @@ $(document).ready(function(){
 		}		
 		page_settings["page_name"] = $("#page_name").val();
 		console.log(page_settings);
-// 		$.ajax({
-// 					url: "/laravel_testing/blog/public/save_page",
-// 					type:"POST",
-// 					
-// 					data:page_settings
-// 					})
-// 					.done(function( d ){
-// 						setTimeout(function(){alert(d)},2000);
-// 						
-// 					});
+		$.ajax({
+					url: "/laravel_testing/blog/public/save_page",
+					type:"POST",
+					
+					data:page_settings
+					})
+					.done(function( d ){
+						setTimeout(function(){alert(d)},2000);
+						
+					});
 // 		
 		
 	});
@@ -326,6 +326,7 @@ $(document).ready(function(){
 				{
 					
 					var e = elements[x];		
+					console.log(e["position"]);
 					if(e["position"]=="main_content")		
 					{
 						main_content["item_"+i] = {};
@@ -352,10 +353,10 @@ $(document).ready(function(){
 					}
 					else if(e["position"]=="header")		
 					{
-						right_side_bar["item_"+i] = {};
-						right_side_bar["item_"+i]["form_id"] = form_id;
-						right_side_bar["item_"+i]["form_name"] = form_name;
-						right_side_bar["item_"+i]["e_id"] = e["id"];
+						header["item_"+i] = {};
+						header["item_"+i]["form_id"] = form_id;
+						header["item_"+i]["form_name"] = form_name;
+						header["item_"+i]["e_id"] = e["id"];
 	
 					}
 					else if(e["position"]=="footer")		

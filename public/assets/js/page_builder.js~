@@ -231,16 +231,16 @@ $(document).ready(function(){
 		}		
 		page_settings["page_name"] = $("#page_name").val();
 		console.log(page_settings);
-// 		$.ajax({
-// 					url: "/laravel_testing/blog/public/save_page",
-// 					type:"POST",
-// 					
-// 					data:page_settings
-// 					})
-// 					.done(function( d ){
-// 						setTimeout(function(){alert(d)},2000);
-// 						
-// 					});
+		$.ajax({
+					url: "/laravel_testing/blog/public/save_page",
+					type:"POST",
+					
+					data:page_settings
+					})
+					.done(function( d ){
+						setTimeout(function(){alert(d)},2000);
+						
+					});
 // 		
 		
 	});
@@ -326,6 +326,7 @@ $(document).ready(function(){
 				{
 					
 					var e = elements[x];		
+					console.log(e["position"]);
 					if(e["position"]=="main_content")		
 					{
 						main_content["item_"+i] = {};
@@ -707,7 +708,7 @@ $(document).ready(function(){
 			str = str + '</div>';
 		}
 		str = str + '</div>';
-		str = str + '<div class="col-md-12"><h3>Footer</h3></div>'
+		str = str + '<div class="col-md-12"><h3>Footer</h3></div>';
 		str = str + '<div class="col-md-12">';
 
 		str = str + '<div class="col-md-9 " id="footer_disp">';

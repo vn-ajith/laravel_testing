@@ -38,4 +38,6 @@ Route::get("/register","UsersController@register");
 Route::post("/doRegister","UsersController@doRegister");
 Route::get("/login","UsersController@login");
 Route::post("/doLogin","UsersController@doLogin");
-Route::get("/dashboard","UsersController@dashboard")
+Route::get("/dashboard","UsersController@dashboard");
+Route::post("/new_user","UsersController@new_user");
+Route::post("/page_list","UsersController@page_list");
