@@ -28,7 +28,7 @@ Route::get('/save_form_data','FormsController@save_form_data');
 
 Route::get('/page_builder','PageBuilderController@page_build');
 Route::post('/generate_form_data_table','PageBuilderController@generate_form_data_table');
-Route::model("page","Page_build");
+
 Route::post("/save_page","PageBuilderController@save_page");
 
 Route::get("/list_builder","ListBuilderController@list_builder");
@@ -40,5 +40,10 @@ Route::get("/login","UsersController@login");
 Route::post("/doLogin","UsersController@doLogin");
 Route::get("/dashboard","UsersController@dashboard");
 Route::post("/new_user","UsersController@new_user");
-Route::post("/page_list","UsersController@page_list");
-Route::post("/user_list","UsersController@user_list")
+Route::get("/page_list","UsersController@page_list");
+Route::get("/user_list","UsersController@user_list");
+Route::model("user","User");
+Route::get("/deleteUser/{user}","UsersController@deleteUser");
+Route::model("page","Page_builds");
+Route::get("/deletePage/{page}","PageBuilderController@deletePage");
+Route::get("/search_user","UsersController@search_user");

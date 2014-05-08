@@ -146,7 +146,7 @@ class PageBuilderController extends BaseController
 	{	
 		if(Session::get("account_id")!=NULL)
 		{
-			echo Session::get("account_id");
+			
 			$page_builds = new Page_builds();
 			$input = Input::all();
 			

@@ -131,6 +131,11 @@ class PageBuilderController extends BaseController
 		}					
 
 	}
+	public function deletePage(Page_builds $page)
+	{
+		$page->delete();
+		return Redirect::action("UsersController@dashboard");
+	}
 
 	/*
 		Function save_page()

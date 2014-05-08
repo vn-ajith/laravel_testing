@@ -196,7 +196,7 @@ footer {
             <div class="col-xs-6 col-sm-3 placeholder text-center">
               <img src="assets/images/pages.png" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail" id="page_viewer">
               <h4>Pages</h4>
-              <span class="text-muted">Something else</span>
+              <span class="text-muted">Pages created using this account</span>
             </div>
           </div>
           
@@ -217,9 +217,9 @@ footer {
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="modal_title">Add new user</h4>
+					<h4 class="modal-title" >Add new user</h4>
 				</div>	
-				<div class="modal-body" id="modal_body">
+				<div class="modal-body">
 					<div class="form-group">
 						<input type="text" class="form-control" id="username" placeholder="Enter a username"> 	
 					</div>
@@ -237,5 +237,49 @@ footer {
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+
+
+	<div class="modal fade" id="myModal_2">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="modal_title"></h4>
+				</div>	
+				<div class="modal-body" id="modal_body">
+					
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+
+	<div class="modal fade" id="myModal_3">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Search user</h4>
+				</div>	
+				<div class="modal-body" >
+					<div class="form-group">
+					<input type="text" placeholder="Enter atleast 3 letters of username" id="search_user_text" class="form-control">
+					</div>
+					<div id="search_results">
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-primary" value="Add users to account" id="add_user_account">
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
 <!-- /.modal -->
 @stop
