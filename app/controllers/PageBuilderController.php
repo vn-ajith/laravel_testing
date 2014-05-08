@@ -9,14 +9,18 @@ class PageBuilderController extends BaseController
 	*/
 	public function page_build()
 	{
-		$forms = Form_config::all();
-		$form_data = Form_data::all();
-		
-		$lists = ListBuild::all();
-		
-		
-
-		return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'lists'=>$lists))	;
+		if(Session::get("account_id")!=NULL)
+		{
+			$forms = Form_config::all();
+			$form_data = Form_data::all();
+			
+			$lists = ListBuild::all();
+			return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'lists'=>$lists));
+		}
+		else
+		{
+			return Redirect::action("UsersController@login");
+		}
 	}
 	
 	/*
@@ -128,6 +132,13 @@ class PageBuilderController extends BaseController
 			echo '</tbody>';
  			echo '</table>';
 			echo '</div>';
+			echo '<p><label>Select fields to display</label></p>';
+			echo '<div class="checkbox">  <label> <input type="checkbox" name="field_options" value="all">All  </label></div>';
+			foreach($t_head as $op)
+			{
+				echo '<div class="checkbox">  <label> <input type="checkbox" name="field_options" value="'.$op.'">'.$op.'</label></div>';
+			}
+			
 		}					
 
 	}

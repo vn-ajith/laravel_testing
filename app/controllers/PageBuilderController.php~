@@ -9,14 +9,18 @@ class PageBuilderController extends BaseController
 	*/
 	public function page_build()
 	{
-		$forms = Form_config::all();
-		$form_data = Form_data::all();
-		
-		$lists = ListBuild::all();
-		
-		
-
-		return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'lists'=>$lists))	;
+		if(Session::get("account_id")!=NULL)
+		{
+			$forms = Form_config::all();
+			$form_data = Form_data::all();
+			
+			$lists = ListBuild::all();
+			return View::make('PageBuilder.page_builder',array('forms'=>$forms,'form_data'=>$form_data,'lists'=>$lists));
+		}
+		else
+		{
+			return Redirect::action("UsersController@login");
+		}
 	}
 	
 	/*
@@ -128,6 +132,13 @@ class PageBuilderController extends BaseController
 			echo '</tbody>';
  			echo '</table>';
 			echo '</div>';
+			echo '<p><label>Select fields to display</label></p>';
+			echo '<div class="checkbox">  <label> <input type="checkbox" name="field_options" value="all">All  </label></div>';
+			foreach($t_head as $op)
+			{
+				echo '<div class="checkbox">  <label> <input type="checkbox" value="all">All  </label></div>';
+			}
+			
 		}					
 
 	}
@@ -164,7 +175,14 @@ class PageBuilderController extends BaseController
 			{
 				$page_builds->page_name = $input['page_name'];
 				$page_builds->view_type = $input['view_type'];
-				$page_builds->page_settings = json_encode($input["settings"]);
+				if(isset($input["settings"]))
+				{
+					$page_builds->page_settings = json_encode($input["settings"]);
+				}
+				else
+				{
+					$page_builds->page_settings = " ";
+				}
 				$page_builds->box_order = json_encode($input["box_order"]);
 				$page_builds->account_id = Session::get("account_id");
 				$page_builds->save();

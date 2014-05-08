@@ -95,6 +95,7 @@ $(document).ready(function(){
 		}
 	});	
 	$("body").on("click","#select_form_data",function(){
+		var field_options  = ""; 
 		var form_name = $('#form_selector').children(":selected").val();	
 		var form_id = $('#form_selector').children(":selected").attr("id");
 		if(typeof page_settings["settings"]["form_data"][form_id] == "undefined")
@@ -120,7 +121,14 @@ $(document).ready(function(){
 			
 			page_settings["settings"]["form_data"][form_id]["elements"][id]["position"] = $("#pos_data_"+form_id+"_"+id).val();
 		});	
+		$("input:checkbox[name='field_options']:checked").each(function()
+		{
+			field_options =   this.value+ "," +field_options; 
+		}
+		);
+		page_settings["settings"]["form_data"][form_id]["field_options"] = field_options;
 		alert("data added");
+
 		$("#myModal_2").modal("toggle");
 			
 	});
@@ -232,16 +240,16 @@ $(document).ready(function(){
 		}		
 		page_settings["page_name"] = $("#page_name").val();
 		console.log(page_settings);
-		$.ajax({
-					url: "/laravel_testing/blog/public/save_page",
-					type:"POST",
-					
-					data:page_settings
-					})
-					.done(function( d ){
-						setTimeout(function(){alert(d)},2000);
-						
-					});
+// 		$.ajax({
+// 					url: "/laravel_testing/blog/public/save_page",
+// 					type:"POST",
+// 					
+// 					data:page_settings
+// 					})
+// 					.done(function( d ){
+// 						setTimeout(function(){alert(d)},2000);
+// 						
+// 					});
 // 		
 		
 	});
@@ -646,6 +654,7 @@ $(document).ready(function(){
 		}
 		else if(view_type == '2_col_left_view' )
 		{
+			str = str + '<div class="col-md-3"><h3>Left side bar</h3></div><div class="col-md-9"><h3>Main content</h3></div><div class="col-md-12"></div> <div class="col-md-12">'
 			str = str +'<div class="col-md-3 " id="left_2_column_left">';
 				for(var left in left_side_bar)
 				{	

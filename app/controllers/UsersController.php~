@@ -100,7 +100,7 @@ class UsersController extends BaseController
 		}
 		else
 		{
-			s
+			
 			echo 'Username and email should be unique';
 		}
 	}
@@ -156,7 +156,7 @@ class UsersController extends BaseController
 			echo '<td>'.$u->email.'</td>';
 			echo '<td>';
 			echo '<a href="'.action('UsersController@deleteUser', $u->user_id).'" ><img src="assets/images/delete.png"></a>';
-			echo '<a href="'.action('UsersController@deleteUser', $u->user_id).'" ><img src="assets/images/edit.png"></a>';				
+			
 			echo '</td>';
 			echo '</tr>';
 		}
@@ -211,10 +211,11 @@ class UsersController extends BaseController
 	public function logout()
 	{	
 		Session::forget('user');
+		Session::forget("account_id")	;
 		Session::flush();
 		Auth::logout();
 		
-    		return Redirect::action('TasksController@home')->with('message', 'Your are now logged out!');
+    		return Redirect::action('UsersController@login');
 	}
 	
 }

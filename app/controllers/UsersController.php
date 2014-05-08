@@ -73,11 +73,17 @@ class UsersController extends BaseController
 	
 	public function dashboard()
 	{
-		$user = Session::get("user");
-		
-		$account_id = Session::get("account_id");
-		$pages = DB::table('page_builds')->where('account_id', $account_id)->get();
-		return View::make('Users.dashboard',array("user"=>$user,"pages"=>$pages));
+		if(Session::get('user')!=NULL)
+		{
+			$user = Session::get("user");
+			$account_id = Session::get("account_id");
+			$pages = DB::table('page_builds')->where('account_id', $account_id)->get();
+			return View::make('Users.dashboard',array("user"=>$user,"pages"=>$pages));
+		}
+		else
+		{
+			return Redirect::action("UsersController@login");
+		}
 	}
 	public function new_user()
 	{
@@ -100,7 +106,7 @@ class UsersController extends BaseController
 		}
 		else
 		{
-			s
+			
 			echo 'Username and email should be unique';
 		}
 	}
@@ -211,10 +217,11 @@ class UsersController extends BaseController
 	public function logout()
 	{	
 		Session::forget('user');
+		Session::forget("account_id")	;
 		Session::flush();
 		Auth::logout();
 		
-    		return Redirect::action('TasksController@home')->with('message', 'Your are now logged out!');
+    		return Redirect::action('UsersController@login');
 	}
 	
 }

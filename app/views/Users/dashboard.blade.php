@@ -127,7 +127,7 @@ footer {
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{{action('UsersController@dashboard')}}">Dashboard</a></li>
             <li><a href="{{action('PageBuilderController@page_build')}}">Page builder</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="{{action('UsersController@logout')}}">Sign out</a></li>
             <li><a href="#">Help</a></li>
           </ul>
           
@@ -171,11 +171,7 @@ footer {
           
 		  <h1 class="page-header">
             Dashboard
-		<?php
-			if(Session::has('errors'))
-			$errors = Session::get('errors');
-		 ?>
-		{{ HTML::ul($errors->all(), array('class'=>'alert alert-danger')) }}
+		
            <div>
 		
 		</div>
