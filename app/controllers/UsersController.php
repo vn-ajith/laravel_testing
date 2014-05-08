@@ -83,8 +83,8 @@ class UsersController extends BaseController
 	{
 		$input = Input::all();
 		$rules = $rules = array(
-				'username'=>'required|alpha|min:2|unique:users',
-				'email'=>'required|email',
+				'username'=>'required|alpha_num|min:2|unique:users,username',
+				'email'=>'required|email|unique:users,email',
 				'password'=>'required|alpha_num|between:6,12');
 		$validator = Validator::make($input,$rules);
 		if($validator->passes())
@@ -100,6 +100,7 @@ class UsersController extends BaseController
 		}
 		else
 		{
+			s
 			echo 'Username and email should be unique';
 		}
 	}
@@ -155,7 +156,7 @@ class UsersController extends BaseController
 			echo '<td>'.$u->email.'</td>';
 			echo '<td>';
 			echo '<a href="'.action('UsersController@deleteUser', $u->user_id).'" ><img src="assets/images/delete.png"></a>';
-			echo '<a href="'.action('UsersController@deleteUser', $u->user_id).'" ><img src="assets/images/edit.png"></a>';				
+			
 			echo '</td>';
 			echo '</tr>';
 		}

@@ -77,6 +77,20 @@ $(document).ready(function()
 		$("input:checkbox[name='check']:checked").each(function()
 		{
 			var val = this.value;
+			$.ajax({
+					url: "/laravel_testing/blog/public/search_user_add",
+					type:"GET",
+					data:{"user_id":val}
+		
+					
+					})
+					.done(function( d ){
+						
+						//alert(d);
+						
+						
+					});
+			
 		});
 	});
 });

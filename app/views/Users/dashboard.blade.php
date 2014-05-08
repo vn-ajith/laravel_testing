@@ -171,6 +171,11 @@ footer {
           
 		  <h1 class="page-header">
             Dashboard
+		<?php
+			if(Session::has('errors'))
+			$errors = Session::get('errors');
+		 ?>
+		{{ HTML::ul($errors->all(), array('class'=>'alert alert-danger')) }}
            <div>
 		
 		</div>

@@ -266,8 +266,9 @@ footer {
 					<h4 class="modal-title">Search user</h4>
 				</div>	
 				<div class="modal-body" >
-					<input type="text" placeholder="Enter atleast 3 letters of username" id="search_user_text">
-					
+					<div class="form-group">
+					<input type="text" placeholder="Enter atleast 3 letters of username" id="search_user_text" class="form-control">
+					</div>
 					<div id="search_results">
 					</div>
 					
