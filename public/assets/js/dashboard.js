@@ -60,7 +60,8 @@ $(document).ready(function()
 		var search_text = $("#search_user_text").val();
 		$.ajax({
 					url: "/laravel_testing/blog/public/search_user",
-					type:"GET"
+					type:"GET",
+					data:{"search":search_text}
 		
 					
 					})
@@ -70,5 +71,26 @@ $(document).ready(function()
 						
 						
 					});
+	});
+	//$("input:checkbox[name='check']:checked").each(function()
+	$("#add_user_account").click(function(){
+		$("input:checkbox[name='check']:checked").each(function()
+		{
+			var val = this.value;
+			$.ajax({
+					url: "/laravel_testing/blog/public/search_user_add",
+					type:"GET",
+					data:{"user_id":val}
+		
+					
+					})
+					.done(function( d ){
+						
+						alert(d);
+						
+						
+					});
+			
+		});
 	});
 });

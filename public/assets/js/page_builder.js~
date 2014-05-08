@@ -162,7 +162,8 @@ $(document).ready(function(){
 	
 	$("#generate_layout").click(function(e){
 		console.log(page_settings);
-		
+		var value_radio = $( "input:radio[name='view_type']:checked" ).val();
+		page_settings["view_type"] = value_radio;
      		generate_layout();
 		alert("Now you can edit layout");
 		$('#save_page').show();
@@ -353,10 +354,10 @@ $(document).ready(function(){
 					}
 					else if(e["position"]=="header")		
 					{
-						right_side_bar["item_"+i] = {};
-						right_side_bar["item_"+i]["form_id"] = form_id;
-						right_side_bar["item_"+i]["form_name"] = form_name;
-						right_side_bar["item_"+i]["e_id"] = e["id"];
+						header["item_"+i] = {};
+						header["item_"+i]["form_id"] = form_id;
+						header["item_"+i]["form_name"] = form_name;
+						header["item_"+i]["e_id"] = e["id"];
 	
 					}
 					else if(e["position"]=="footer")		
@@ -423,7 +424,7 @@ $(document).ready(function(){
 			}
 
 		}
-		console.log(header);
+		
 		
 		var str = '<div class="row">	<div class="col-md-12"></div> 	<div class="col-md-12"></div>		<div class="col-md-12"></div>	<div class="col-md-12"></div>	<div class="col-md-12"><h3>Header</h3></div> <div class="col-md-12">';
 		
@@ -464,10 +465,11 @@ $(document).ready(function(){
 		
 		
 		str = str+'</div><div class="col-md-12"></div>	<div class="col-md-12"></div> <div class="col-md-12"></div>';	
-		str = str + '<div class="col-md-3"><h3>Left side bar</h3></div><div class="col-md-6"><h3>Main content</h3></div><div class="col-md-3"><h3>Right side bar</h3></div><div class="col-md-12"></div> <div class="col-md-12">'
+		
 		var view_type = page_settings["view_type"];
 		if(view_type=='3_col_view')
 		{
+			str = str + '<div class="col-md-3"><h3>Left side bar</h3></div><div class="col-md-6"><h3>Main content</h3></div><div class="col-md-3"><h3>Right side bar</h3></div><div class="col-md-12"></div> <div class="col-md-12">'
 			str = str +'<div class="col-md-3 " id="left_3_column">';
 				for(var left in left_side_bar)
 				{	
@@ -508,6 +510,7 @@ $(document).ready(function(){
 					var item = main_content[main];
 					if(typeof item["form_id"]!='undefined')	
 					{
+						console.log("form");
 						var form_id = item["form_id"];
 						var form_name = item["form_name"];
 						var e_id;
@@ -524,6 +527,7 @@ $(document).ready(function(){
 					}
 					else if(typeof item["list_id"]!='undefined')
 					{
+						console.log("list");
 						var list_id = item["list_id"];
 						var list_name = item["list_name"];
 						str = str +'<div id="box_list#'+list_id+'" class="panel panel-default">		<p>List ID: '+list_id+'</p>	<p>List Name: '+list_name+'</p>';
@@ -571,6 +575,7 @@ $(document).ready(function(){
 		}
 		else if(view_type=='2_col_right_view')
 		{
+			str = str + '<div class="col-md-9"><h3>Main content</h3></div><div class="col-md-3"><h3>Right side bar</h3></div><div class="col-md-12"></div> <div class="col-md-12">'
 			str = str + '<div class="col-md-9 " id="main_2_column_right">';
 				
 				for(var main in main_content)

@@ -131,6 +131,11 @@ class PageBuilderController extends BaseController
 		}					
 
 	}
+	public function deletePage(Page_builds $page)
+	{
+		$page->delete();
+		return Redirect::action("UsersController@dashboard");
+	}
 
 	/*
 		Function save_page()
@@ -152,12 +157,12 @@ class PageBuilderController extends BaseController
 			
 			
 			$rules = array('view_type'=>'required',
-					'settings'=>'required',
 					'box_order' =>'required'
 					);
 			$validator = Validator::make($input,$rules);
 			if($validator->passes())
 			{
+				$page_builds->page_name = $input['page_name'];
 				$page_builds->view_type = $input['view_type'];
 				$page_builds->page_settings = json_encode($input["settings"]);
 				$page_builds->box_order = json_encode($input["box_order"]);

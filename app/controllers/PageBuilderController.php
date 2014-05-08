@@ -157,14 +157,21 @@ class PageBuilderController extends BaseController
 			
 			
 			$rules = array('view_type'=>'required',
-					'settings'=>'required',
 					'box_order' =>'required'
 					);
 			$validator = Validator::make($input,$rules);
 			if($validator->passes())
 			{
+				$page_builds->page_name = $input['page_name'];
 				$page_builds->view_type = $input['view_type'];
-				$page_builds->page_settings = json_encode($input["settings"]);
+				if(isset($input["settings"]))
+				{
+					$page_builds->page_settings = json_encode($input["settings"]);
+				}
+				else
+				{
+					$page_builds->page_settings = " ";
+				}
 				$page_builds->box_order = json_encode($input["box_order"]);
 				$page_builds->account_id = Session::get("account_id");
 				$page_builds->save();

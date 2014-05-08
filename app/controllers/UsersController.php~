@@ -84,7 +84,7 @@ class UsersController extends BaseController
 		$input = Input::all();
 		$rules = $rules = array(
 				'username'=>'required|alpha|min:2|unique:users',
-				'email'=>'required|email|unique:users',
+				'email'=>'required|email|',
 				'password'=>'required|alpha_num|between:6,12');
 		$validator = Validator::make($input,$rules);
 		if($validator->passes())
@@ -155,7 +155,7 @@ class UsersController extends BaseController
 			echo '<td>'.$u->email.'</td>';
 			echo '<td>';
 			echo '<a href="'.action('UsersController@deleteUser', $u->user_id).'" ><img src="assets/images/delete.png"></a>';
-							
+			echo '<a href="'.action('UsersController@deleteUser', $u->user_id).'" ><img src="assets/images/edit.png"></a>';				
 			echo '</td>';
 			echo '</tr>';
 		}
@@ -167,6 +167,45 @@ class UsersController extends BaseController
 	{
 		$user->delete();
 		return Redirect::action("UsersController@dashboard");
+	}
+	public function search_user()
+	{
+		$input = Input::all();
+		$search =  $input['search'].'%';
+		$users = DB::table('users')->where('username', 'LIKE', $search)->get();
+		if(!empty($users))
+		{
+			echo '<div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>E-mail</th>	
+		  
+                </tr>
+              </thead>
+              <tbody>';
+		foreach($users as $u)
+		{
+			echo '<tr>';
+			echo '<td><input type="checkbox" value="'.$u->user_id.'" id="user_'.$u->user_id.'"></td>';
+			echo '<td>'.$u->username.'</td>';
+			echo '<td>'.$u->email.'</td>';
+			echo '</tr>';
+		}
+		echo ' </tbody>
+            </table>
+          </div>';
+		}
+		
+	}
+	public function search_user_add()
+	{
+		$input  = Input::all();
+		$user_id = $input["user_id"];
+		$account_id = Session::get("account_id");
+		DB::table('users')->where('user_id', 1)->update(array('account_id' => $account_id));
 	}
 	public function logout()
 	{	

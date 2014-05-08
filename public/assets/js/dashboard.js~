@@ -58,5 +58,25 @@ $(document).ready(function()
 	});
 	$("#search_user_text").keyup(function(){
 		var search_text = $("#search_user_text").val();
+		$.ajax({
+					url: "/laravel_testing/blog/public/search_user",
+					type:"GET",
+					data:{"search":search_text}
+		
+					
+					})
+					.done(function( d ){
+						
+						$("#search_results").html(d);
+						
+						
+					});
+	});
+	//$("input:checkbox[name='check']:checked").each(function()
+	$("#add_user_account").click(function(){
+		$("input:checkbox[name='check']:checked").each(function()
+		{
+			var val = this.value;
+		});
 	});
 });

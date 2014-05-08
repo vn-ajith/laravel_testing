@@ -47,3 +47,4 @@ Route::get("/deleteUser/{user}","UsersController@deleteUser");
 Route::model("page","Page_builds");
 Route::get("/deletePage/{page}","PageBuilderController@deletePage");
 Route::get("/search_user","UsersController@search_user");
+Route::get("/search_user_add","UsersController@search_user_add");
