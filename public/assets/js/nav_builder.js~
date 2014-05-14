@@ -16,9 +16,9 @@ $(document).ready(function(){
 	$("#add_new_menu").click(function(){
 		var nav_title = $('#nav_title').val();
 		var nav_url = $('#nav_url').val();
-		var str="<div class='box' id='"+nav_title+"' ><span class='box_test'>"+nav_title+"</span>";
+		var str="<div class='box' id='"+nav_url+"' ><span class='box_test'>"+nav_url+"</span>";
 		str = str + "<div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
-		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_title+"_add_new'>";
+		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_url+"_add_new'>";
 		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div><p></p></div>";
 		navigation["nav_details"][nav_title] = {};
 		navigation["nav_details"][nav_title]["title"] = nav_title;
@@ -71,9 +71,9 @@ $(document).ready(function(){
 		var nav_title = $('#nav_sub_title').val();
 		var nav_url = $('#nav_sub_url').val();
 		
-		var str = "<div class='box' id='"+nav_title+"' >";
-		str = str +"<span class='box_test'>"+nav_title+ "</span><div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
-		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_title+"_add_new'>";
+		var str = "<div class='box' id='"+nav_url+"' >";
+		str = str +"<span class='box_test'>"+nav_url+ "</span><div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_url+"_settings' >";
+		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_url+"_add_new'>";
 		
 		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div><p></p></div>";
 		
@@ -96,14 +96,14 @@ $(document).ready(function(){
 
 	});
 	$("#save_nav").click(function(){
-		val list_name = $("#list_name").val();
+		var list_name = $("#list_name").val();
 		$.ajax({
 				method: "POST",
 				url: "/laravel_testing/blog/public/save_list",
 				data:{"list_name":list_name,"list_details":navigation}
 			}).done(function(d){
 				alert(d);
-// 				alert("Navigation bar saved successfully");
+
 			});
 
 		});

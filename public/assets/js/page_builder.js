@@ -6,7 +6,7 @@ $(document).ready(function(){
 	page_settings["settings"]["form"]= {}
 	page_settings["settings"]["form_data"] = {};
 	page_settings["box_order"] = {}
-	page_settings["lists"] = {};
+	page_settings["settings"]["lists"] = {};
  	$("input[id^='view_type']").click(function(){
 		var str="";
 		
@@ -150,13 +150,13 @@ $(document).ready(function(){
 		$("input:checkbox[name='list_check']:checked").each(function()
 		{
 			var id = this.id;
-			if(typeof page_settings["lists"][id] == "undefined")
+			if(typeof page_settings["settings"]["lists"][id] == "undefined")
 			{
-			page_settings["lists"][id] = {};
+			page_settings["settings"]["lists"][id] = {};
 			}
-    			page_settings["lists"][id]["list_id"] = id;
-			page_settings["lists"][id]["list_name"] = $(this).val();
-			page_settings["lists"][id]["position"] = $("#lists_position_"+id).val(); 
+    			page_settings["settings"]["lists"][id]["list_id"] = id;
+			page_settings["settings"]["lists"][id]["list_name"] = $(this).val();
+			page_settings["settings"]["lists"][id]["position"] = $("#lists_position_"+id).val(); 
 			});
 		
 		
@@ -383,7 +383,7 @@ $(document).ready(function(){
 		}
 		if(typeof page_settings !='undefined')
 		{
-			var lists = page_settings["lists"];
+			var lists = page_settings["settings"]["lists"];
  			
 			 
 			 for(var val in lists)

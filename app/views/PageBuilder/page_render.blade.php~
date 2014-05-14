@@ -5,7 +5,7 @@
 	$view_type =  $page->view_type;
 	
 	
-	
+	ListBuilderController::list_maker(3);
 		
 ?>
 
@@ -67,15 +67,19 @@
 			@endif
 		</div>
 		<div class="col-md-3">
-			@foreach($right as $r)
-				{{$r}}
-			@endforeach
+			@if($right!=NULL)
+				@foreach($right as $r)
+					{{$r}}
+				@endforeach
+			@endif
 		</div>
 	@endif	
 	<div class="col-md-12" id="footer">
-		@foreach($footer as $f)
-			{{$f}}
-		@endforeach
+		@if($footer!=NULL)
+			@foreach($footer as $f)
+				{{$f}}
+			@endforeach
+		@endif
 	</div>
 </div>
 

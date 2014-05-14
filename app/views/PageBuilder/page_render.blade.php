@@ -5,7 +5,7 @@
 	$view_type =  $page->view_type;
 	
 	
-	
+	ListBuilderController::list_maker(4);
 		
 ?>
 

@@ -28,6 +28,7 @@ class PageBuilderController extends BaseController
 		{
 			$box_order = json_decode($page->box_order,true);
 			$page_settings = json_decode($page->page_settings,true);
+			
 			if(isset($box_order["header"]))
 			{
 				$header = $box_order["header"];
