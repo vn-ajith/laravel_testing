@@ -22,6 +22,10 @@ class PageBuilderController extends BaseController
 			return Redirect::action("UsersController@login");
 		}
 	}
+	public function page_render(Page_builds $page)
+	{
+		return View::make("PageBuilder.page_render",array("page"=>$page));
+	}
 	
 	/*
 		function: generate_select_box
@@ -136,7 +140,7 @@ class PageBuilderController extends BaseController
 			echo '<div class="checkbox">  <label> <input type="checkbox" name="field_options" value="all">All  </label></div>';
 			foreach($t_head as $op)
 			{
-				echo '<div class="checkbox">  <label> <input type="checkbox" value="all">All  </label></div>';
+				echo '<div class="checkbox">  <label> <input type="checkbox" name="field_options" value="'.$op.'">'.$op.'</label></div>';
 			}
 			
 		}					

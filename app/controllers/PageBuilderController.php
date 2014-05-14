@@ -22,6 +22,17 @@ class PageBuilderController extends BaseController
 			return Redirect::action("UsersController@login");
 		}
 	}
+	public function page_render(Page_builds $page)
+	{
+		if(Session::get("account_id")!=NULL)
+		{
+			return View::make("PageBuilder.page_render",array("page"=>$page));
+		}
+		else
+		{
+			return Redirect::action("UsersController@login");
+		}
+	}
 	
 	/*
 		function: generate_select_box
