@@ -17,7 +17,7 @@ class ListBuilderController extends BaseController
 		if($validator->passes())
 		{
 			$list->list_name = $input["list_name"];
-			$list->nav_details = json_encode($input["list_details"]);
+			$list->list_details = json_encode($input["list_details"]);
 			$list->save();
 			echo 'List saved successfully !';
 		}
@@ -26,6 +26,13 @@ class ListBuilderController extends BaseController
 			echo 'Error!!';
 		}
 		
+	}
+	public static function list_maker($list_id)
+	{
+		$list = ListBuild::findOrFail($list_id);
+		$str = "";
+		$list_details = json_decode($list->list_details,true);
+		$nav_details = $list_details["nav_details"];
 	}
 }
 ?>

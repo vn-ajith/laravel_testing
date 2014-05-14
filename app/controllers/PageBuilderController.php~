@@ -24,7 +24,80 @@ class PageBuilderController extends BaseController
 	}
 	public function page_render(Page_builds $page)
 	{
-		return View::make("PageBuilder.page_render",array("page"=>$page));
+		if(Session::get("account_id")!=NULL)
+		{
+			$box_order = json_decode($page->box_order,true);
+			$page_settings = json_decode($page->page_settings,true);
+			if(isset($box_order["header"]))
+			{
+				$header = $box_order["header"];
+			}
+			else
+			{
+				$header = NULL;	
+			}
+			if(isset($box_order["footer"]))
+			{
+				$footer = $box_order["footer"];
+			}
+			else
+			{
+				$footer = NULL;
+			}
+			if(isset($box_order["left"]))
+			{
+				$left = $box_order["left"];
+			}
+			else 
+			{
+				$left = NULL;
+			}
+			if(isset($box_order["main"]))
+			{
+				$main = $box_order["main"];
+			}
+			else
+			{
+				$main = NULL;
+			}
+			if(isset($box_order["right"]))
+			{
+				$right = $box_order["right"];
+			}
+			else
+			{
+				$right = NULL;
+			}
+			if(isset($page_settings["form"]))
+			{
+				$form = $page_settings["form"];
+			}
+			else 
+			{
+				$form = NULL;
+			}
+			if(isset($page_settings["form_data"]))
+			{
+				$form_data = $page_settings["form_data"];
+			}
+			else
+			{
+				$form_data = NULL;
+			}
+			if(isset($page_settings["lists"]))
+			{
+				$lists = $page_settings["lists"];
+			}
+			else
+			{
+				$lists = NULL;
+			}
+			return View::make("PageBuilder.page_render",array("page"=>$page));
+		}
+		else
+		{
+			return Redirect::action("UsersController@login");
+		}
 	}
 	
 	/*

@@ -27,5 +27,13 @@ class ListBuilderController extends BaseController
 		}
 		
 	}
+	public static function list_maker($list_id)
+	{
+		$list = ListBuild::findOrFail($list_id);
+		$str = "";
+		$list_details = json_decode($list->list_details,true);
+		$nav_details = $list_details["nav_details"];
+		
+	}
 }
 ?>
