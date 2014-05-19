@@ -216,6 +216,8 @@ class PageBuilderController extends BaseController
 			{
 				echo '<div class="checkbox">  <label> <input type="checkbox" name="field_options" value="'.$op.'">'.$op.'</label></div>';
 			}
+			echo '<p><label>Css class </label></p>';
+			echo "<input type='text' id='form_data_css_class' class='form-control' style='width:50%;'>";
 			
 		}					
 
@@ -225,6 +227,28 @@ class PageBuilderController extends BaseController
 		$page->delete();
 		return Redirect::action("UsersController@dashboard");
 	}
+	public static function make_component($tag)
+	{
+		if(strpos($tag,"list")===false)	
+		{
+			
+			$forms = explode("#",$tag) ;
+			$form_id = $forms[0];
+			
+			$form = Form_config::findOrFail($form_id);
+			
+			$f = array('form_name' => $form->form_name,
+					'form_desc' => $form->form_desc,
+					'form_url'  => $form->form_url,
+					'form_id'   => $form->form_id,
+					'desc_order'=>json_decode($form->desc_order,true));
+		
+ 		return $f;
+		
+		}
+	}
+
+	
 
 	/*
 		Function save_page()

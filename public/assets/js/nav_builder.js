@@ -1,7 +1,8 @@
 $(document).ready(function(){
 	$("#save_nav").hide();	
 	var navigation = {};
-	var item_num = 0
+	var item_num = 0;
+	var menu_id = 1;
 	
 	navigation["nav_details"] = {};
 	document.title = "Navigation builder";
@@ -16,14 +17,16 @@ $(document).ready(function(){
 	$("#add_new_menu").click(function(){
 		var nav_title = $('#nav_title').val();
 		var nav_url = $('#nav_url').val();
-		var str="<div class='box' id='"+nav_url+"' ><span class='box_test'>"+nav_url+"</span>";
+		var str="<div class='box' id='"+menu_id+"' ><span class='box_test'>"+nav_title+"</span>";
 		str = str + "<div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_title+"_settings' >";
-		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_url+"_add_new'>";
-		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_title+"_delete'></div><p></p></div>";
-		navigation["nav_details"][nav_title] = {};
-		navigation["nav_details"][nav_title]["title"] = nav_title;
-		navigation["nav_details"][nav_title]["url"] = nav_url;
-		navigation["nav_details"][nav_title]["parent"] = "";
+		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+menu_id+"_add_new'>";
+		str = str + "<img class='task' src='assets/images/delete.png' id ='"+menu_id+"_delete'></div><p></p></div>";
+		navigation["nav_details"][menu_id] = {};
+		navigation["nav_details"][menu_id]["id"] = menu_id;
+		navigation["nav_details"][menu_id]["title"] = nav_title;
+		navigation["nav_details"][menu_id]["url"] = nav_url;
+		navigation["nav_details"][menu_id]["parent"] = 0;
+		menu_id++;
 		$("#menu_holder").append(str);
 		$('#myModal_add_menu').modal('toggle');
 		item_num ++;
@@ -65,31 +68,27 @@ $(document).ready(function(){
 	});
 	$("#add_new_sub_menu").click(function(){
 
-		var menu = $('#menu').val();
+		var menu = parseInt($('#menu').val());
 		
 		
 		var nav_title = $('#nav_sub_title').val();
 		var nav_url = $('#nav_sub_url').val();
 		
-		var str = "<div class='box' id='"+nav_url+"' >";
-		str = str +"<span class='box_test'>"+nav_url+ "</span><div class='edit'><img class='task' src='assets/images/edit.png' id ='"+nav_url+"_settings' >";
-		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+nav_url+"_add_new'>";
+		var str = "<div class='box' id='"+menu_id+"' >";
+		str = str +"<span class='box_test'>"+nav_title+ "</span><div class='edit'><img class='task' src='assets/images/edit.png' id ='"+menu_id+"_settings' >";
+		str = str + "<img class='task' src='assets/images/add_new.png' id= '"+menu_id+"_add_new'>";
 		
-		str = str + "<img class='task' src='assets/images/delete.png' id ='"+nav_url+"_delete'></div><p></p></div>";
+		str = str + "<img class='task' src='assets/images/delete.png' id ='"+menu_id+"_delete'></div><p></p></div>";
 		
 		
 		$("#"+menu).append(str);
-		navigation["nav_details"][nav_title] = {};
-		navigation["nav_details"][nav_title]["title"] = nav_title;
-		navigation["nav_details"][nav_title]["url"] = nav_url;
-		if(navigation["nav_details"][menu]["parent"] !="")
-		{
-		navigation["nav_details"][nav_title]["parent"] = navigation["nav_details"][menu]["parent"]+"_"+menu;	
-		}
-		else
-		{
-		navigation["nav_details"][nav_title]["parent"] = menu;
-		}
+		navigation["nav_details"][menu_id] = {};
+		navigation["nav_details"][menu_id]["id"] = menu_id;
+		navigation["nav_details"][menu_id]["title"] = nav_title;
+		navigation["nav_details"][menu_id]["url"] = nav_url;
+		
+		navigation["nav_details"][menu_id]["parent"] = menu;
+		menu_id++;
 		
 		console.log(navigation);
 		$('#myModal_add_sub_menu').modal('toggle');

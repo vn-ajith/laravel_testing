@@ -7,7 +7,11 @@
 <?php
 $fields = $form["desc_order"]  ;
 $fid = $form['form_id'];
-
+echo '<pre>';
+print_r($fields);
+echo '</pre>';
+foreach($fields as $f)
+{}
 ?>
 
 <!--<div class="container">-->
@@ -21,7 +25,7 @@ $fid = $form['form_id'];
 
 	<p>* fields are required</p>
 
-	@foreach ($fields as $key=>$field)
+	@foreach($fields as $key=>$field)
 	<?php
 		$index =strpos($key,'_');
 		$name = substr($key,0,$index);
