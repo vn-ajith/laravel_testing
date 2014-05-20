@@ -29,117 +29,8 @@ class ListBuilderController extends BaseController
 		}
 		
 	}
+	
 	public static function list_maker($list_id)
-	{
-		$list = ListBuild::findOrFail($list_id);
-		$str = "";
-		$level = 0;
-		$nav_array = array();
-		$list_details = json_decode($list->list_details,true);
-		$lists = $list_details["nav_details"];
-		$level = 0;
-
-		foreach($lists as $l)
-		{
-			$temp = (strlen($l["parent"])+1)/2;
-			
-			if($temp>=$level)
-			{
-				$level = $temp;
-			}
-		}
-	
-
-		$level_array = array();
-		for($i=0;$i<=$level;$i++)
-		{
-			$level_array[$i]= array();
-		}
-		foreach($lists as $l)
-	
-		{
-			$temp = (strlen($l["parent"])+1)/2;
-			$index = explode("_",$l["parent"]);
-			
-	
-			if(count($index)>=1)
-			{
-				$level_array[$temp][$l["url"]] = array("url"=>$l["url"],"parent"=>$index[count($index)-1]);
-			}	
-			else
-			{
-				$level_array[$temp][$l["url"]] = array("url"=>$l["url"]);
-			}
-		}
-
-		for($i=$level;$i>=1;$i--)
-		{
-			foreach($level_array[$i] as $url)
-			{
-				foreach($level_array[$i-1] as &$parent)
-				{
-					if($url["parent"]==$parent["url"])
-					{
-						$parent["child"][] =$url; 
-					}
-				}
-			}
-		}	
-		$list_array = $level_array[0];
-		$str = "<ul>";
-		$s ="";
-		foreach($list_array as $url)
-		{
-	
-	
-			if(isset($url["child"]))
-			{	
-				$children = $url["child"];	
-				$str = $str ."<li>".$url["url"];
-				
-				foreach($children as $node)
-				{
-					$s = "";
-					$str = $str.ListBuilderController::child($node);
-				}
-				$str = $str.'</li>';
-			}
-			else
-			{
-				$str = $str ."<li>".$url["url"].'</li>';
-			}
-	
-		}
-		$str = $str."</ul>";
-		echo $str;
-		
-	}
-	public static function child($n)
-	{
-		$s="";
-		if(!isset($n["child"]))
-		{
-			$sa= "<ul><li>".$n["url"]."</li></ul>";
-			return $sa;
-		}
-		else
-		{
-			$node_child = $n["child"];
-			$s = $s.'<ul><li>'.$n["url"];
-			
-			
-			foreach($node_child as $node )
-			{
-			
-			$s = $s. ListBuilderController::child($node);
-			}
-			$s = $s.'</li></ul>';
-			
-		}
-		return $s;
-	}
-
-	public static function do_something($list_id)
 	{
 		global $menuItems;
                 global $parentMenuIds;
@@ -147,17 +38,12 @@ class ListBuilderController extends BaseController
 		$list_details = json_decode($list->list_details,true);
 		$menuItems = $list_details["nav_details"];
 		
-		echo $str= "  <div class='navbar navbar-inverse'>
-      <div class='navbar-inner navbar-inverse'>
-        <div class='container'>
-           <a class='btn btn-navbar' data-toggle='collapse' data-target='.navbar-responsive-collapse'>
-            <span class='icon-bar'></span>
-            <span class='icon-bar'></span>
-            <span class='icon-bar'></span>
-          </a>
-          <a class='brand' href='#'>Title</a>
-          <div class='nav-collapse collapse navbar-responsive-collapse'>
-            <ul class='nav'>";
+		echo $str= "
+			<div class='container'>
+			  <div class='row'>
+      
+        
+            <ul class='nav nav-pills'>";
 		
 		foreach($menuItems as $parentId)
                 {
@@ -167,9 +53,7 @@ class ListBuilderController extends BaseController
 		ListBuilderController::generate_menu(0);
 		echo "  </li>
             		</ul>
-          		</div><!-- /.nav-collapse -->
-        		</div>
-      			</div><!-- /navbar-inner -->
+          		
     			</div>  ";
 	
 	}
