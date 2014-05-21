@@ -93,7 +93,7 @@ class PageBuilderController extends BaseController
 			{
 				$lists = NULL;
 			}
-			return View::make("PageBuilder.page_render",array("page"=>$page,"header"=>$header,"footer"=>$footer,"left"=>$left,"main"=>$main,"right"=>$right,"lists"=>$lists));
+			return View::make("PageBuilder.page_render",array("page"=>$page,"header"=>$header,"footer"=>$footer,"left"=>$left,"main"=>$main,"right"=>$right,"lists"=>$lists,"form_data"=>$form_data));
 		}
 		else
 		{
@@ -227,14 +227,22 @@ class PageBuilderController extends BaseController
 		$page->delete();
 		return Redirect::action("UsersController@dashboard");
 	}
-	public static function make_component($tag)
+	public static function make_component($tag,$field_options=NULL,$css_class_name=NULL)
 	{
 		if(strpos($tag,"list")===false)	
 		{
 			
 			$forms = explode("#",$tag) ;
 			$form_id = $forms[0];
-			
+			$item_id = $forms[1];
+			if($item_id>=1)
+			{
+				$str = FormsController::make_form_data($item_id,$field_options,$css_class_name);
+				echo  $str;
+				
+			}
+			else
+			{
 			$form = Form_config::findOrFail($form_id);
 			
 			$f = array('form_name' => $form->form_name,
@@ -243,10 +251,19 @@ class PageBuilderController extends BaseController
 					'form_id'   => $form->form_id,
 					'desc_order'=>json_decode($form->desc_order,true));
 		
- 		return $f;
+ 			return $f;
+			}	
 		
 		}
+		else
+		{	
+			$lists = explode("#",$tag);
+			$list_id = $lists[1];
+			ListBuilderController::list_maker($list_id);
+		}
 	}
+
+	
 
 	/*
 		Function save_page()

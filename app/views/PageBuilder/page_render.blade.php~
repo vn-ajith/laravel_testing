@@ -1,19 +1,11 @@
 @extends("layout_page_render")
 @section("content")
-<style>
-.box{
-padding:5px;
-border:1px solid black;
-}
-</style>
+
 
 	
 	
 <?php
 	$view_type =  $page->view_type;
-	
-	
-	ListBuilderController::do_something(6);
 		
 ?>
 
@@ -23,11 +15,34 @@ border:1px solid black;
 		<div class="col-md-12 box" id="header">
 			@if($header!=NULL)
 				@foreach($header as $h)
-					<?php 
-					$forms = PageBuilderController::make_component($h);
-				
-				 	?>
- 				
+						<?php 
+							$items = explode("#",$h) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($h);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($h,$field_options,$css_class_name);
+							}
+					?>
+<!-- 					{{$h}} -->
 				@endforeach
 			@endif
 		</div>
@@ -38,14 +53,68 @@ border:1px solid black;
 				@if($left!=NULL)
 					
 					@foreach($left as $l)
-						{{$l}}
+							<?php 
+							$items = explode("#",$l) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($l);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($l,$field_options,$css_class_name);
+							}
+					?>
+<!-- 					{{$l}} -->
 					@endforeach
 				@endif
 			</div>
 			<div class="col-md-9 box">
 				@if($main!=NULL)
 					@foreach($main as $m)
-						{{$m}}
+							<?php 
+							$items = explode("#",$m) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($m);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($m,$field_options,$css_class_name);
+							}
+					?>
+<!-- 					{{$m}} -->
 					@endforeach
 				@endif
 			</div>
@@ -57,21 +126,102 @@ border:1px solid black;
 				@if($left!=NULL)
 					
 					@foreach($left as $l)
-						{{$l}}
+							<?php 
+							$items = explode("#",$l) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($l);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($l,$field_options,$css_class_name);
+							}
+					?>
+<!-- 					{{$l}} -->
 					@endforeach
 				@endif
 			</div>
 			<div class="col-md-6 box">
 				@if($main!=NULL)
 					@foreach($main as $m)
-						{{$m}}
+						<?php 
+							$items = explode("#",$m) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($m);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($m,$field_options,$css_class_name);
+							}
+					?>
+<!-- 					{{$m}} -->
 					@endforeach
 				@endif
 			</div>
 			<div class="col-md-3 box">
 				@if($right!=NULL)
 					@foreach($right as $r)
-						{{$r}}
+							<?php 
+							$items = explode("#",$r) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($r);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($r,$field_options,$css_class_name);
+							}
+					?>
+<!-- 					{{$r}} -->
 					@endforeach
 				@endif
 			</div>
@@ -82,14 +232,68 @@ border:1px solid black;
 			<div class="col-md-9 box">
 				@if($main!=NULL)
 					@foreach($main as $m)
-						{{$m}}
+							<?php 
+							$items = explode("#",$m) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($m);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($m,$field_options,$css_class_name);
+							}
+					?>
+<!-- 					{{$m}} -->
 					@endforeach
 				@endif
 			</div>
 			<div class="col-md-3 box">
 				@if($right!=NULL)
 					@foreach($right as $r)
-						{{$r}}
+							<?php 
+							$items = explode("#",$r) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($r);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($r,$field_options,$css_class_name);
+							}
+					?>
+<!-- 					{{$r}} -->
 					@endforeach
 				@endif
 			</div>
@@ -99,6 +303,33 @@ border:1px solid black;
 		<div class="col-md-12 box" id="footer">
 			@if($footer!=NULL)
 				@foreach($footer as $f)
+						<?php 
+							$items = explode("#",$f) ;
+							$item = $items[0];
+							$num = $items[1];
+							if($num==0)
+							{
+							$forms = PageBuilderController::make_component($f);
+							}
+							else 
+							{
+								if($items[0]!="list")
+								{
+									if($form_data!=NULL)
+									{
+										$field_options = $form_data[$item]["field_options"];
+										$css_class_name = $form_data[$item]["css_class_name"];
+											
+									}
+								}
+								else
+								{
+									$field_options = NULL;
+									$css_class_name = NULL;
+								}
+								PageBuilderController::make_component($f,$field_options,$css_class_name);
+							}
+					?>
 					{{$f}}
 				@endforeach
 			@endif

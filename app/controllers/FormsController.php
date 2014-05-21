@@ -232,6 +232,47 @@ class FormsController extends BaseController
 		$form_data->save();
 		
 	}
+	public static function make_form_data($form_data_id,$field_options,$css_class_name)
+	{
+		$form_data = Form_data::findOrFail($form_data_id);
+		$field_num = $form_data->field_num;
+
+		$str = "<div class='container'>";
+		$field_display = array();
+		if($field_options!="all")	
+		{
+			$temp = explode(",",$field_options);
+			foreach($temp as $t)
+			{
+				$field_display[] = $t;
+			}
+			$e = array_pop($field_display);
+		}
+		$str = $str."<div class='".$css_class_name."'>";
+		for($i=1;$i<=$field_num;$i++)	
+		{
+			$field = "field_".$i."_name";
+			$temp = explode("#",$form_data->$field);
+			$field_to_display = $temp[1];
+			$value = "field_".$i."_value";
+			if($field_options!="all")
+			{
+				if(in_array($field_to_display,$field_display))
+				{
+					$str = $str."<p>".$field_to_display." : ".$form_data->$value."</p>";
+				}
+			}
+			else
+			{
+				$str = $str."<p>".$field_to_display." : ".$form_data->$value."</p>";
+			}
+			
+		}
+		$str = $str."</div></div>";
+		return $str;
+		
+	}
+	
 	
 
 }
