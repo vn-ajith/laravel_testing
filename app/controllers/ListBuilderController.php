@@ -87,11 +87,11 @@ class ListBuilderController extends BaseController
                                 }
                                 else if($value["parent"] != 0 && in_array($value["id"], $parentMenuIds))
                                 {
-                                	  echo '<li class="dropdown-submenu"><a href="#">' . $value["title"] . '</a>';
+                                	  echo '<li class="dropdown-submenu"><a href="'.$value["url"].'">' . $value["title"] . '</a>';
                                 }
                         	else
                         	{
-                        		echo '<li><a href="#">' . $value["title"] . '</a>';
+                        		echo '<li><a href="'.$value["url"].'">' . $value["title"] . '</a>';
                         	}
                         	ListBuilderController::generate_menu($value["id"]);
                                 

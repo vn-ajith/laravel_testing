@@ -218,6 +218,7 @@ class PageBuilderController extends BaseController
 			}
 			echo '<p><label>Css class </label></p>';
 			echo "<input type='text' id='form_data_css_class' class='form-control' style='width:50%;'>";
+			echo '<div class="checkbox">  <label> <input type="checkbox" id="grid_list_view" value="1">Grid view /List view</label></div>';
 			
 		}					
 

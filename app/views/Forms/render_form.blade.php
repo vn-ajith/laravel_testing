@@ -7,14 +7,10 @@
 <?php
 $fields = $form["desc_order"]  ;
 $fid = $form['form_id'];
-echo '<pre>';
-print_r($fields);
-echo '</pre>';
-foreach($fields as $f)
-{}
-?>
 
-<!--<div class="container">-->
+?>
+<script src="../assets/js/save_form_data.js" type="text/javascript"></script>
+<!-- <div class="container"> -->
 
 <form role="form" id="form_{{$fid}}">
 	
@@ -127,5 +123,7 @@ foreach($fields as $f)
 <input type="button" class="btn btn-success" value="Save" id="save_form_data#{{$fid}}">
 </form>
 
+ <!-- </div> --> 
 
 
+<!-- @stop -->
