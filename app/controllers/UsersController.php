@@ -128,8 +128,8 @@ class UsersController extends BaseController
 		foreach($pages as $p)
 		{
 			echo '<tr>';
-			echo '<td>'.$p->page_id.'</td>';
-			echo '<td>'.$p->page_name.'</td>';
+			
+			echo '<td><a href="'.action('PageBuilderController@page_render', $p->page_id).'">'.$p->page_name.'</a></td>';
 			echo '<td>';
 			echo '<a href="'.action('PageBuilderController@deletePage', $p->page_id).'" ><img src="assets/images/delete.png"></a></td>';
 							

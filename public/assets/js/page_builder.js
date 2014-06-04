@@ -82,7 +82,7 @@ $(document).ready(function(){
 		else
 		{
 		$.ajax({
-					url: "/laravel_testing/blog/public/generate_form_data_table",
+					url: "../../../laravel_testing/blog/public/generate_form_data_table",
 					type:"POST",
 					
 					data:{"id":id,"radio":value_radio}
@@ -135,6 +135,7 @@ $(document).ready(function(){
 		}
 		page_settings["settings"]["form_data"][form_id]["field_options"] = field_options;
 		page_settings["settings"]["form_data"][form_id]["css_class_name"] = $("#form_data_css_class").val();
+		
 		alert("data added");
 
 		$("#myModal_2").modal("toggle");
@@ -246,10 +247,18 @@ $(document).ready(function(){
 			});
 			
 		}		
+		if($('#grid_list_view').is(':checked'))
+		{
+			page_settings["settings"]["grid_list_view"] = 1;
+		}
+		else
+		{	
+			page_settings["settings"]["grid_list_view"] = 0;
+		}
 		page_settings["page_name"] = $("#page_name").val();
 		console.log(page_settings);
 		$.ajax({
-					url: "/laravel_testing/blog/public/save_page",
+					url: "../../../laravel_testing/blog/public/save_page",
 					type:"POST",
 					
 					data:page_settings

@@ -10,7 +10,7 @@ $(document).ready(function()
 		var email = $("#email").val();
 		var password = $("#password").val();
 		$.ajax({
-					url: "/laravel_testing/blog/public/new_user",
+					url: "../../../laravel_testing/blog/public/new_user",
 					type:"POST",
 					data: {"username":username,"email":email,"password":password}
 					
@@ -24,7 +24,7 @@ $(document).ready(function()
 	});
 	$("#users").click(function(){
 		$.ajax({
-					url: "/laravel_testing/blog/public/user_list",
+					url: "../../../laravel_testing/blog/public/user_list",
 					type:"GET"
 		
 					
@@ -39,7 +39,7 @@ $(document).ready(function()
 	});
 	$("#page_viewer").click(function(){
 		$.ajax({
-					url: "/laravel_testing/blog/public/page_list",
+					url: "../../../laravel_testing/blog/public/page_list",
 					type:"GET"
 		
 					
@@ -59,7 +59,7 @@ $(document).ready(function()
 	$("#search_user_text").keyup(function(){
 		var search_text = $("#search_user_text").val();
 		$.ajax({
-					url: "/laravel_testing/blog/public/search_user",
+					url: "../../../laravel_testing/blog/public/search_user",
 					type:"GET",
 					data:{"search":search_text}
 		
@@ -78,7 +78,7 @@ $(document).ready(function()
 		{
 			var val = this.value;
 			$.ajax({
-					url: "/laravel_testing/blog/public/search_user_add",
+					url: "../../../laravel_testing/blog/public/search_user_add",
 					type:"GET",
 					data:{"user_id":val}
 		

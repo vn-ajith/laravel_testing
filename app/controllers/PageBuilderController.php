@@ -219,6 +219,7 @@ class PageBuilderController extends BaseController
 			echo '<p><label>Css class </label></p>';
 			echo "<input type='text' id='form_data_css_class' class='form-control' style='width:50%;'>";
 			
+			
 		}					
 
 	}
@@ -237,8 +238,11 @@ class PageBuilderController extends BaseController
 			$item_id = $forms[1];
 			if($item_id>=1)
 			{
+				
 				$str = FormsController::make_form_data($item_id,$field_options,$css_class_name);
+				
 				echo $str;
+				
 				
 			}
 			else

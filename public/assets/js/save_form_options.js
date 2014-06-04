@@ -36,7 +36,7 @@
 			console.log(j);
 			
 			$.ajax({
-					url: "/laravel_testing/blog/public/saveForm",
+					url: "../../../laravel_testing/blog/public/saveForm",
 					type:"POST",
 // 					
 					data:JSON.parse(j)

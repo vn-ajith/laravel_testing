@@ -30,7 +30,7 @@ class ListBuilderController extends BaseController
 		
 	}
 	
-	public static function do_something($list_id)
+	public static function list_maker($list_id)
 	{
 		global $menuItems;
                 global $parentMenuIds;
@@ -87,7 +87,7 @@ class ListBuilderController extends BaseController
                                 }
                                 else if($value["parent"] != 0 && in_array($value["id"], $parentMenuIds))
                                 {
-                                	  echo '<li class="dropdown-submenu"><a href="#">' . $value["title"] . '</a>';
+                                	  echo '<li class="dropdown-submenu"><a href="'.$value["url"].'">' . $value["title"] . '</a>';
                                 }
                         	else
                         	{

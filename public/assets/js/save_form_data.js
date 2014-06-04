@@ -132,7 +132,7 @@ $(document).ready(function(){
 			
 			console.log(JSON.stringify(form_data));
 			$.ajax({
-					url: "/laravel_testing/blog/public/save_form_data",
+					url: "../../../../laravel_testing/blog/public/save_form_data",
 					type:"POST",
 					
 					data:form_data

@@ -199,6 +199,30 @@
 						
 				
 					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">6</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-3 radio">
+									<div class="checkbox">  <label> <input type="checkbox" id="grid_list_view" value="1">Grid view /List view</label></div>
+			
+								</div> 
+								<div class="col-md-3 radio">
+								</div>
+								<div class="col-md-3 radio">
+								</div>
+								<div class="col-md-3 radio">
+								</div>
+					
+							</div>
+					
+						</div>
+						
+				
+					</div>
+
 
 
 

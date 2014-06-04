@@ -98,7 +98,7 @@ $(document).ready(function(){
 		var list_name = $("#list_name").val();
 		$.ajax({
 				method: "POST",
-				url: "/laravel_testing/blog/public/save_list",
+				url: "../../../laravel_testing/blog/public/save_list",
 				data:{"list_name":list_name,"list_details":navigation}
 			}).done(function(d){
 				alert(d);

@@ -6,9 +6,15 @@
 	
 <?php
 	$view_type =  $page->view_type;
+	$form = Form_config::findOrFail(4);
+	$forms = array('form_name' => $form->form_name,
+					'form_desc' => $form->form_desc,
+					'form_url'  => $form->form_url,
+					'form_id'   => $form->form_id,
+					'desc_order'=>json_decode($form->desc_order),true);
+		/*<!-- @include("Forms.render_form",array("form"=>$forms)) -->*/
 		
 ?>
-
 
 <div class="container">
 	<div class="row">
@@ -47,6 +53,7 @@
 			@endif
 		</div>
 	</div>
+	<div class="col-md-12"></div>
 	@if($view_type =="2_col_left_view")
 		<div class="row">
 			<div class="col-md-3 box">
@@ -330,7 +337,7 @@
 								PageBuilderController::make_component($f,$field_options,$css_class_name);
 							}
 					?>
-					{{$f}}
+<!-- 					{{$f}} -->
 				@endforeach
 			@endif
 		</div>

@@ -36,7 +36,14 @@ class FormsController extends BaseController
 	
 	public function render_form_creator()
 	{
-		return View::make('Forms.render_form_creator');
+		if(Session::get("account_id")!=NULL)
+		{
+			return View::make('Forms.render_form_creator');
+		}
+		else
+		{
+			return Redirect::action('UsersController@login');
+		}
 	
 	}
 	/*
@@ -190,7 +197,7 @@ class FormsController extends BaseController
 	
 		
 		$input = Input::all();
-		var_dump($input);
+		//var_dump($input);
 		$fdata = $input['form_data'];
  		$form_data->form_id = $input['form_id'];
  		$form_data->form_name = $input['form_name'];
@@ -237,7 +244,8 @@ class FormsController extends BaseController
 		$form_data = Form_data::findOrFail($form_data_id);
 		$field_num = $form_data->field_num;
 
-		$str = "<div class='container'>";
+		
+		
 		$field_display = array();
 		if($field_options!="all")	
 		{
@@ -248,7 +256,8 @@ class FormsController extends BaseController
 			}
 			$e = array_pop($field_display);
 		}
-		$str = $str."<div class='".$css_class_name."'>";
+		
+		$str = '<div class="'.$css_class_name.' li form_box">';
 		for($i=1;$i<=$field_num;$i++)	
 		{
 			$field = "field_".$i."_name";
@@ -259,16 +268,17 @@ class FormsController extends BaseController
 			{
 				if(in_array($field_to_display,$field_display))
 				{
-					$str = $str."<p>".$field_to_display." : ".$form_data->$value."</p>";
+					$str = $str."<p class='group inner list-group-item-text'>".$form_data->$value."</p>";
 				}
 			}
 			else
 			{
-				$str = $str."<p>".$field_to_display." : ".$form_data->$value."</p>";
+				$str = $str."<p class='group inner list-group-item-text'>".$form_data->$value."</p>";
 			}
 			
 		}
-		$str = $str."</div></div>";
+		
+		$str = $str."</div>";
 		return $str;
 		
 	}

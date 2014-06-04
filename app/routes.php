@@ -36,12 +36,14 @@ Route::post("/save_list","ListBuilderController@save_list");
 
 Route::get("/register","UsersController@register");
 Route::post("/doRegister","UsersController@doRegister");
-Route::get("/login","UsersController@login");
-Route::post("/doLogin","UsersController@doLogin");
 Route::get("/dashboard","UsersController@dashboard");
 Route::post("/new_user","UsersController@new_user");
 Route::get("/page_list","UsersController@page_list");
 Route::get("/user_list","UsersController@user_list");
+
+Route::get("/login","UsersController@login");
+
+Route::post("/doLogin","UsersController@doLogin");
 Route::model("user","User");
 Route::get("/deleteUser/{user}","UsersController@deleteUser");
 Route::model("page","Page_builds");
