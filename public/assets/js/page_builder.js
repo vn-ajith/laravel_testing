@@ -135,6 +135,7 @@ $(document).ready(function(){
 		}
 		page_settings["settings"]["form_data"][form_id]["field_options"] = field_options;
 		page_settings["settings"]["form_data"][form_id]["css_class_name"] = $("#form_data_css_class").val();
+
 		
 		alert("data added");
 

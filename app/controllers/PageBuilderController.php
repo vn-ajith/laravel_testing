@@ -220,6 +220,7 @@ class PageBuilderController extends BaseController
 			echo "<input type='text' id='form_data_css_class' class='form-control' style='width:50%;'>";
 			
 			
+			
 		}					
 
 	}
