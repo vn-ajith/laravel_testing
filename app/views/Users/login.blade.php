@@ -1,18 +1,13 @@
 @extends("layout")
 @section("content")
+
+<link rel="stylesheet" href="assets/css/superhero_bootstrap_theme.css" >
 <style>
 .form-control{
 	width:50%;
 }
-#errors{
-	margin-left:5%;
-	margin-right:50%;
-/* 	background-color:#FF4136; */
-	color: #FF4136;
-	border-radius:4px;
-	text-align:center;
-}
 </style>
+<body>
 <div id="login_container">
 	<section class="header section-padding">
 		<div class="background">&nbsp;</div>
@@ -63,4 +58,5 @@
 		
 	</div>
 </div>
+</body>
 @stop

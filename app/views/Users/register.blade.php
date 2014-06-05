@@ -1,5 +1,6 @@
 @extends('../layout')
 @section('content')
+<link rel="stylesheet" href="assets/css/superhero_bootstrap_theme.css" >
 <style>
 .form-control{
 	width:50%;
