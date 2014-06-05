@@ -22,6 +22,10 @@ class PageBuilderController extends BaseController
 			return Redirect::action("UsersController@login");
 		}
 	}
+	/*
+		Function : page render
+		This function used to render a particular page that is build using page builder. It takes page id as input and renders all elements including grid/List view
+	*/
 	public function page_render(Page_builds $page)
 	{
 		if(Session::get("account_id")!=NULL)
@@ -93,7 +97,15 @@ class PageBuilderController extends BaseController
 			{
 				$lists = NULL;
 			}
-			return View::make("PageBuilder.page_render",array("page"=>$page,"header"=>$header,"footer"=>$footer,"left"=>$left,"main"=>$main,"right"=>$right,"lists"=>$lists,"form_data"=>$form_data));
+			if(isset($page_settings["grid_list_view"]))
+			{
+				$grid_list_view = $page_settings["grid_list_view"];
+			}
+			else
+			{
+				$grid_list_view = -1;
+			}
+			return View::make("PageBuilder.page_render",array("page"=>$page,"header"=>$header,"footer"=>$footer,"left"=>$left,"main"=>$main,"right"=>$right,"lists"=>$lists,"form_data"=>$form_data,"grid_list_view"=>$grid_list_view));
 		}
 		else
 		{

@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('div').removeClass('alert alert-danger');
 	var all_req = new Array();
 	var allInputs = $( ":input" );
-	///var n = id.search("e_")+2;
+	
 	$('body').find(':input').each(function(){
  		
 		if($(this).val()==1)
@@ -18,21 +18,21 @@ $(document).ready(function(){
 		var f = save_id.search("#");
 		var fid = save_id.substring(15,save_id.length);
 		
-		//alert(JSON.stringify(all_req));
+		
 		var form_data =  {};
 		form_data ["form_data"] =  {};
 		form_data["form_id"] = $("#form_id_"+fid).val();
 		form_data["form_name"] = $("#form_name_"+fid).html();
 		var count = 0;
+		
 		for(var i=0;i<all_req.length;i++)		
 		{
-			var n = all_req[i].search("_required"+fid);
+			var n = all_req[i].search("_required_"+fid);
 			var name = all_req[i].substring(0,n);
 			
 			var m = name.search("_");
 			var type = name.substring(0,m);
-// 			alert(type);
-			//$("#"+name+" :selected").val()==undefined
+			
 			if(type=='SLT' || type=='NUM' || type=='PARAGH' || type=='DROPDN')
 			{
 				var v = $("#"+name+"_"+fid).val();
@@ -90,6 +90,7 @@ $(document).ready(function(){
 			}
 			
 		}
+		
 		if(count==0)
 		{
 			var fdata = $('#form_'+fid).serialize();
@@ -138,9 +139,9 @@ $(document).ready(function(){
 					data:form_data
 					})
 					.done(function( data ){
-						
+						alert('Data saved');			
 					});
-			alert('Data saved');
+			
 		}
 	});
 	

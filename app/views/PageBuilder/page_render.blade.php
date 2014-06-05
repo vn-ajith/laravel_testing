@@ -106,16 +106,18 @@ $('a').on('click',function(e) {
 			</div>
 		</div>
 	</div>
-	<div class="col-md-12">
-		 <div class="well well-sm">
-        		<strong>Category Title</strong>
-        		<div class="btn-group">
-            			<a href="#" id="list" class="btn btn-default btn-sm list"><span class="glyphicon glyphicon-th-list">
-            				</span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm grid"><span
-                			class="glyphicon glyphicon-th"></span>Grid</a>
-        		</div>
-    		</div>
-	</div>
+	@if($grid_list_view==1)
+		<div class="col-md-12">
+			<div class="well well-sm">
+				<strong>Category Title</strong>
+				<div class="btn-group">
+					<a href="#" id="list" class="btn btn-default btn-sm list"><span class="glyphicon glyphicon-th-list">
+						</span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm grid"><span
+						class="glyphicon glyphicon-th"></span>Grid</a>
+				</div>
+			</div>
+		</div>
+	@endif
 	@if($view_type =="2_col_left_view")
 		<div class="row">
 			<div class="col-md-3 box">

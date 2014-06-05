@@ -6,7 +6,14 @@ class ListBuilderController extends BaseController
         public $parentMenuIds;
 	public function list_builder()
 	{
-		return View::make('ListBuilder.navigation_builder');
+		if(Session::get("account_id")!=NULL)
+		{
+			return View::make('ListBuilder.navigation_builder');
+		}
+		else
+		{
+			return Redirect::action('UsersController@login');
+		}
 	}
 	public function save_list()
 	{

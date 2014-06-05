@@ -16,7 +16,7 @@ class UsersController extends BaseController
 		$input = Input::all();
 		
 		$rules = array(
-				'username'=>'required|alpha|min:2|unique:users',
+				'username'=>'required|alpha_num|min:2|unique:users',
 				'email'=>'required|email|unique:users',
 				'password'=>'required|alpha_num|between:6,12',
 				'c_password'=>'required|alpha_num|between:6,12|same:password'
@@ -33,7 +33,8 @@ class UsersController extends BaseController
 			$account->email = $input['email'];
 			$account->save();
 			
-			$user->user_id = DB::table('accounts')->max('account_id');
+			$temp = DB::table('users')->max('user_id');
+			$user->user_id = $temp + 1;	
 			$user->username = $input['username'];
 			$user->email = $input['email'];
 			$user->password = Hash::make($input['password']);
@@ -48,26 +49,55 @@ class UsersController extends BaseController
 	
 	public function login()
 	{
+		
 		return View::make('Users.login');
 	}
 	public function doLogin()
 	{
-		if (Auth::attempt(array('username'=>Input::get('username'), 'password'=>Input::get('password')))) 
+		
+		$rules = array(
+			'username'    => 'required|alphaNum', 
+			'password' => 'required|alphaNum|min:6' 
+		);
+
+		
+		$validator = Validator::make(Input::all(), $rules);
+
+		
+		if ($validator->fails()) 
 		{
-			$user = Input::get('username');	
-			Session::put('user',$user);
-			$account_id = DB::table('users')->where('username', $user)->pluck('account_id');
-				
- 			Session::put("account_id",$account_id);
-			
-			return Redirect::action('UsersController@dashboard');
+		
+			return Redirect::to('login')
+				->withErrors($validator) 
+				->withInput(Input::except('password')); 
 		}
 		else
 		{
-// 			echo "<h1>login Failed</h1>";
-    			return Redirect::action('UsersController@login')
-        		->with('message', 'Your username/password combination was incorrect')->withInput();
-// 			return Redirect::action('UsersController@login')->withErrors($validator)->withInput();
+
+			
+			$userdata = array(
+				'username' 	=> Input::get('username'),
+				'password' 	=> Input::get('password')
+			);
+
+			
+			if (Auth::attempt($userdata)) 
+			{
+				$user = Input::get('username');	
+				Session::put('user',$user);
+				$account_id = DB::table('users')->where('username', $user)->pluck('account_id');
+					
+				Session::put("account_id",$account_id);
+				return Redirect::action('UsersController@dashboard');
+
+			}
+			else
+			{	 	
+
+				return Redirect::to('login');
+
+			}
+
 		}
 	}
 	
@@ -78,7 +108,21 @@ class UsersController extends BaseController
 			$user = Session::get("user");
 			$account_id = Session::get("account_id");
 			$pages = DB::table('page_builds')->where('account_id', $account_id)->get();
-			return View::make('Users.dashboard',array("user"=>$user,"pages"=>$pages));
+			$recent_pages = DB::table('page_builds')
+                     			->select('page_id','page_name')
+                     			->orderBy('page_id','desc')
+					->take(3)
+                     			->get();
+			
+			$recent = '<ul class="nav nav-sidebar"><li><h3>Recent pages </h3></li>';
+			foreach($recent_pages as $r)
+			{
+				$recent .= '<li><a href="'.action("PageBuilderController@page_render",$r->page_id).'">'.$r->page_name.'</a></li>';
+			}
+			$recent .='</ul>';
+			
+			return View::make('Users.dashboard',array("user"=>$user,"pages"=>$pages,"recent"=>$recent));
+			
 		}
 		else
 		{
@@ -142,7 +186,9 @@ class UsersController extends BaseController
 	}
 	public function user_list()
 	{
-		$user = User::all();
+		$account_id = Session::get("account_id");
+		$user = DB::select('select * from users where account_id= ?',array($account_id));
+// 		$user = User::all();
 		echo '<div class="table-responsive">
             <table class="table table-striped">
               <thead>
