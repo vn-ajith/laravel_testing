@@ -27,6 +27,7 @@ div.grid div.li {
 }
 
 </style>
+<link rel="stylesheet" href="assets/css/superhero_bootstrap_theme.css" > 
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -59,7 +60,6 @@ $('a').on('click',function(e) {
 		/*<!-- @include("Forms.render_form",array("form"=>$forms)) -->*/
 		
 ?>
-<!-- <link href="../assets/css/grid_list_style.css" rel="stylesheet">  -->
 <!-- <script src="../assets/js/page_render.js" type="text/javascript"></script> -->
 <script src="../assets/js/save_form_data.js" type="text/javascript"></script>
 <div class="container">

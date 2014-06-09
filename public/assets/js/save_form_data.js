@@ -127,6 +127,8 @@ $(document).ready(function(){
 				{
 					form_data["form_data"][field]["value"] = value;
 				}
+				form_data["form_data"][field]["value"] = decodeURIComponent(form_data["form_data"][field]["value"]);
+				form_data["form_data"][field]["value"] = form_data["form_data"][field]["value"].replace("+"," ");
 				
 				
 			}

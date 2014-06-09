@@ -57,8 +57,8 @@ class FormsController extends BaseController
 					'form_desc' => $form->form_desc,
 					'form_url'  => $form->form_url,
 					'form_id'   => $form->form_id,
-					'desc_order'=>json_decode($form->desc_order),true);
-		return View::make('Forms.render_form',array('form'=>$forms));
+					'desc_order'=>json_decode($form->desc_order,true));
+		return View::make('form_rendering_engine',array('form'=>$forms));
 	}
 	
 	/*      Function: save_form()

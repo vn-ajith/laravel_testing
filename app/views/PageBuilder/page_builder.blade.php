@@ -6,32 +6,33 @@
 }
 
 #generate_page_contents > div {
-    margin-bottom: 15px;
-    padding: 7px;
+	margin-bottom: 15px;
+	padding: 7px;
 }
 #save_page {
-    margin-left: 50%;
+	margin-left: 50%;
 }
 .form-group{
 	width:50%;
 }
 #page_builder_header {
-    margin-top: 10%;
+	margin-top: 10%;
 }
 #navigation_header{
-		padding-top:15px;
-		padding-bottom:15px;
-		background-color:#f8f8f8;
+	padding-top:15px;
+	padding-bottom:15px;
+	background-color:#f8f8f8;
 		
-	}
-	.navbar-default {
-		border-color:#f8f8f8;
-	}
-	.navbar{
-		margin-bottom:0px;
-	}
+}
+.navbar-default {
+	border-color:#f8f8f8;
+}
+.navbar{
+	margin-bottom:0px;
+}
 
 </style>
+<link rel="stylesheet" href="assets/css/superhero_bootstrap_theme.css" > 
 
 <script type="text/javascript" src="assets/js/page_builder.js"></script>
  <div class="col-md-12" id="navigation_header">

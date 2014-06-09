@@ -12,106 +12,100 @@
         </script>
 
         
-        <style type="text/css">
+<style type="text/css">
+
 body {
-  padding-top: 50px;
-  background-color: #f5f5f5;
+	padding-top: 50px;
+	background-color: #f5f5f5;
 }
 footer {
-  padding-left: 15px;
-  padding-right: 15px;
-  background-color: #fff;
+	padding-left: 15px;
+	padding-right: 15px;
+	background-color: #fff;
 }
 
-/*
- * Off Canvas
- * --------------------------------------------------
- */
 @media screen and (max-width: 768px) {
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
+.row-offcanvas {
+	position: relative;
+	-webkit-transition: all 0.25s ease-out;
+	-moz-transition: all 0.25s ease-out;
+	transition: all 0.25s ease-out;
+}
 
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -33%;
-  }
+.row-offcanvas-left
+.sidebar-offcanvas {
+	left: -33%;
+}
 
-  .row-offcanvas-left.active {
-    left: 33%;
-  }
+.row-offcanvas-left.active {
+	left: 33%;
+}
 
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 33%;
-    margin-left: 10px;
-  }
+.sidebar-offcanvas {
+	position: absolute;
+	top: 0;
+	width: 33%;
+	margin-left: 10px;
+}
 }
 
 
-/* Sidebar navigation */
+
 .nav-sidebar {
-  background-color: #f5f5f5;
-  margin-right: -15px;
-  margin-bottom: 20px;
-  margin-left: -15px;
+
+	margin-right: -15px;
+	margin-bottom: 20px;
+	border-right:1px dashed grey;
+	height:272px;
 }
 .nav-sidebar > li > a {
-  padding-right: 20px;
-  padding-left: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
 }
 .nav-sidebar > .active > a {
-  color: #fff;
-  background-color: #428bca;
+	color: #fff;
+	background-color: #428bca;
 }
 
-/*
- * Main content
- */
 
 .main {
-  padding: 20px;
-  background-color: #fff;
+	padding: 20px;
+	background-color: #fff;
 }
 @media (min-width: 768px) {
   .main {
-    padding-right: 40px;
-    padding-left: 40px;
+	padding-right: 40px;
+	padding-left: 40px;
   }
 }
 .main .page-header {
-  margin-top: 0;
+	margin-top: 0;
 }
 #navigation_header{
 		
-		padding-bottom:15px;
-		background-color:#f8f8f8;
-		margin-bottom:20px;
-	}
-	.navbar-default {
-		border-color:#f8f8f8;
-	}
-	.navbar{
-		margin-bottom:0px;
-	}
+	padding-bottom:15px;
+	background-color:#f8f8f8;
+	margin-bottom:20px;
+}
+.navbar-default {
+	border-color:#f8f8f8;
+}
+.navbar{
+	margin-bottom:0px;
+}
 
 
-        </style>
-    
-    
-    <!-- HTML code from Bootply.com editor -->
-    
-    <body  >
+</style>
+  
+<link rel="stylesheet" href="assets/css/superhero_bootstrap_theme.css" > 
+
+<body>
         
         <div class="col-md-12" id="navigation_header">
 	<div class="container">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
+
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span>
@@ -121,7 +115,7 @@ footer {
 					</button>
 				</div>
 		
-		<!-- Collect the nav links, forms, and other content for toggling -->
+
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav" style="float:right;">
 						<li class="active"><a href="{{action('UsersController@dashboard')}}">Dashboard</a></li>
@@ -156,9 +150,7 @@ footer {
 		  <h1 class="page-header">
             Dashboard
 		
-           <div>
-		
-		</div>
+           
           </h1>
 
           <div class="row placeholders">

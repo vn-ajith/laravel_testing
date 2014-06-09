@@ -52,7 +52,9 @@
 		{{ Form::submit('Register user', array('class'=>'btn btn-primary')) }}
 
 	</div>
-	
+	<div class="form-group" style="margin-top:10px;">
+			<a href="{{action('UsersController@login')}}">Already a user? Login here</a>
+		</div>
 	
 		{{ Form::close() }}
 	
