@@ -20,8 +20,23 @@ class FormsController extends BaseController
 	
 	public function select_form()
 	{
-		$forms = Form_config::all();
-		return View::make('Forms.select_form',compact('forms'));
+		if(Session::get("account_id")!=NULL)
+		{
+		
+			$account_id =  Session::get("account_id");
+			/*$recent_pages = DB::table('form_config')
+                     			->where('page_id','page_name')
+                     			->orderBy('page_id','desc')
+					->take(3)
+                     			->get();*/
+			
+			$forms = Form_config::all();
+			return View::make('Forms.select_form',compact('forms'));
+		}
+		else
+		{
+			return Redirect::action('UsersController@login');
+		}
 	}
 	
 	

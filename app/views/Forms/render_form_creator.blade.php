@@ -83,6 +83,7 @@
 					<ul class="nav navbar-nav" style="float:right;">
 						<li><a href="{{action('UsersController@dashboard')}}">Dashboard</a></li>
 						<li class="active"><a href="{{action('FormsController@render_form_creator')}}">Form builder</a></li>	
+						<li><a href="{{action('FormsController@select_form')}}">Forms available</a></li>
 						<li><a href="{{action('ListBuilderController@list_builder')}}">List builder</a></li>	
 						<li><a href="{{action('PageBuilderController@page_build')}}">Page builder</a></li>
 						<li><a href="{{action('UsersController@logout')}}">Sign out</a></li>
